@@ -603,13 +603,17 @@
   <!-- ==================== MODAL DE REGISTRO CON EDAD EXACTA, IDENTIDAD Y PERFIL ==================== -->
   <div class="modal-overlay" id="registerModal">
     <div class="modal-box">
-      <h2 class="modal-header-title">🛡️ REGISTRO DE PELEADOR DE AURA</h2>
-      <p class="modal-subtitle">Al ingresar tu edad exacta, el sistema te asignará automáticamente al segmento seguro correspondiente.</p>
+      <h2 class="modal-header-title">🛡️ REGISTRO OBLIGATORIO DE INGRESO</h2>
+      <p class="modal-subtitle">Para garantizar la seguridad y cumplir con la normativa, debes completar todos tus datos y adjuntar tu foto de registro.</p>
+
+      <div class="strict-requirement-alert">
+        🛑 <strong>ACCESO RESTRINGIDO:</strong> No podrás ingresar al sitio ni navegar si no completas los campos obligatorios y adjuntas la foto de registro de identidad.
+      </div>
 
       <form id="registerForm">
         <div class="form-group">
-          <label class="form-label">1. Nombre de Usuario del Peleador:</label>
-          <input type="text" id="regUsername" class="form-control" value="AuraMaster_CL" required>
+          <label class="form-label">1. Nombre de Usuario del Peleador (*Obligatorio):</label>
+          <input type="text" id="regUsername" class="form-control" placeholder="Ej: AuraMaster_CL" required>
         </div>
 
         <div class="form-group">

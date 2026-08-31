@@ -642,6 +642,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // BLOQUEO ESTRICTO DE ACCESO (GATEKEEPER) HASTA CUMPLIR REQUISITOS
+  function enforceGatekeeper() {
+    const mainWrapper = document.querySelector('.main-wrapper');
+    const appNav = document.querySelector('.app-nav');
+    
+    if (!appState.user.adultVerified || !appState.user.registryPhoto) {
+      if (registerModal) registerModal.classList.add('active');
+      if (mainWrapper) {
+        mainWrapper.style.pointerEvents = 'none';
+        mainWrapper.style.filter = 'blur(6px)';
+        mainWrapper.style.opacity = '0.3';
+      }
+      if (appNav) {
+        appNav.style.pointerEvents = 'none';
+        appNav.style.opacity = '0.4';
+      }
+    } else {
+      if (registerModal) registerModal.classList.remove('active');
+      if (mainWrapper) {
+        mainWrapper.style.pointerEvents = 'auto';
+        mainWrapper.style.filter = 'none';
+        mainWrapper.style.opacity = '1';
+      }
+      if (appNav) {
+        appNav.style.pointerEvents = 'auto';
+        appNav.style.opacity = '1';
+      }
+    }
+  }
+
   if (registerForm) {
     registerForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -649,6 +679,25 @@ document.addEventListener('DOMContentLoaded', () => {
       const exactAge = parseInt(document.getElementById('regExactAge').value, 10);
       const bracketInfo = getBracketFromAge(exactAge);
 
+      // VALIDACIONES ESTRICTAS DE INGRESO
+      if (!username) {
+        alert('🛑 ACCESO DENEGADO: Debes ingresar un nombre de usuario válido para ingresar al sitio.');
+        return;
+      }
+
+      if (isNaN(exactAge) || exactAge < 8 || exactAge > 99) {
+        alert('🛑 ACCESO DENEGADO: Debes ingresar una edad exacta válida.');
+        return;
+      }
+
+      if (!selectedRegistryPhoto) {
+        alert(exactAge >= 18 
+          ? '🛑 ACCESO RESTRINGIDO: Es obligatorio adjuntar tu fotografía selfie de registro de identidad para acceder al sitio.' 
+          : '🛑 ACCESO RESTRINGIDO: Es obligatorio adjuntar la fotografía del adulto responsable / tutor legal para acceder al sitio.');
+        return;
+      }
+
+      // SI CUMPLE TODOS LOS REQUISITOS, SE AUTORIZA EL ACCESO
       appState.user.username = username;
       appState.user.exactAge = exactAge;
       appState.user.ageBracket = bracketInfo.key;
@@ -656,13 +705,13 @@ document.addEventListener('DOMContentLoaded', () => {
       appState.user.registryPhoto = selectedRegistryPhoto;
       appState.user.adultVerified = true;
 
-      registerModal.classList.remove('active');
       saveState();
+      enforceGatekeeper();
 
       if (exactAge >= 18) {
-        alert(`¡Registro de Mayor de Edad completado, ${username}!\n🔒 Tu foto selfie de identidad fue guardada en el registro interno de la base de datos (privado).\n👤 Tu foto de perfil pública está activa para el Torneo Leyendas 18+.`);
+        alert(`🎉 ¡ACCESO CONCEDIDO ${username}!\n🔒 Tu foto selfie de identidad fue guardada en el registro interno de seguridad (privado).\n✅ Bienvenido a Batallas de Aura.`);
       } else {
-        alert(`¡Registro completado, ${username}!\n🔒 La fotografía del tutor legal fue guardada en el registro interno de seguridad.\n🎯 Has sido asignado estrictamente al segmento: ${bracketInfo.label}`);
+        alert(`🎉 ¡ACCESO CONCEDIDO ${username}!\n🔒 La fotografía del tutor legal fue registrada en la base de seguridad interna.\n🎯 Asignado estrictamente al segmento: ${bracketInfo.label}`);
       }
     });
   }
@@ -670,7 +719,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const openProfileBtn = document.getElementById('openProfileBtn');
   if (openProfileBtn) openProfileBtn.addEventListener('click', () => registerModal.classList.add('active'));
 
-  if (!appState.user.adultVerified) registerModal.classList.add('active');
+  // Aplicar filtro de entrada inmediatamente al cargar
+  enforceGatekeeper();
 
   // MÓDULO DE ENTRENAMIENTO 1v1 VS BOT DIGITAL
   let currentTrainingBot = { name: 'AuraBot-Alpha', seed: 'AuraBotAlpha', reward: 30 };
