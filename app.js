@@ -1122,23 +1122,47 @@ document.addEventListener('DOMContentLoaded', () => {
   // BASE DE DATOS PERMANENTE E INMUTABLE DE ADMINISTRACIÓN (SIN BORRADO)
   // ==========================================================================
   const ADMIN_DB_KEY = 'batallas_de_aura_admin_db_v1';
+  const PERMANENT_VISITS_KEY = 'batallas_aura_permanent_visits_floor_v1';
   const BASE_VISITS_START = 5000;
 
+  function getStoredVisitsCount() {
+    try {
+      const saved = localStorage.getItem(PERMANENT_VISITS_KEY);
+      if (saved) {
+        const val = parseInt(saved, 10);
+        if (!isNaN(val) && val >= BASE_VISITS_START) return val;
+      }
+    } catch (e) {
+      console.error('Error al obtener contador de visitas:', e);
+    }
+    return BASE_VISITS_START;
+  }
+
+  function setStoredVisitsCount(val) {
+    try {
+      const current = getStoredVisitsCount();
+      const maxVal = Math.max(current, val, BASE_VISITS_START);
+      localStorage.setItem(PERMANENT_VISITS_KEY, maxVal.toString());
+      return maxVal;
+    } catch (e) {
+      return val;
+    }
+  }
+
   function loadAdminDB() {
+    const visitsFloor = getStoredVisitsCount();
     try {
       const data = localStorage.getItem(ADMIN_DB_KEY);
       if (data) {
         const parsed = JSON.parse(data);
-        if (!parsed.visitsCount || parsed.visitsCount < BASE_VISITS_START) {
-          parsed.visitsCount = BASE_VISITS_START;
-        }
+        parsed.visitsCount = Math.max(visitsFloor, parsed.visitsCount || BASE_VISITS_START);
         return parsed;
       }
     } catch (e) {
       console.error('Error al cargar base de datos admin:', e);
     }
     return {
-      visitsCount: BASE_VISITS_START,
+      visitsCount: visitsFloor,
       battlesCount: 38,
       userRegistry: [
         { id: 1001, username: 'AuraMaster_CL', exactAge: 13, bracket: '12-15 (Teens)', verified: true, date: '2026-08-31 09:12' },
@@ -1167,18 +1191,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updatePublicVisitsUI() {
     const publicVisitsCounter = document.getElementById('publicVisitsCounter');
-    if (publicVisitsCounter && adminDB) {
-      const count = Math.max(BASE_VISITS_START, adminDB.visitsCount || BASE_VISITS_START);
+    if (publicVisitsCounter) {
+      const count = getStoredVisitsCount();
       publicVisitsCounter.textContent = count.toLocaleString();
     }
   }
 
-  // REGISTRO INMUTABLE DE VISITAS AL CARGAR
+  // REGISTRO INMUTABLE DE VISITAS AL CARGAR (SIN REINICIO ENTRE COMMITS)
   function logVisitEvent() {
-    if (!adminDB.visitsCount || adminDB.visitsCount < BASE_VISITS_START) {
-      adminDB.visitsCount = BASE_VISITS_START;
-    }
-    adminDB.visitsCount++;
+    let currentCount = getStoredVisitsCount();
+    currentCount++;
+    const finalVisits = setStoredVisitsCount(currentCount);
+
+    adminDB.visitsCount = finalVisits;
     adminDB.interactionLogs.unshift({
       id: Date.now(),
       type: 'VISITA_NUEVA',
@@ -1186,6 +1211,7 @@ document.addEventListener('DOMContentLoaded', () => {
       user: appState.user.username || 'Visitante',
       date: new Date().toLocaleString()
     });
+
     saveAdminDB();
     updatePublicVisitsUI();
   }
