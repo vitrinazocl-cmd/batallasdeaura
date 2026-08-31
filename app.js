@@ -6,7 +6,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  const STORAGE_KEY = 'batallas_de_aura_state_v2';
+  const STORAGE_KEY = 'batallas_de_aura_state_v4';
 
   // HELPER DE ASIGNACIÓN AUTOMÁTICA DE SEGMENTO
   function getBracketFromAge(age) {
@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ageBracket: '12-15',
       walletAP: 350,
       avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=AuraFighter1',
+      registryPhoto: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop',
       adultVerified: true
     },
     transactions: [
@@ -611,7 +612,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const useGenericAvatarBtn = document.getElementById('useGenericAvatarBtn');
 
   let selectedPublicAvatar = appState.user.avatar || 'https://api.dicebear.com/7.x/bottts/svg?seed=AuraFighter1';
-  let selectedRegistryPhoto = appState.user.registryPhoto || null;
+  let selectedRegistryPhoto = appState.user.registryPhoto || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop';
 
   if (registryPhotoInput) {
     registryPhotoInput.addEventListener('change', (e) => {
