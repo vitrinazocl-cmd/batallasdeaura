@@ -593,13 +593,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function startBgMusic() {
     if (!bgMusicTrack || isBattleActivePause) return;
-    bgMusicTrack.volume = 0.35;
-    bgMusicTrack.play().then(() => {
-      isBgMusicPlaying = true;
-      if (bgMusicBtnText) bgMusicBtnText.textContent = 'Ogryzek - AURA (1) [▶ ON]';
-    }).catch(() => {
-      // Espera interacción previa del usuario
-    });
+    bgMusicTrack.volume = 0.45;
+    const playPromise = bgMusicTrack.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        isBgMusicPlaying = true;
+        if (bgMusicBtnText) bgMusicBtnText.textContent = 'Ogryzek - AURA (1) [▶ ON]';
+      }).catch((err) => {
+        console.log('Esperando toque/clic del usuario para audio:', err);
+      });
+    }
   }
 
   function pauseBgMusicForBattle() {
@@ -631,12 +634,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // REPRODUCCIÓN AUTOMÁTICA AL PRIMER CLIC EN EL SITIO
-  window.addEventListener('click', () => {
-    if (!isBgMusicPlaying && !isBattleActivePause) {
-      startBgMusic();
-    }
-  }, { once: true });
+  // DESBLOQUEAR Y REPRODUCIR AL PRIMER CLICK, TOUCH, KEYPRESS O SCROLL
+  const audioUnlockEvents = ['click', 'touchstart', 'pointerdown', 'keydown'];
+  audioUnlockEvents.forEach(evt => {
+    window.addEventListener(evt, () => {
+      if (!isBgMusicPlaying && !isBattleActivePause) {
+        startBgMusic();
+      }
+    }, { passive: true });
+  });
+
+  // INTENTO INICIAL AL CARGAR
+  setTimeout(() => startBgMusic(), 500);
 
   // TURNO 1: PELEADOR 1 (TÚ)
   if (recordP1CamBtn) {
