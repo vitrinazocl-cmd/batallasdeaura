@@ -1171,12 +1171,13 @@ body {
 /* Navbar Touch Scroll Smoothness */
 .nav-container {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   overflow-x: auto;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   padding: 4px 0;
+  width: 100%;
 }
 .nav-container::-webkit-scrollbar {
   height: 4px;
@@ -1196,22 +1197,86 @@ body {
 }
 
 @media (max-width: 768px) {
+  html, body {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+
   .header-container {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 12px;
+    gap: 10px;
+    padding: 10px 8px;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    overflow: hidden;
   }
   
   .logo-brand {
     justify-content: center;
+    max-width: 100%;
+  }
+
+  .logo-text h1 {
+    font-size: 17px !important;
+    letter-spacing: 0.5px !important;
+    white-space: normal !important;
+    text-align: center;
+    word-break: break-word;
+  }
+
+  .logo-tag {
+    font-size: 9px !important;
+    letter-spacing: 1px !important;
   }
 
   .safezone-header-badge {
     width: 100%;
     text-align: center;
     justify-content: center;
-    font-size: 12px;
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  .user-status-bar {
+    width: 100% !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 6px !important;
+  }
+
+  .wallet-badge-mini {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+    flex: 1 1 auto;
+    justify-content: center;
+    white-space: nowrap;
+  }
+
+  .user-profile-btn {
+    font-size: 11px !important;
+    padding: 4px 10px !important;
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .main-wrapper {
+    width: 100% !important;
+    max-width: 100vw !important;
+    padding: 0 10px 30px !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden;
+  }
+
+  .mission-banner-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 14px 10px !important;
+    box-sizing: border-box !important;
+    word-break: break-word;
   }
 
   .social-layout {
@@ -1313,40 +1378,41 @@ body {
   }
 
   .leaderboard-table th, .leaderboard-table td {
-    padding: 10px 12px;
-    font-size: 13px;
+    padding: 8px 10px;
+    font-size: 12px;
   }
 }
 
 @media (max-width: 480px) {
   .logo-text h1 {
-    font-size: 20px;
+    font-size: 15px !important;
+    letter-spacing: 0px !important;
   }
 
   .logo-icon {
-    font-size: 26px;
-    padding: 6px 10px;
+    font-size: 22px;
+    padding: 4px 8px;
   }
 
   .nav-btn {
-    font-size: 11px;
-    padding: 8px 12px;
+    font-size: 10px;
+    padding: 6px 10px;
   }
 
   .arena-title {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .arena-subtitle {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .fighter-name {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .judge-card {
-    padding: 15px;
+    padding: 12px;
   }
 
   .chat-input-bar {
