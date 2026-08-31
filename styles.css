@@ -1094,11 +1094,161 @@ body {
   background: rgba(0, 255, 136, 0.1);
 }
 
-/* Responsividad */
+/* ==========================================================================
+   SUITE 100% RESPONSIVE PARA DISPOSITIVOS MÓVILES (SMARTPHONES Y TABLETS)
+   ========================================================================== */
+
+/* Navbar Touch Scroll Smoothness */
+.nav-container {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  padding: 4px 0;
+}
+.nav-container::-webkit-scrollbar {
+  height: 4px;
+}
+.nav-container::-webkit-scrollbar-thumb {
+  background: var(--cyan-neon);
+  border-radius: 4px;
+}
+
+@media (max-width: 1024px) {
+  .main-wrapper {
+    padding: 0 15px 30px;
+  }
+  .judges-section {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
-  .header-container { flex-direction: column; align-items: flex-start; }
-  .social-layout { grid-template-columns: 1fr; }
-  .videos-duel-container { grid-template-columns: 1fr; }
-  .stage-top-bar { flex-direction: column; gap: 10px; }
-  .fighter-hud { width: 100%; }
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+  
+  .logo-brand {
+    justify-content: center;
+  }
+
+  .safezone-header-badge {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+
+  .social-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .videos-duel-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .stage-top-bar {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .fighter-hud {
+    width: 100%;
+  }
+
+  .vs-badge-center {
+    align-self: center;
+    margin: 5px 0;
+  }
+
+  .arena-actions-bar {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .arena-actions-bar .btn-cyber {
+    width: 100%;
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  .battle-format-selector-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .round-tracker-badge {
+    width: 100%;
+    text-align: center;
+  }
+
+  .modal-box {
+    width: 95vw;
+    padding: 20px 16px;
+    margin: 10px;
+    max-height: 94vh;
+  }
+
+  .computed-bracket-banner {
+    font-size: 12px;
+  }
+
+  .leaderboard-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .leaderboard-table th, .leaderboard-table td {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text h1 {
+    font-size: 20px;
+  }
+
+  .logo-icon {
+    font-size: 26px;
+    padding: 6px 10px;
+  }
+
+  .nav-btn {
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+
+  .arena-title {
+    font-size: 20px;
+  }
+
+  .arena-subtitle {
+    font-size: 13px;
+  }
+
+  .fighter-name {
+    font-size: 13px;
+  }
+
+  .judge-card {
+    padding: 15px;
+  }
+
+  .chat-input-bar {
+    flex-direction: column;
+  }
+
+  .chat-input-bar button {
+    width: 100%;
+  }
 }
