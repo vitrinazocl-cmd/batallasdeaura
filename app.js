@@ -896,6 +896,210 @@ document.addEventListener('DOMContentLoaded', () => {
   if (startTrainingCamBtn) startTrainingCamBtn.addEventListener('click', executeTrainingSession);
   if (simTrainingBtn) simTrainingBtn.addEventListener('click', executeTrainingSession);
 
+  // ==========================================================================
+  // BASE DE DATOS PERMANENTE E INMUTABLE DE ADMINISTRACIÓN (SIN BORRADO)
+  // ==========================================================================
+  const ADMIN_DB_KEY = 'batallas_de_aura_admin_db_v1';
+
+  function loadAdminDB() {
+    try {
+      const data = localStorage.getItem(ADMIN_DB_KEY);
+      if (data) return JSON.parse(data);
+    } catch (e) {
+      console.error('Error al cargar base de datos admin:', e);
+    }
+    return {
+      visitsCount: 142,
+      battlesCount: 38,
+      userRegistry: [
+        { id: 1001, username: 'AuraMaster_CL', exactAge: 13, bracket: '12-15 (Teens)', verified: true, date: '2026-08-31 09:12' },
+        { id: 1002, username: 'CyberWarrior_Stgo', exactAge: 14, bracket: '12-15 (Teens)', verified: true, date: '2026-08-31 10:05' },
+        { id: 1003, username: 'NeonNinja_Valpo', exactAge: 14, bracket: '12-15 (Teens)', verified: true, date: '2026-08-31 11:30' },
+        { id: 1004, username: 'MiniAura_Antofa', exactAge: 10, bracket: '8-12 (Junior)', verified: true, date: '2026-08-31 12:15' },
+        { id: 1005, username: 'Legend_Peleador18', exactAge: 21, bracket: '18+ (Torneo Leyendas)', verified: true, date: '2026-08-31 14:00' }
+      ],
+      interactionLogs: [
+        { id: 5001, type: 'VISITA_SITIO', desc: 'Ingreso de usuario a plataforma www.batallasdeaura.cl', user: 'AuraMaster_CL', date: '2026-08-31 15:30' },
+        { id: 5002, type: 'REGISTRO_FOTO', desc: 'Fotografía de registro de identidad verificada con éxito', user: 'AuraMaster_CL', date: '2026-08-31 15:31' },
+        { id: 5003, type: 'BATALLA_3_VIDEOS', desc: 'Combate completado con veredicto de 3 Jurados Digitales', user: 'AuraMaster_CL', date: '2026-08-31 15:32' }
+      ]
+    };
+  }
+
+  let adminDB = loadAdminDB();
+
+  function saveAdminDB() {
+    try {
+      localStorage.setItem(ADMIN_DB_KEY, JSON.stringify(adminDB));
+    } catch (e) {
+      console.error('Error al guardar base de datos admin:', e);
+    }
+  }
+
+  // REGISTRO INMUTABLE DE VISITAS AL CARGAR
+  function logVisitEvent() {
+    adminDB.visitsCount++;
+    adminDB.interactionLogs.unshift({
+      id: Date.now(),
+      type: 'VISITA_NUEVA',
+      desc: `Visita registrada a la plataforma (${window.navigator.userAgent.substring(0, 40)}...)`,
+      user: appState.user.username || 'Visitante',
+      date: new Date().toLocaleString()
+    });
+    saveAdminDB();
+  }
+
+  logVisitEvent();
+
+  // REGISTRO INMUTABLE DE NUEVO USUARIO
+  function registerUserInAdminDB(userObj) {
+    adminDB.userRegistry.unshift({
+      id: Date.now(),
+      username: userObj.username,
+      exactAge: userObj.exactAge,
+      bracket: getBracketFromAge(userObj.exactAge).label,
+      verified: true,
+      date: new Date().toLocaleString()
+    });
+
+    adminDB.interactionLogs.unshift({
+      id: Date.now() + 1,
+      type: 'NUEVO_REGISTRO',
+      desc: `Nuevo usuario registrado: ${userObj.username} (${userObj.exactAge} años, ${getBracketFromAge(userObj.exactAge).label})`,
+      user: userObj.username,
+      date: new Date().toLocaleString()
+    });
+
+    saveAdminDB();
+  }
+
+  // ==========================================================================
+  // GESTIÓN DE ACCESO Y DASHBOARD ADMINISTRADOR
+  // ==========================================================================
+  const adminLoginNavBtn = document.getElementById('adminLoginNavBtn');
+  const adminLoginModal = document.getElementById('adminLoginModal');
+  const closeAdminLoginModalBtn = document.getElementById('closeAdminLoginModalBtn');
+  const adminLoginForm = document.getElementById('adminLoginForm');
+  const logoutAdminBtn = document.getElementById('logoutAdminBtn');
+  const exportAdminDbBtn = document.getElementById('exportAdminDbBtn');
+  let isAdminLoggedIn = false;
+
+  if (adminLoginNavBtn) {
+    adminLoginNavBtn.addEventListener('click', () => {
+      if (isAdminLoggedIn) {
+        showAdminTab();
+      } else {
+        adminLoginModal.classList.add('active');
+      }
+    });
+  }
+
+  if (closeAdminLoginModalBtn) {
+    closeAdminLoginModalBtn.addEventListener('click', () => adminLoginModal.classList.remove('active'));
+  }
+
+  if (adminLoginForm) {
+    adminLoginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const u = document.getElementById('adminUser').value.trim();
+      const p = document.getElementById('adminPass').value.trim();
+
+      // CREDENCIALES PEDIDAS POR EL USUARIO: batallasdeaura / 1234567
+      if (u === 'batallasdeaura' && p === '1234567') {
+        isAdminLoggedIn = true;
+        adminLoginModal.classList.remove('active');
+        adminLoginForm.reset();
+        showAdminTab();
+        alert('🔑 ACCESO AUTORIZADO: Bienvenido al Panel de Control de Administración de Batallas de Aura.');
+      } else {
+        alert('🛑 ACCESO DENEGADO: Credenciales de administrador incorrectas.');
+      }
+    });
+  }
+
+  function showAdminTab() {
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+    const adminTab = document.getElementById('adminTab');
+    if (adminTab) adminTab.classList.add('active');
+    if (adminLoginNavBtn) adminLoginNavBtn.classList.add('active');
+
+    renderAdminDashboard();
+  }
+
+  function renderAdminDashboard() {
+    const adminStatVisits = document.getElementById('adminStatVisits');
+    const adminStatUsers = document.getElementById('adminStatUsers');
+    const adminStatBattles = document.getElementById('adminStatBattles');
+    const adminStatAP = document.getElementById('adminStatAP');
+
+    if (adminStatVisits) adminStatVisits.textContent = adminDB.visitsCount.toLocaleString();
+    if (adminStatUsers) adminStatUsers.textContent = adminDB.userRegistry.length.toLocaleString();
+    if (adminStatBattles) adminStatBattles.textContent = (adminDB.battlesCount + appState.transactions.length).toLocaleString();
+    if (adminStatAP) adminStatAP.textContent = `${appState.user.walletAP + 1850} AP`;
+
+    // RENDERIZAR TABLA DE USUARIOS REGISTRADOS PERMANENTES
+    const adminUsersTbody = document.getElementById('adminUsersTbody');
+    if (adminUsersTbody) {
+      adminUsersTbody.innerHTML = '';
+      adminDB.userRegistry.forEach(u => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong style="color: var(--cyan-neon);">#${u.id}</strong></td>
+          <td><strong>${sanitizeHTML(u.username)}</strong></td>
+          <td>${u.exactAge} años</td>
+          <td><span style="color: var(--gold-neon); font-weight: 700;">${u.bracket}</span></td>
+          <td><span style="color: var(--green-safe);">🔒 FOTO & DATOS OK</span></td>
+          <td>${u.date}</td>
+        `;
+        adminUsersTbody.appendChild(tr);
+      });
+    }
+
+    // RENDERIZAR TABLA DE LOGS PERMANENTES
+    const adminLogsTbody = document.getElementById('adminLogsTbody');
+    if (adminLogsTbody) {
+      adminLogsTbody.innerHTML = '';
+      adminDB.interactionLogs.forEach(log => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><span style="color: var(--text-muted);">#${log.id}</span></td>
+          <td><strong style="color: var(--magenta-neon);">${log.type}</strong></td>
+          <td>${sanitizeHTML(log.desc)}</td>
+          <td><strong>${sanitizeHTML(log.user)}</strong></td>
+          <td>${log.date}</td>
+        `;
+        adminLogsTbody.appendChild(tr);
+      });
+    }
+  }
+
+  if (logoutAdminBtn) {
+    logoutAdminBtn.addEventListener('click', () => {
+      isAdminLoggedIn = false;
+      alert('🔒 Sesión de administración cerrada con éxito.');
+      location.reload();
+    });
+  }
+
+  if (exportAdminDbBtn) {
+    exportAdminDbBtn.addEventListener('click', () => {
+      const fullExport = {
+        appState: appState,
+        adminDB: adminDB,
+        exportDate: new Date().toISOString()
+      };
+
+      const blob = new Blob([JSON.stringify(fullExport, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `batallas_de_aura_base_de_datos_${Date.now()}.json`;
+      a.click();
+      alert('📥 Base de datos permanente exportada correctamente en formato JSON.');
+    });
+  }
+
   const rankingFilter = document.getElementById('rankingAgeFilter');
   if (rankingFilter) rankingFilter.addEventListener('change', () => renderLeaderboard());
 

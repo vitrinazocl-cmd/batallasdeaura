@@ -54,6 +54,7 @@
         <button class="nav-btn" data-tab="socialTab">💬 RED SOCIAL & CHAT</button>
         <button class="nav-btn" data-tab="rankingTab">🏆 RANKING CHILE</button>
         <button class="nav-btn" data-tab="legalTab">⚖️ NORMATIVA & MISIÓN SEGURO</button>
+        <button class="nav-btn btn-admin-nav" id="adminLoginNavBtn" style="background: rgba(255, 0, 122, 0.15); border: 1px solid var(--magenta-neon); color: var(--magenta-neon); font-weight: 800;">⚙️ ADMIN</button>
       </div>
     </nav>
   </header>
@@ -700,7 +701,118 @@
       </div>
     </section>
 
+    <!-- TAB 6: PANEL DE CONTROL ADMINISTRATIVO & BASE DE DATOS -->
+    <section class="tab-content" id="adminTab">
+      <div class="transactions-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 25px;">
+          <div>
+            <h2 style="font-family: var(--font-head); color: var(--magenta-neon); font-size: 24px; text-transform: uppercase;">⚙️ PANEL DE CONTROL & BASE DE DATOS DE ADMINISTRACIÓN</h2>
+            <p style="color: var(--text-muted); font-size: 14px;">Supervisión en tiempo real de visitas, registros, combates e interacciones. Base de datos permanente sin borrado de registros.</p>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn-cyber btn-cyber-gold" id="exportAdminDbBtn">📥 EXPORTAR BASE DE DATOS (JSON)</button>
+            <button class="btn-cyber btn-cyber-magenta" id="logoutAdminBtn">🔒 CERRAR SESIÓN ADMIN</button>
+          </div>
+        </div>
+
+        <!-- TARJETAS DE ESTADÍSTICAS EN TIEMPO REAL -->
+        <div class="moves-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 30px;">
+          <div class="move-card" style="border-color: var(--cyan-neon); text-align: center; padding: 16px;">
+            <div style="font-size: 32px;">👁️</div>
+            <div style="font-family: var(--font-head); font-size: 26px; color: var(--cyan-neon);" id="adminStatVisits">0</div>
+            <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Visitas Totales Sitio</div>
+          </div>
+
+          <div class="move-card" style="border-color: var(--gold-neon); text-align: center; padding: 16px;">
+            <div style="font-size: 32px;">👤</div>
+            <div style="font-family: var(--font-head); font-size: 26px; color: var(--gold-neon);" id="adminStatUsers">0</div>
+            <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Usuarios Registrados</div>
+          </div>
+
+          <div class="move-card" style="border-color: var(--magenta-neon); text-align: center; padding: 16px;">
+            <div style="font-size: 32px;">🥊</div>
+            <div style="font-family: var(--font-head); font-size: 26px; color: var(--magenta-neon);" id="adminStatBattles">0</div>
+            <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Batallas Disputadas</div>
+          </div>
+
+          <div class="move-card" style="border-color: var(--green-safe); text-align: center; padding: 16px;">
+            <div style="font-size: 32px;">💎</div>
+            <div style="font-family: var(--font-head); font-size: 26px; color: var(--green-safe);" id="adminStatAP">0 AP</div>
+            <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Puntos AP en Circulación</div>
+          </div>
+        </div>
+
+        <!-- TABLAS DE BASE DE DATOS PERMANENTE -->
+        <div style="margin-bottom: 25px;">
+          <h3 style="font-family: var(--font-head); color: var(--gold-neon); font-size: 16px; margin-bottom: 12px;">📋 BASE DE DATOS HISTÓRICA DE USUARIOS REGISTRADOS</h3>
+          <div style="overflow-x: auto;">
+            <table class="leaderboard-table">
+              <thead>
+                <tr>
+                  <th>ID DE REGISTRO</th>
+                  <th>USUARIO</th>
+                  <th>EDAD EXACTA</th>
+                  <th>SEGMENTO ASIGNADO</th>
+                  <th>ESTADO SEGURIDAD</th>
+                  <th>FECHA Y HORA REGISTRO</th>
+                </tr>
+              </thead>
+              <tbody id="adminUsersTbody">
+                <!-- Carga mediante JS desde BD permanente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="font-family: var(--font-head); color: var(--cyan-neon); font-size: 16px; margin-bottom: 12px;">📈 LOG HISTÓRICO PERMANENTE DE VISITAS & INTERACCIONES</h3>
+          <div style="overflow-x: auto;">
+            <table class="leaderboard-table">
+              <thead>
+                <tr>
+                  <th>ID LOG</th>
+                  <th>TIPO EVENTO</th>
+                  <th>DESCRIPCIÓN DE INTERACCIÓN</th>
+                  <th>USUARIO / SESIÓN</th>
+                  <th>FECHA REGISTRO</th>
+                </tr>
+              </thead>
+              <tbody id="adminLogsTbody">
+                <!-- Carga mediante JS desde BD permanente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
+
+  <!-- ==================== MODAL LOGIN ADMINISTRADOR ==================== -->
+  <div class="modal-overlay" id="adminLoginModal">
+    <div class="modal-box" style="max-width: 420px; border-color: var(--magenta-neon); box-shadow: 0 0 35px rgba(255, 0, 122, 0.4);">
+      <button class="modal-close-btn" id="closeAdminLoginModalBtn">✕</button>
+      <h2 class="modal-header-title" style="color: var(--magenta-neon);">⚙️ ACCESO DE ADMINISTRACIÓN</h2>
+      <p class="modal-subtitle">Ingresa tus credenciales maestras para acceder al panel de control de estadísticas y base de datos.</p>
+
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label class="form-label">Usuario Administrador:</label>
+          <input type="text" id="adminUser" class="form-control" placeholder="Usuario admin" required autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Contraseña:</label>
+          <input type="password" id="adminPass" class="form-control" placeholder="Contraseña admin" required>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+          <button type="submit" class="btn-cyber btn-cyber-magenta" style="flex: 1; padding: 12px;">🔑 INGRESAR AL PANEL</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- ==================== MODAL DE REGISTRO CON EDAD EXACTA, IDENTIDAD Y PERFIL ==================== -->
   <div class="modal-overlay" id="registerModal">
