@@ -672,6 +672,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!appState.user.adultVerified) registerModal.classList.add('active');
 
+  // MÓDULO DE ENTRENAMIENTO 1v1 VS BOT DIGITAL
+  let currentTrainingBot = { name: 'AuraBot-Alpha', seed: 'AuraBotAlpha', reward: 30 };
+  const botCards = document.querySelectorAll('.training-bot-card');
+  const trainingBotAvatar = document.getElementById('trainingBotAvatar');
+  const trainingBotName = document.getElementById('trainingBotName');
+  const startTrainingCamBtn = document.getElementById('startTrainingCamBtn');
+  const simTrainingBtn = document.getElementById('simTrainingBtn');
+  const trainingFeedbackText = document.getElementById('trainingFeedbackText');
+
+  botCards.forEach(card => {
+    card.addEventListener('click', () => {
+      botCards.forEach(c => {
+        c.classList.remove('active');
+        c.style.borderColor = 'var(--border-neon)';
+      });
+      card.classList.add('active');
+      card.style.borderColor = 'var(--cyan-neon)';
+
+      const botType = card.getAttribute('data-bot');
+      if (botType === 'AuraBot-Alpha') {
+        currentTrainingBot = { name: 'AuraBot-Alpha', seed: 'AuraBotAlpha', reward: 30 };
+      } else if (botType === 'CyberBot-Zero') {
+        currentTrainingBot = { name: 'CyberBot-Zero', seed: 'CyberBotZero', reward: 50 };
+      } else if (botType === 'OmegaBot-X') {
+        currentTrainingBot = { name: 'OmegaBot-X', seed: 'OmegaBotX', reward: 80 };
+      }
+
+      if (trainingBotAvatar) trainingBotAvatar.src = `https://api.dicebear.com/7.x/bottts/svg?seed=${currentTrainingBot.seed}`;
+      if (trainingBotName) trainingBotName.textContent = `${currentTrainingBot.name} (Rival Digital)`;
+    });
+  });
+
+  function executeTrainingSession() {
+    if (trainingFeedbackText) {
+      trainingFeedbackText.innerHTML = `🤖 <em>${currentTrainingBot.name} ejecutando simulación de sparring... Evaluando postura de aura...</em>`;
+    }
+
+    setTimeout(() => {
+      appState.user.walletAP += currentTrainingBot.reward;
+      appState.transactions.unshift({
+        id: Date.now(),
+        type: 'win',
+        desc: `Práctica de Entrenamiento vs ${currentTrainingBot.name} (+${currentTrainingBot.reward} AP)`,
+        amount: currentTrainingBot.reward,
+        date: 'Ahora'
+      });
+      saveState();
+
+      if (trainingFeedbackText) {
+        trainingFeedbackText.innerHTML = `
+          ✅ <strong>¡Entrenamiento con ${currentTrainingBot.name} completado con éxito!</strong><br>
+           Kai-Ro: <em>"Excelente fluidez de movimiento. Has ganado +${currentTrainingBot.reward} AP de práctica."</em><br>
+           Aura-Neo: <em>"Tu energía de escenario mejoró un +20% en esta sesión."</em><br>
+           Valkyria-X: <em>"Estás listo para ingresar a la Arena PvP de 2 usuarios reales."</em>
+        `;
+      }
+      alert(`🎯 ¡Sesión de Entrenamiento Finalizada! Has ganado +${currentTrainingBot.reward} AP de práctica vs ${currentTrainingBot.name}.`);
+    }, 2000);
+  }
+
+  if (startTrainingCamBtn) startTrainingCamBtn.addEventListener('click', executeTrainingSession);
+  if (simTrainingBtn) simTrainingBtn.addEventListener('click', executeTrainingSession);
+
   const rankingFilter = document.getElementById('rankingAgeFilter');
   if (rankingFilter) rankingFilter.addEventListener('change', () => renderLeaderboard());
 

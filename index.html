@@ -43,6 +43,7 @@
     <nav class="app-nav">
       <div class="nav-container">
         <button class="nav-btn active" data-tab="arenaTab">🥊 ARENA DE PELEA 15S</button>
+        <button class="nav-btn" data-tab="trainingTab">🤖 MODO ENTRENAMIENTO</button>
         <button class="nav-btn" data-tab="movesTab">📜 PASOS & PUNTAJES</button>
         <button class="nav-btn" data-tab="customMovesTab">✨ MIS PASOS CREADOS</button>
         <button class="nav-btn" data-tab="walletTab">💎 BILLETERA DE AURA</button>
@@ -172,7 +173,98 @@
       </div>
     </section>
 
-    <!-- TAB 2: GUÍA DE MOVIMIENTOS & PUNTAJES DE AURA -->
+    <!-- TAB 2: MÓDULO DE ENTRENAMIENTO 1v1 VS BOT DIGITAL -->
+    <section class="tab-content" id="trainingTab">
+      <div class="transactions-card">
+        <div style="text-align: center; margin-bottom: 25px;">
+          <h2 style="font-family: var(--font-head); color: var(--gold-neon); font-size: 24px; text-transform: uppercase;">🤖 DOJO DE ENTRENAMIENTO DIGITAL (VS IA BOT)</h2>
+          <p style="color: var(--text-muted); font-size: 15px;">¿Estás a solas o quieres practicar antes de una batalla real PvP entre 2 usuarios? Enfréntate a los Jugadores Digitales de prueba creados por la app.</p>
+        </div>
+
+        <!-- SELECCIÓN DE BOT DE ENTRENAMIENTO -->
+        <div style="margin-bottom: 25px;">
+          <h3 style="font-family: var(--font-head); color: var(--cyan-neon); font-size: 16px; margin-bottom: 12px;">1. SELECCIONA TU RIVAL DIGITAL DE PRÁCTICA:</h3>
+          <div class="moves-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+            
+            <div class="move-card training-bot-card active" data-bot="AuraBot-Alpha" style="border-color: var(--cyan-neon); cursor: pointer;">
+              <div class="move-header">
+                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=AuraBotAlpha" alt="AuraBot-Alpha" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--cyan-neon);">
+                <div>
+                  <h4 class="move-title">AuraBot-Alpha</h4>
+                  <div class="move-cat">Nivel: Principiante (Ataques Básicos)</div>
+                </div>
+              </div>
+              <p class="move-desc">Ideal para tus primeros 15s de práctica. Responde con movimientos suaves de aura.</p>
+              <div style="font-size: 12px; color: var(--green-safe); font-weight: 700;">Recompensa Práctica: +30 AP</div>
+            </div>
+
+            <div class="move-card training-bot-card" data-bot="CyberBot-Zero" style="cursor: pointer;">
+              <div class="move-header">
+                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=CyberBotZero" alt="CyberBot-Zero" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--magenta-neon);">
+                <div>
+                  <h4 class="move-title">CyberBot-Zero</h4>
+                  <div class="move-cat">Nivel: Intermedio (Escudo & Contra)</div>
+                </div>
+              </div>
+              <p class="move-desc">Responde con velocidad y escudos neón. Pon a prueba tus combos creados.</p>
+              <div style="font-size: 12px; color: var(--green-safe); font-weight: 700;">Recompensa Práctica: +50 AP</div>
+            </div>
+
+            <div class="move-card training-bot-card" data-bot="OmegaBot-X" style="cursor: pointer;">
+              <div class="move-header">
+                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=OmegaBotX" alt="OmegaBot-X" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--gold-neon);">
+                <div>
+                  <h4 class="move-title">OmegaBot-X</h4>
+                  <div class="move-cat">Nivel: Legendario (Remates Cósmicos)</div>
+                </div>
+              </div>
+              <p class="move-desc">IA avanzada de sparring que evalúa la velocidad máxima y tu precisión de remate.</p>
+              <div style="font-size: 12px; color: var(--green-safe); font-weight: 700;">Recompensa Práctica: +80 AP</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- STAGE DE ENTRENAMIENTO -->
+        <div class="battle-stage-card" style="border-color: var(--gold-neon);">
+          <div class="stage-top-bar">
+            <div class="fighter-hud p1">
+              <img src="https://api.dicebear.com/7.x/bottts/svg?seed=AuraFighter1" class="fighter-avatar-hud" id="trainingP1Avatar">
+              <div class="fighter-info">
+                <div class="fighter-name" id="trainingP1Name">AuraMaster_CL (Tú en Práctica)</div>
+                <div class="aura-bar-bg"><div class="aura-bar-fill" style="width: 100%;"></div></div>
+              </div>
+            </div>
+
+            <div class="vs-badge-center" style="background: linear-gradient(135deg, var(--gold-neon), #ff9900); color: #000;">PRACTICE</div>
+
+            <div class="fighter-hud p2">
+              <img src="https://api.dicebear.com/7.x/bottts/svg?seed=AuraBotAlpha" class="fighter-avatar-hud" id="trainingBotAvatar">
+              <div class="fighter-info">
+                <div class="fighter-name" id="trainingBotName">AuraBot-Alpha (Rival Digital)</div>
+                <div class="aura-bar-bg"><div class="aura-bar-fill" style="width: 100%; background: linear-gradient(90deg, #ffd700, #ff5500);"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="arena-actions-bar">
+            <button class="btn-cyber btn-cyber-gold" id="startTrainingCamBtn">📷 ENTRENAR 15s (CÁMARA)</button>
+            <button class="btn-cyber" id="simTrainingBtn">🤖 SIMULAR ENTRENAMIENTO IA</button>
+          </div>
+        </div>
+
+        <!-- RETROALIMENTACIÓN DE ENTRENAMIENTO -->
+        <div class="legal-notice-box" style="margin-top: 20px; background: rgba(255, 215, 0, 0.05); border-color: var(--gold-neon);">
+          <strong>🎯 Feedback de los Jurados en Modo Entrenamiento:</strong>
+          <p id="trainingFeedbackText" style="margin-top: 5px; color: var(--text-main);">
+            Elige tu rival digital de práctica arriba y presiona "Entrenar 15s" para recibir consejos personalizados de los jurados antes de una batalla PvP real entre 2 usuarios.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 3: GUÍA DE MOVIMIENTOS & PUNTAJES DE AURA -->
     <section class="tab-content" id="movesTab">
       <div class="transactions-card">
         <div style="text-align: center; margin-bottom: 25px;">
