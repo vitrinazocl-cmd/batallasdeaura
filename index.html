@@ -149,12 +149,18 @@
           </div>
         </div>
 
-        <!-- CONTROLES Y ACCIONES DE COMBATE -->
+        <!-- BANNER DE TURNO SECUENCIAL DE CÁMARA EN VIVO -->
+        <div class="turn-status-banner" id="turnStatusBanner" style="background: rgba(0, 243, 255, 0.12); border: 1px solid var(--cyan-neon); border-radius: 10px; padding: 10px 16px; margin-bottom: 15px; text-align: center;">
+          <div style="font-family: var(--font-head); font-size: 13px; color: var(--gold-neon);" id="turnBadgeText">
+            🔴 TURNO 1 EN VIVO: Presiona "📷 1. GRABAR EN VIVO (PELEADOR 1 - TÚ)" para capturar tus 15s en el minuto.
+          </div>
+        </div>
+
+        <!-- CONTROLES Y ACCIONES DE COMBATE SECUENCIAL EN VIVO -->
         <div class="arena-actions-bar">
-          <button class="btn-cyber" id="startCamBtn">📷 GRABAR 15s (CÁMARA)</button>
-          <button class="btn-cyber btn-cyber-magenta" id="uploadVideoBtn">📁 SUBIR MI VIDEO 15s</button>
-          <button class="btn-cyber btn-cyber-gold" id="simBattleBtn">🔥 SIMULAR BATALLA RÁPIDA</button>
-          <input type="file" id="videoFileInput" accept="video/*" style="display: none;">
+          <button class="btn-cyber btn-cyber-gold" id="recordP1CamBtn">📷 1. GRABAR EN VIVO (PELEADOR 1 - TÚ)</button>
+          <button class="btn-cyber btn-cyber-magenta" id="recordP2CamBtn" disabled style="opacity: 0.4; cursor: not-allowed;">📷 2. GRABAR EN VIVO (PELEADOR 2 - RIVAL)</button>
+          <button class="btn-cyber" id="simBattleBtn">🤖 SIMULAR COMBATE IA</button>
         </div>
       </div>
 

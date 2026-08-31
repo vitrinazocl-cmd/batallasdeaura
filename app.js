@@ -503,57 +503,118 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // COMBATE Y LOS 3 JURADOS DIGITALES
-  const startCamBtn = document.getElementById('startCamBtn');
-  const uploadVideoBtn = document.getElementById('uploadVideoBtn');
+  // ==========================================================================
+  // COMBATE SECUENCIAL EN VIVO TURNO POR TURNO (CÁMARA WEBRTC OBLIGATORIA)
+  // Sin archivos pre-grabados: solo captura en vivo en el minuto del combate.
+  // ==========================================================================
+  const recordP1CamBtn = document.getElementById('recordP1CamBtn');
+  const recordP2CamBtn = document.getElementById('recordP2CamBtn');
   const simBattleBtn = document.getElementById('simBattleBtn');
-  const videoFileInput = document.getElementById('videoFileInput');
+
   const player1Video = document.getElementById('player1Video');
+  const player2Video = document.getElementById('player2Video');
+  const turnBadgeText = document.getElementById('turnBadgeText');
+  const p1VideoStatus = document.getElementById('p1VideoStatus');
+  const p2VideoStatus = document.getElementById('p2VideoStatus');
 
   let mediaRecorder;
   let recordedChunks = [];
+  let p1LiveRecordedBlob = null;
+  let p2LiveRecordedBlob = null;
 
-  if (startCamBtn) {
-    startCamBtn.addEventListener('click', async () => {
+  // TURNO 1: PELEADOR 1 (TÚ)
+  if (recordP1CamBtn) {
+    recordP1CamBtn.addEventListener('click', async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
         player1Video.srcObject = stream;
         player1Video.muted = true;
         player1Video.play();
 
+        if (p1VideoStatus) p1VideoStatus.innerHTML = '<span style="color: var(--red-alert);">🔴 Grabando Turno 1 en Vivo...</span>';
+
         recordedChunks = [];
         mediaRecorder = new MediaRecorder(stream);
-        
+
         mediaRecorder.ondataavailable = e => { if (e.data.size > 0) recordedChunks.push(e.data); };
         mediaRecorder.onstop = () => {
-          const blob = new Blob(recordedChunks, { type: 'video/webm' });
+          p1LiveRecordedBlob = new Blob(recordedChunks, { type: 'video/webm' });
           player1Video.srcObject = null;
-          player1Video.src = URL.createObjectURL(blob);
+          player1Video.src = URL.createObjectURL(p1LiveRecordedBlob);
           player1Video.muted = false;
           player1Video.play();
+
+          if (p1VideoStatus) p1VideoStatus.innerHTML = '✓ Video Turno 1 Grabado en Vivo (Tú)';
+
+          // DESBLOQUEAR TURNO 2 PARA EL RIVAL
+          if (recordP2CamBtn) {
+            recordP2CamBtn.disabled = false;
+            recordP2CamBtn.style.opacity = '1';
+            recordP2CamBtn.style.cursor = 'pointer';
+          }
+          if (recordP1CamBtn) {
+            recordP1CamBtn.disabled = true;
+            recordP1CamBtn.style.opacity = '0.4';
+            recordP1CamBtn.style.cursor = 'not-allowed';
+          }
+
+          if (turnBadgeText) {
+            turnBadgeText.innerHTML = '🔵 TURNO 2 EN VIVO: ¡Excelente! Ahora presiona "📷 2. GRABAR EN VIVO (PELEADOR 2 - RIVAL)" para capturar la respuesta.';
+          }
+
+          alert('📹 ¡Turno 1 grabado en vivo en el minuto del combate! Ahora se habilita la cámara para el Turno 2 (Rival).');
+        };
+
+        mediaRecorder.start();
+        startTimerCountdown(15, () => mediaRecorder.stop());
+      } catch (err) {
+        alert('No se detectó cámara web. Usando el simulador de combate digital en vivo...');
+        runSimulatedBattle();
+      }
+    });
+  }
+
+  // TURNO 2: PELEADOR 2 (RIVAL)
+  if (recordP2CamBtn) {
+    recordP2CamBtn.addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        player2Video.srcObject = stream;
+        player2Video.muted = true;
+        player2Video.play();
+
+        if (p2VideoStatus) p2VideoStatus.innerHTML = '<span style="color: var(--red-alert);">🔴 Grabando Turno 2 en Vivo (Rival)...</span>';
+
+        recordedChunks = [];
+        mediaRecorder = new MediaRecorder(stream);
+
+        mediaRecorder.ondataavailable = e => { if (e.data.size > 0) recordedChunks.push(e.data); };
+        mediaRecorder.onstop = () => {
+          p2LiveRecordedBlob = new Blob(recordedChunks, { type: 'video/webm' });
+          player2Video.srcObject = null;
+          player2Video.src = URL.createObjectURL(p2LiveRecordedBlob);
+          player2Video.muted = false;
+          player2Video.play();
+
+          if (p2VideoStatus) p2VideoStatus.innerHTML = '✓ Video Turno 2 Grabado en Vivo (Rival)';
+
+          if (turnBadgeText) {
+            turnBadgeText.innerHTML = '⚡ AMBOS VIDEOS EN VIVO REGISTRADOS. Los 3 Jurados Digitales están evaluando la ronda...';
+          }
+
+          alert('📹 ¡Turno 2 grabado en vivo! Ambos videos secuenciales están listos para la evaluación de los Jurados.');
           runJudgesEvaluation();
         };
 
         mediaRecorder.start();
         startTimerCountdown(15, () => mediaRecorder.stop());
       } catch (err) {
-        alert('No se detectó cámara web. Usando el simulador de batalla digital...');
+        alert('No se detectó cámara web para el rival. Usando la respuesta de simulación en vivo...');
         runSimulatedBattle();
       }
     });
   }
 
-  if (uploadVideoBtn) uploadVideoBtn.addEventListener('click', () => videoFileInput.click());
-  if (videoFileInput) {
-    videoFileInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        player1Video.src = URL.createObjectURL(file);
-        player1Video.play();
-        runJudgesEvaluation();
-      }
-    });
-  }
   if (simBattleBtn) simBattleBtn.addEventListener('click', () => runSimulatedBattle());
 
   // MOTOR DE COMBATE MULTI-VIDEOS (3, 5 O 7 VIDEOS DE MÁX 15S SIN MÍNIMO)
@@ -575,6 +636,22 @@ document.addEventListener('DOMContentLoaded', () => {
   function resetMatchRounds() {
     currentRoundIndex = 1;
     matchRoundsScores = [];
+
+    if (recordP1CamBtn) {
+      recordP1CamBtn.disabled = false;
+      recordP1CamBtn.style.opacity = '1';
+      recordP1CamBtn.style.cursor = 'pointer';
+    }
+    if (recordP2CamBtn) {
+      recordP2CamBtn.disabled = true;
+      recordP2CamBtn.style.opacity = '0.4';
+      recordP2CamBtn.style.cursor = 'not-allowed';
+    }
+
+    if (turnBadgeText) {
+      turnBadgeText.innerHTML = `🔴 TURNO 1 EN VIVO: Presiona "📷 1. GRABAR EN VIVO (PELEADOR 1 - TÚ)" para capturar tu video en el minuto.`;
+    }
+
     updateRoundUI();
   }
 
