@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Batallas de Aura - Red Social de Pelea Digital 15s (Chile)</title>
+  <meta name="description" content="Plataforma de batallas de aura digitales en videos de 15 segundos para jóvenes en Chile, supervisada por jurados digitales y adultos responsables. Sin pánico escénico desde casa.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ==================== HEADER PRINCIPAL ==================== -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo-brand" id="logoClick">
+        <div class="logo-icon">⚡</div>
+        <div class="logo-text">
+          <h1>BATALLAS DE AURA</h1>
+          <div class="logo-tag">Chile SafeKids Digital Arena</div>
+        </div>
+      </div>
+
+      <!-- BANNER SAFE-ZONE: COMBATE DESDE CASA SIN PÁNICO ESCÉNICO -->
+      <div class="safezone-header-badge" title="Espacio seguro para vencer el pánico escénico">
+        🛡️ <span>Tu Casa, Tu Arena Segura</span>
+        <small style="display:block; font-size:10px; color:var(--cyan-neon);">Cero Pánico Escénico</small>
+      </div>
+
+      <div class="user-status-bar">
+        <div class="wallet-badge-mini" title="Tus puntos acumulados de Aura">
+          <span>⚡ AP:</span>
+          <strong id="headerWalletAP">350</strong>
+        </div>
+        <div class="age-tag" id="headerAgeBracket">Rango: 12-15 años (13 años)</div>
+        <button class="user-profile-btn" id="openProfileBtn">
+          <img src="https://api.dicebear.com/7.x/bottts/svg?seed=AuraFighter1" alt="Avatar" class="avatar-mini" id="headerAvatarImg">
+          <span id="headerUserName">AuraMaster_CL</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- NAVBAR NAVEGACIÓN PRINCIPAL -->
+    <nav class="app-nav">
+      <div class="nav-container">
+        <button class="nav-btn active" data-tab="arenaTab">🥊 ARENA DE PELEA 15S</button>
+        <button class="nav-btn" data-tab="walletTab">💎 BILLETERA DE AURA</button>
+        <button class="nav-btn" data-tab="socialTab">💬 RED SOCIAL & CHAT</button>
+        <button class="nav-btn" data-tab="rankingTab">🏆 RANKING CHILE</button>
+        <button class="nav-btn" data-tab="legalTab">⚖️ NORMATIVA & MISIÓN SEGURO</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ==================== MAIN CONTENT WRAPPER ==================== -->
+  <main class="main-wrapper">
+
+    <!-- HERO DE BIENVENIDA Y PROPÓSITO SAFE-ZONE -->
+    <div class="mission-banner-card">
+      <div class="mission-icon">🌐⚡</div>
+      <div>
+        <h3 class="mission-title">¡COMPITE DIGITALMENTE DESDE CUALQUIER LUGAR DEL MUNDO!</h3>
+        <p class="mission-desc">
+          Plataforma global diseñada para que jóvenes de todo el mundo compitan sin salir de casa y superen el <strong>pánico escénico</strong>. Participa en un entorno seguro y supervisado por adultos, interactuando exclusivamente dentro de tu <strong>mismo segmento de edad estricto</strong>.
+        </p>
+      </div>
+    </div>
+
+    <!-- TAB 1: ARENA DE PELEA STREET FIGHTER STAGE -->
+    <section class="tab-content active" id="arenaTab">
+      <div class="arena-header">
+        <h2 class="arena-title">⚡ ARENA DIGITAL DE COMBATE 1v1 ⚡</h2>
+        <p class="arena-subtitle">Demuestra tu aura en un video de máximo 15 segundos. Los 3 Jurados Digitales calificarán tu combate.</p>
+      </div>
+
+      <!-- ESCENARIO DE PELEA RETRO-FUTURISTA -->
+      <div class="battle-stage-card">
+        <!-- HUD DE PELEADORES -->
+        <div class="stage-top-bar">
+          <div class="fighter-hud p1">
+            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=AuraFighter1" alt="Jugador 1" class="fighter-avatar-hud" id="hudP1Avatar">
+            <div class="fighter-info">
+              <div class="fighter-name" id="hudP1Name">AuraMaster_CL (Tú)</div>
+              <div class="aura-bar-bg">
+                <div class="aura-bar-fill" id="p1AuraBar" style="width: 100%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-badge-center">VS</div>
+
+          <div class="fighter-hud p2">
+            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=RivalCyber" alt="Jugador 2" class="fighter-avatar-hud" id="hudP2Avatar">
+            <div class="fighter-info">
+              <div class="fighter-name" id="hudP2Name">CyberWarrior_Stgo</div>
+              <div class="aura-bar-bg">
+                <div class="aura-bar-fill" id="p2AuraBar" style="width: 100%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEWPORT DE VIDEOS PARALELOS -->
+        <div class="stage-arena-viewport">
+          <div class="stage-overlay-grid"></div>
+          
+          <div class="videos-duel-container">
+            <!-- VIDEO JUGADOR 1 -->
+            <div class="video-box-card">
+              <span class="timer-countdown-badge" id="video1Timer">15s MAX</span>
+              <video id="player1Video" class="video-element" autoplay playsinline muted loop poster="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=400&auto=format&fit=crop"></video>
+              <div style="margin-top: 6px; font-weight: 700; font-size: 13px;" id="p1VideoStatus">Tu Ataque de Aura desde Casa</div>
+            </div>
+
+            <!-- VIDEO JUGADOR 2 -->
+            <div class="video-box-card p2-card">
+              <span class="timer-countdown-badge" id="video2Timer">15s MAX</span>
+              <video id="player2Video" class="video-element" autoplay playsinline muted loop poster="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=400&auto=format&fit=crop"></video>
+              <div style="margin-top: 6px; font-weight: 700; font-size: 13px;" id="p2VideoStatus">Respuesta del Rival de tu Edad</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONTROLES Y ACCIONES DE COMBATE -->
+        <div class="arena-actions-bar">
+          <button class="btn-cyber" id="startCamBtn">📷 GRABAR 15s (CÁMARA)</button>
+          <button class="btn-cyber btn-cyber-magenta" id="uploadVideoBtn">📁 SUBIR MI VIDEO 15s</button>
+          <button class="btn-cyber btn-cyber-gold" id="simBattleBtn">🔥 SIMULAR BATALLA RÁPIDA</button>
+          <input type="file" id="videoFileInput" accept="video/*" style="display: none;">
+        </div>
+      </div>
+
+      <!-- SECCIÓN DE LOS 3 JURADOS DIGITALES -->
+      <div class="judges-section">
+        <h3 class="judges-title">👑 PANEL DE 3 JURADOS DIGITALES DE AURA</h3>
+        
+        <div class="judges-grid">
+          <!-- JUEZ 1: KAI-RO -->
+          <div class="judge-card kai-ro">
+            <div class="judge-avatar-wrapper">
+              <img src="https://api.dicebear.com/7.x/bottts/svg?seed=KaiRoJudge" alt="Kai-Ro" class="judge-img">
+            </div>
+            <div class="judge-name">KAI-RO</div>
+            <div class="judge-role">El Maestro del Estilo (Techno-Samurai)</div>
+            <div class="judge-verdict-box" id="verdictKaiRo">"Esperando el combate para evaluar la fluidez y postura de aura."</div>
+            <div class="judge-score-badge" id="scoreKaiRo">SCORE: -- / 10</div>
+          </div>
+
+          <!-- JUEZ 2: AURA-NEO -->
+          <div class="judge-card aura-neo">
+            <div class="judge-avatar-wrapper">
+              <img src="https://api.dicebear.com/7.x/bottts/svg?seed=AuraNeoJudge" alt="Aura-Neo" class="judge-img">
+            </div>
+            <div class="judge-name">AURA-NEO</div>
+            <div class="judge-role">Centinela Cyber-Pop (Star Warrior)</div>
+            <div class="judge-verdict-box" id="verdictAuraNeo">"¡Siente la energía del escenario! Queremos ver brillo cósmico."</div>
+            <div class="judge-score-badge" id="scoreAuraNeo">SCORE: -- / 10</div>
+          </div>
+
+          <!-- JUEZ 3: VALKYRIA-X -->
+          <div class="judge-card valkyria">
+            <div class="judge-avatar-wrapper">
+              <img src="https://api.dicebear.com/7.x/bottts/svg?seed=ValkyriaJudge" alt="Valkyria-X" class="judge-img">
+            </div>
+            <div class="judge-name">VALKYRIA-X</div>
+            <div class="judge-role">Jueza Suprema (Mech-Guardian)</div>
+            <div class="judge-verdict-box" id="verdictValkyria">"Analizaré la precisión de tiempo y la defensa contra el contraataque."</div>
+            <div class="judge-score-badge" id="scoreValkyria">SCORE: -- / 10</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: BILLETERA DIGITAL DE AURA -->
+    <section class="tab-content" id="walletTab">
+      <div class="wallet-hero-card">
+        <div class="wallet-balance-info">
+          <div class="wallet-label">SALDO TOTAL DE BILLETERA DIGITAL</div>
+          <div class="wallet-amount-big">
+            ⚡ <span id="walletTotalPoints">350</span> <small style="font-size: 18px; color: var(--text-muted);">AP (Aura Points)</small>
+          </div>
+          <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">Ganarás +150 AP por cada victoria y perderás -50 AP por derrota. ¡Puedes regalar o recibir puntos en el chat con tu segmento!</p>
+        </div>
+
+        <div>
+          <div class="aura-tier-badge" id="walletTierName">NIVEL: AURA DE ORO</div>
+        </div>
+      </div>
+
+      <div class="transactions-card">
+        <h3 style="font-family: var(--font-head); color: var(--cyan-neon); font-size: 18px; margin-bottom: 15px;">📜 HISTORIAL DE TRANSACCIONES Y BATALLAS</h3>
+        <div class="tx-list" id="txHistoryList">
+          <!-- Carga dinámicamente mediante JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: RED SOCIAL & CHAT INTERACTIVO -->
+    <section class="tab-content" id="socialTab">
+      <div class="social-layout">
+        <!-- SIDEBAR DE AMIGOS -->
+        <aside class="friends-sidebar">
+          <div class="sidebar-title">👥 PELEADORES DE TU SEGMENTO (<span id="socialAgeTag">12-15</span>)</div>
+          <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">🛡️ Solo interactúas con chicos de tu misma edad de forma segura.</div>
+          <div class="friends-list" id="friendsListContainer">
+            <!-- Carga dinámicamente -->
+          </div>
+        </aside>
+
+        <!-- CHAT BOX PRINCIPAL -->
+        <main class="chat-main-card">
+          <div class="chat-header">
+            <div>
+              <strong id="activeChatName" style="color: var(--cyan-neon); font-size: 16px;">CyberWarrior_Stgo</strong>
+              <div style="font-size: 12px; color: var(--green-safe);">● Conectado en Santiago, Chile</div>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <button class="btn-cyber btn-cyber-gold" style="padding: 6px 12px; font-size: 12px;" id="giftPointsBtn">🎁 REGALAR AURA AP</button>
+              <button class="btn-cyber btn-cyber-magenta" style="padding: 6px 12px; font-size: 12px;" id="reportAbuseBtn">🚨 REPORTAR</button>
+            </div>
+          </div>
+
+          <div class="chat-messages-area" id="chatMessagesArea">
+            <!-- Mensajes dinámicos con editar/eliminar -->
+          </div>
+
+          <form class="chat-input-bar" id="chatForm">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Escribe un mensaje de aura pacífico (con filtro de moderación)..." autocomplete="off">
+            <button type="submit" class="btn-cyber" style="padding: 10px 18px;">ENVIAR</button>
+          </form>
+        </main>
+      </div>
+    </section>
+
+    <!-- TAB 4: RANKING CHILE -->
+    <section class="tab-content" id="rankingTab">
+      <div class="transactions-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+          <h3 style="font-family: var(--font-head); color: var(--gold-neon); font-size: 20px;">🏆 TABLA DE LÍDERES DE AURA (CHILE)</h3>
+          <select id="rankingAgeFilter" class="form-control" style="width: auto;">
+            <option value="8-12">Rango: 8 a 12 años (Junior)</option>
+            <option value="12-15" selected>Rango: 12 a 15 años (Teens)</option>
+            <option value="15-18">Rango: 15 a 18 años (Youth)</option>
+            <option value="18+">Rango: 18+ años (Torneo Leyendas)</option>
+          </select>
+        </div>
+
+        <table class="leaderboard-table">
+          <thead>
+            <tr>
+              <th>POS</th>
+              <th>COMBATIENTE</th>
+              <th>RANGO ETARIO</th>
+              <th>NIVEL</th>
+              <th>PUNTOS (AP)</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboardTbody">
+            <!-- Carga mediante JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 5: COMPLIANCE LEGAL & MISIÓN SAFE-ZONE -->
+    <section class="tab-content" id="legalTab">
+      <div class="transactions-card" style="line-height: 1.8;">
+        <h2 style="font-family: var(--font-head); color: var(--cyan-neon); margin-bottom: 15px;">⚖️ MARCO LEGAL Y MISIÓN DE SEGURIDAD DIGITAL</h2>
+        
+        <div class="legal-notice-box">
+          <strong>🛡️ Misión SafeKids & Inclusión Digital:</strong>
+          <p>
+            Sabemos que muchos niños y jóvenes sueñan con demostrar su talento y batallas de aura pero sufren de <strong>pánico escénico</strong> o no cuentan con espacios públicos seguros. 
+            Batallas de Aura ofrece un refugio digital seguro para competir desde el hogar con total privacidad y apoyo.
+          </p>
+        </div>
+
+        <div class="legal-notice-box" style="margin-top: 15px;">
+          <strong>Cumplimiento de la Legislación Chilena:</strong>
+          <ul>
+            <li><strong>Ley N° 21.430:</strong> Protección integral de los derechos de la niñez y adolescencia en entornos digitales.</li>
+            <li><strong>Ley N° 19.628 y Ley N° 21.096:</strong> Privacidad y protección de datos personales. Datos guardados 100% en `LocalStorage`.</li>
+            <li><strong>Segmentación Etaria Estricta (8-12, 12-15, 15-18 y Torneo 18+):</strong> Imposibilidad de interacción cruzada entre segmentos no autorizados.</li>
+            <li><strong>Tutor Responsable:</strong> Verificación de adulto responsable para menores de edad.</li>
+            <li><strong>Plataforma 100% Gratuita:</strong> Sin microtransacciones ni cobros con dinero real.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== MODAL DE REGISTRO CON EDAD EXACTA, IDENTIDAD Y PERFIL ==================== -->
+  <div class="modal-overlay" id="registerModal">
+    <div class="modal-box">
+      <h2 class="modal-header-title">🛡️ REGISTRO DE PELEADOR DE AURA</h2>
+      <p class="modal-subtitle">Al ingresar tu edad exacta, el sistema te asignará automáticamente al segmento seguro correspondiente.</p>
+
+      <form id="registerForm">
+        <div class="form-group">
+          <label class="form-label">1. Nombre de Usuario del Peleador:</label>
+          <input type="text" id="regUsername" class="form-control" value="AuraMaster_CL" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">2. Ingresa tu Edad Exacta (años):</label>
+          <input type="number" id="regExactAge" class="form-control" min="8" max="99" value="13" required>
+          <div id="computedBracketBadge" class="computed-bracket-banner">
+            🎯 Segmento asignado automáticamente: <strong>12 a 15 años (Teens)</strong>
+          </div>
+        </div>
+
+        <!-- PASO 3: FOTO DE REGISTRO DE IDENTIDAD (INTERNO/PRIVADO) -->
+        <div class="form-group" id="registryPhotoGroup">
+          <label class="form-label" id="registryPhotoLabel">3. Fotografía de Adulto Responsable (Registro Interno de Identidad):</label>
+          <input type="file" id="registryPhotoInput" accept="image/*" class="form-control">
+          <img id="registryPhotoPreview" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" alt="Vista previa registro identidad" class="adult-preview-img">
+          <div class="photo-privacy-note">
+            🔒 <strong>Registro de Seguridad Privado:</strong> Esta fotografía se guarda únicamente en la base de registro de la plataforma y <strong>NO se mostrará</strong> a otros usuarios como tu foto de perfil.
+          </div>
+        </div>
+
+        <!-- PASO 4: FOTO DE PERFIL PÚBLICA (OPCIONAL O AVATAR GENÉRICO) -->
+        <div class="form-group">
+          <label class="form-label">4. Foto de Perfil Pública (Opcional):</label>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">
+            Puedes subir tu propia imagen para que te vean en las batallas y el chat, o usar una imagen genérica predeterminada.
+          </p>
+
+          <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+            <img id="publicAvatarPreview" src="https://api.dicebear.com/7.x/bottts/svg?seed=AuraFighter1" alt="Avatar público" class="avatar-mini" style="width: 55px; height: 55px; border-width: 3px;">
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
+              <input type="file" id="publicAvatarInput" accept="image/*" class="form-control" style="font-size: 13px;">
+              <button type="button" id="useGenericAvatarBtn" class="btn-cyber" style="padding: 6px 12px; font-size: 12px; background: rgba(0, 243, 255, 0.15); border: 1px solid var(--cyan-neon); color: var(--cyan-neon);">
+                🤖 Usar Imagen Genérica (Sin foto personal)
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label style="font-size: 13px; color: var(--text-muted);">
+            <input type="checkbox" required checked> Acepto participar en un espacio seguro desde casa, respetando las normas de convivencia sin acoso.
+          </label>
+        </div>
+
+        <button type="submit" class="btn-cyber" style="width: 100%; justify-content: center;">FINALIZAR REGISTRO E INGRESAR</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL DE REGALO DE PUNTOS ==================== -->
+  <div class="modal-overlay" id="giftModal">
+    <div class="modal-box" style="max-width: 420px;">
+      <h3 class="modal-header-title">🎁 REGALAR PUNTOS DE AURA AP</h3>
+      <p class="modal-subtitle">Envía parte de tus Aura Points acumulados a tu amigo en el chat.</p>
+
+      <div class="form-group">
+        <label class="form-label">Cantidad de Aura Points (AP) a regalar:</label>
+        <input type="number" id="giftAmountInput" class="form-control" min="10" max="500" value="50">
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 20px;">
+        <button type="button" class="btn-cyber btn-cyber-gold" id="confirmGiftBtn" style="flex: 1; justify-content: center;">ENVIAR REGALO</button>
+        <button type="button" class="btn-cyber btn-cyber-magenta" id="closeGiftBtn" style="flex: 1; justify-content: center;">CANCELAR</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
