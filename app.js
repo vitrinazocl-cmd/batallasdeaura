@@ -6,7 +6,35 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  const STORAGE_KEY = 'batallas_de_aura_state_v4';
+  const STORAGE_KEY = 'batallas_de_aura_state_v5';
+
+  // 🛡️ CIBERSEGURIDAD EXPERTA: SANITIZADOR ANTI-XSS (CROSS-SITE SCRIPTING GUARD)
+  function sanitizeHTML(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;')
+      .replace(/\//g, '&#x2F;');
+  }
+
+  // 🛡️ CIBERSEGURIDAD EXPERTA: LIMITADOR DE VELOCIDAD DE CHAT (ANTI-SPAM & FLOODING)
+  let lastMessageTime = 0;
+  let messageCountInWindow = 0;
+
+  function isRateLimited() {
+    const now = Date.now();
+    if (now - lastMessageTime < 4000) {
+      messageCountInWindow++;
+      if (messageCountInWindow > 3) return true;
+    } else {
+      lastMessageTime = now;
+      messageCountInWindow = 1;
+    }
+    return false;
+  }
 
   // HELPER DE ASIGNACIÓN AUTOMÁTICA DE SEGMENTO
   function getBracketFromAge(age) {
@@ -303,11 +331,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (createCustomMoveForm) {
     createCustomMoveForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const name = document.getElementById('customMoveName').value.trim();
-      const cat = document.getElementById('customMoveCat').value;
-      const icon = document.getElementById('customMoveIcon').value;
-      const desc = document.getElementById('customMoveDesc').value.trim();
-      const diff = document.getElementById('customMoveDiff').value;
+      const name = sanitizeHTML(document.getElementById('customMoveName').value.trim());
+      const cat = sanitizeHTML(document.getElementById('customMoveCat').value);
+      const icon = sanitizeHTML(document.getElementById('customMoveIcon').value);
+      const desc = sanitizeHTML(document.getElementById('customMoveDesc').value.trim());
+      const diff = sanitizeHTML(document.getElementById('customMoveDiff').value);
 
       const newMove = {
         id: Date.now(),
@@ -316,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
         icon: icon,
         desc: desc,
         diff: diff,
-        author: appState.user.username
+        author: sanitizeHTML(appState.user.username)
       };
 
       if (!appState.customMoves) appState.customMoves = [];
@@ -356,16 +384,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // CHAT SOCIAL CON ACCIONES (EDITAR, ELIMINAR, REGALAR)
+  // CHAT SOCIAL CON ACCIONES (EDITAR, ELIMINAR, REGALAR, ANTI-SPAM & ANTI-XSS)
   const badWords = ['mierda', 'puta', 'tonto', 'estupido', 'weon', 'culiao', 'conchesumadre', 'maricon'];
 
   const chatForm = document.getElementById('chatForm');
   if (chatForm) {
     chatForm.addEventListener('submit', (e) => {
       e.preventDefault();
+      
+      // 🛡️ CIBERSEGURIDAD: RATELIMIT ANTI-SPAM
+      if (isRateLimited()) {
+        alert('🛡️ CIBERSEGURIDAD SAFE-KIDS: Envío de mensajes en pausa por protección anti-spam. Por favor espera unos segundos.');
+        return;
+      }
+
       const input = document.getElementById('chatInput');
-      let text = input.value.trim();
-      if (!text) return;
+      let rawText = input.value.trim();
+      if (!rawText) return;
+
+      let text = sanitizeHTML(rawText);
 
       let censored = text;
       badWords.forEach(word => {

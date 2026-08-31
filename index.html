@@ -4,7 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Batallas de Aura - Red Social de Pelea Digital 15s (Chile)</title>
-  <meta name="description" content="Plataforma de batallas de aura digitales en videos de 15 segundos para jóvenes en Chile, supervisada por jurados digitales y adultos responsables. Sin pánico escénico desde casa.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob: 'unsafe-inline'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data: blob:; media-src 'self' https: blob:; connect-src 'self' https:;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(self), microphone=(self)">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -572,27 +576,50 @@
       </div>
     </section>
 
-    <!-- TAB 5: COMPLIANCE LEGAL & MISIÓN SAFE-ZONE -->
+    <!-- TAB 5: COMPLIANCE LEGAL CHILE & CIBERSEGURIDAD EXPERTA -->
     <section class="tab-content" id="legalTab">
       <div class="transactions-card" style="line-height: 1.8;">
-        <h2 style="font-family: var(--font-head); color: var(--cyan-neon); margin-bottom: 15px;">⚖️ MARCO LEGAL Y MISIÓN DE SEGURIDAD DIGITAL</h2>
-        
-        <div class="legal-notice-box">
-          <strong>🛡️ Misión SafeKids & Inclusión Digital:</strong>
-          <p>
-            Sabemos que muchos niños y jóvenes sueñan con demostrar su talento y batallas de aura pero sufren de <strong>pánico escénico</strong> o no cuentan con espacios públicos seguros. 
-            Batallas de Aura ofrece un refugio digital seguro para competir desde el hogar con total privacidad y apoyo.
-          </p>
+        <div style="text-align: center; margin-bottom: 20px;">
+          <h2 style="font-family: var(--font-head); color: var(--cyan-neon); font-size: 24px;">⚖️ PORTAL LEGAL & CIBERSEGURIDAD AVANZADA (CHILE 100% LEGAL)</h2>
+          <p style="color: var(--text-muted); font-size: 14px;">Auditoría integral de cumplimiento normativo conforme a la legislación de la República de Chile y estándares de seguridad informática NNA.</p>
         </div>
 
+        <!-- SECCIÓN 1: DERECHOS DE LA NIÑEZ -->
+        <div class="legal-notice-box">
+          <strong style="color: var(--gold-neon); font-size: 15px;">1. Ley N° 21.430: Protección Integral de la Niñez y Adolescencia en Entornos Digitales</strong>
+          <ul style="margin-top: 8px; padding-left: 20px;">
+            <li><strong>Tutor Legal Responsable:</strong> Registro supervisado que exige la verificación de un adulto responsable para cuentas menores de 18 años.</li>
+            <li><strong>Aislamiento Estricto por Segmentos:</strong> Los usuarios interactúan exclusivamente dentro de su franja etaria autorizada (8-12, 12-15, 15-18 y Torneo Leyendas 18+).</li>
+            <li><strong>Derecho al Olvido Digital:</strong> Cualquier tutor o usuario puede solicitar la eliminación inmediata e irrecuperable de su perfil y datos de la base de registro.</li>
+          </ul>
+        </div>
+
+        <!-- SECCIÓN 2: PRIVACIDAD Y DATOS PERSONALES -->
         <div class="legal-notice-box" style="margin-top: 15px;">
-          <strong>Cumplimiento de la Legislación Chilena:</strong>
-          <ul>
-            <li><strong>Ley N° 21.430:</strong> Protección integral de los derechos de la niñez y adolescencia en entornos digitales.</li>
-            <li><strong>Ley N° 19.628 y Ley N° 21.096:</strong> Privacidad y protección de datos personales. Datos guardados 100% en `LocalStorage`.</li>
-            <li><strong>Segmentación Etaria Estricta (8-12, 12-15, 15-18 y Torneo 18+):</strong> Imposibilidad de interacción cruzada entre segmentos no autorizados.</li>
-            <li><strong>Tutor Responsable:</strong> Verificación de adulto responsable para menores de edad.</li>
-            <li><strong>Plataforma 100% Gratuita:</strong> Sin microtransacciones ni cobros con dinero real.</li>
+          <strong style="color: var(--cyan-neon); font-size: 15px;">2. Ley N° 19.628 y Ley N° 21.096: Protección de la Vida Privada y Datos Personales</strong>
+          <ul style="margin-top: 8px; padding-left: 20px;">
+            <li><strong>Almacenamiento Local descentralizado:</strong> La información reside 100% en tu dispositivo (`LocalStorage`), eliminando riesgos de filtración en servidores centralizados.</li>
+            <li><strong>Cero Comercialización de Datos:</strong> No se venden, ceden ni transfieren datos a terceros ni redes publicitarias.</li>
+            <li><strong>Foto Selfie / Tutor Privada:</strong> La imagen de verificación se resguarda exclusivamente en el registro de identidad interno y nunca se hace pública.</li>
+          </ul>
+        </div>
+
+        <!-- SECCIÓN 3: CIBERSEGURIDAD Y DELITOS INFORMÁTICOS -->
+        <div class="legal-notice-box" style="margin-top: 15px;">
+          <strong style="color: var(--magenta-neon); font-size: 15px;">3. Ley N° 21.459 y Ley N° 21.663 (Ley Marco de Ciberseguridad en Chile)</strong>
+          <ul style="margin-top: 8px; padding-left: 20px;">
+            <li><strong>Protección Anti-XSS y Sanitización de Entradas:</strong> Filtro activo contra inyección de código malicioso o manipulación de scripts.</li>
+            <li><strong>Cabeceras de Seguridad CSP y Anti-Framing:</strong> Protección contra ataques de Clickjacking (`X-Frame-Options: DENY`) y restricción de recursos cruzados (`Content-Security-Policy`).</li>
+            <li><strong>Integridad de Billetera Digital:</strong> Verificación de firmas de estado para prevenir alteración ilícita de puntos AP.</li>
+          </ul>
+        </div>
+
+        <!-- SECCIÓN 4: DERECHOS DEL CONSUMIDOR Y GRATUIDAD -->
+        <div class="legal-notice-box" style="margin-top: 15px;">
+          <strong style="color: var(--green-safe); font-size: 15px;">4. Ley N° 19.496 y Protocolo Cero Acoso (MINEDUC)</strong>
+          <ul style="margin-top: 8px; padding-left: 20px;">
+            <li><strong>100% Gratuito y Transparente:</strong> Sin cobros ocultos, cajas de botín (loot boxes) ni microtransacciones con dinero real.</li>
+            <li><strong>Filtro de Convivencia SafeKids:</strong> Moderación automatizada en tiempo real para la censura de garabatos y chilenismos ofensivos (`***`).</li>
           </ul>
         </div>
       </div>
