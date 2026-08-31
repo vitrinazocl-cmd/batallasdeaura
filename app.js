@@ -556,10 +556,62 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   if (simBattleBtn) simBattleBtn.addEventListener('click', () => runSimulatedBattle());
 
+  // MOTOR DE COMBATE MULTI-VIDEOS (3, 5 O 7 VIDEOS DE MÁX 15S SIN MÍNIMO)
+  let currentMatchTotalRounds = 3;
+  let currentRoundIndex = 1;
+  let matchRoundsScores = [];
+
+  const battleFormatSelect = document.getElementById('battleFormatSelect');
+  const roundNumberText = document.getElementById('roundNumberText');
+  const roundsReelContainer = document.getElementById('roundsReelContainer');
+
+  if (battleFormatSelect) {
+    battleFormatSelect.addEventListener('change', (e) => {
+      currentMatchTotalRounds = parseInt(e.target.value, 10);
+      resetMatchRounds();
+    });
+  }
+
+  function resetMatchRounds() {
+    currentRoundIndex = 1;
+    matchRoundsScores = [];
+    updateRoundUI();
+  }
+
+  function updateRoundUI() {
+    if (roundNumberText) {
+      roundNumberText.textContent = `VIDEO ${currentRoundIndex} DE ${currentMatchTotalRounds}`;
+    }
+    renderRoundsReel();
+  }
+
+  function renderRoundsReel() {
+    if (!roundsReelContainer) return;
+    roundsReelContainer.innerHTML = '';
+
+    for (let i = 1; i <= currentMatchTotalRounds; i++) {
+      const item = document.createElement('div');
+      let statusClass = '';
+      let statusIcon = '📹';
+
+      if (i < currentRoundIndex) {
+        statusClass = 'completed';
+        statusIcon = '✓';
+      } else if (i === currentRoundIndex) {
+        statusClass = 'active';
+        statusIcon = '⚡';
+      }
+
+      item.className = `round-reel-item ${statusClass}`;
+      item.innerHTML = `${statusIcon} Video ${i} de ${currentMatchTotalRounds}`;
+      roundsReelContainer.appendChild(item);
+    }
+  }
+
   function startTimerCountdown(seconds, onFinish) {
     const badge = document.getElementById('video1Timer');
     let left = seconds;
-    badge.textContent = `${left}s RECOR`;
+    badge.textContent = `${left}s MAX`;
     
     const interval = setInterval(() => {
       left--;
@@ -568,14 +620,14 @@ document.addEventListener('DOMContentLoaded', () => {
         badge.textContent = '15s MAX';
         if (onFinish) onFinish();
       } else {
-        badge.textContent = `${left}s RECOR`;
+        badge.textContent = `${left}s MAX`;
       }
     }, 1000);
   }
 
   function runSimulatedBattle() {
-    document.getElementById('p1VideoStatus').textContent = '⚡ Ejecutando Dragón de Aura desde casa...';
-    document.getElementById('p2VideoStatus').textContent = '🛡️ Escudo Cyber-Pop Activado...';
+    document.getElementById('p1VideoStatus').textContent = `⚡ Ejecutando Video ${currentRoundIndex} de ${currentMatchTotalRounds}...`;
+    document.getElementById('p2VideoStatus').textContent = `🛡️ Respuesta Video ${currentRoundIndex} del Rival...`;
     runJudgesEvaluation();
   }
 
@@ -588,56 +640,77 @@ document.addEventListener('DOMContentLoaded', () => {
     const sAuraNeo = document.getElementById('scoreAuraNeo');
     const sValkyria = document.getElementById('scoreValkyria');
 
-    vKaiRo.textContent = 'Evaluando técnicas y postura samurai...';
-    vAuraNeo.textContent = 'Midiendo el impacto visual cyber...';
-    vValkyria.textContent = 'Analizando tiempo de respuesta y aura...';
+    vKaiRo.textContent = `Evaluando Video ${currentRoundIndex} de ${currentMatchTotalRounds}...`;
+    vAuraNeo.textContent = `Midiendo energía del Video ${currentRoundIndex}...`;
+    vValkyria.textContent = `Analizando defensa del Video ${currentRoundIndex}...`;
 
     setTimeout(() => {
       const score1 = (7.5 + Math.random() * 2.4).toFixed(1);
       const score2 = (7.8 + Math.random() * 2.1).toFixed(1);
       const score3 = (8.0 + Math.random() * 1.9).toFixed(1);
 
-      const totalScore = (parseFloat(score1) + parseFloat(score2) + parseFloat(score3)) / 3;
-      const won = totalScore >= 8.2;
+      const roundTotalScore = (parseFloat(score1) + parseFloat(score2) + parseFloat(score3)) / 3;
+      matchRoundsScores.push(roundTotalScore);
 
       sKaiRo.textContent = `SCORE: ${score1} / 10`;
       sAuraNeo.textContent = `SCORE: ${score2} / 10`;
       sValkyria.textContent = `SCORE: ${score3} / 10`;
 
-      if (won) {
-        vKaiRo.textContent = '"¡Gran dominio del espacio seguro en casa! Tu postura fue limpia."';
-        vAuraNeo.textContent = '"¡El brillo de tu aura venció cualquier pánico escénico!"';
-        vValkyria.textContent = '"Defensa impecable. ¡Premio de victoria otorgado!"';
+      // SI AÚN FALTAN RONDAS DE VIDEOS POR ENVIAR
+      if (currentRoundIndex < currentMatchTotalRounds) {
+        vKaiRo.textContent = `"Video ${currentRoundIndex} calificado (${roundTotalScore.toFixed(1)} pts). Preparen el Video ${currentRoundIndex + 1} de ${currentMatchTotalRounds}."`;
+        vAuraNeo.textContent = `"¡Buena rutina! Sigan acumulando brillo en la siguiente ronda."`;
+        vValkyria.textContent = `"Avancen al Video ${currentRoundIndex + 1} de la batalla."`;
 
-        appState.user.walletAP += 150;
-        appState.transactions.unshift({
-          id: Date.now(),
-          type: 'win',
-          desc: `Victoria de Aura (+150 AP)`,
-          amount: 150,
-          date: 'Ahora'
-        });
-        saveState();
-        alert('🎉 ¡VICTORIA! Los 3 Jurados Digitales te han otorgado +150 Aura Points (AP).');
+        alert(`📹 ¡Video ${currentRoundIndex} de ${currentMatchTotalRounds} registrado y calificado! Procede a enviar el Video ${currentRoundIndex + 1}.`);
+        currentRoundIndex++;
+        updateRoundUI();
       } else {
-        vKaiRo.textContent = '"Buen intento. Sigue practicando desde la comodidad de tu hogar."';
-        vAuraNeo.textContent = '"Faltó un poco más de energía de escenario."';
-        vValkyria.textContent = '"El contragolpe rival rompió tu escudo."';
+        // BATALLA COMPLETADA (SE ENVIARON TODOS LOS VIDEOS: 3, 5 O 7)
+        const grandMatchScore = matchRoundsScores.reduce((a, b) => a + b, 0) / matchRoundsScores.length;
+        const won = grandMatchScore >= 8.2;
 
-        appState.user.walletAP = Math.max(0, appState.user.walletAP - 50);
-        appState.transactions.unshift({
-          id: Date.now(),
-          type: 'loss',
-          desc: `Derrota en Batalla de Aura (-50 AP)`,
-          amount: -50,
-          date: 'Ahora'
-        });
-        saveState();
-        alert('💥 DERROTA. Se han restado 50 Aura Points (AP). ¡Sigue practicando en tu espacio seguro!');
+        if (won) {
+          vKaiRo.textContent = `"¡VICTORIA FINAL DE COMBATE! Dominio absoluto en los ${currentMatchTotalRounds} videos enviados."`;
+          vAuraNeo.textContent = `"¡Espectáculo legendario! El brillo total del combate fue impecable."`;
+          vValkyria.textContent = `"Campeón indiscutido del acuerdo de ${currentMatchTotalRounds} videos."`;
+
+          const apGained = 150 + (currentMatchTotalRounds * 20);
+          appState.user.walletAP += apGained;
+          appState.transactions.unshift({
+            id: Date.now(),
+            type: 'win',
+            desc: `Victoria en Batalla de ${currentMatchTotalRounds} Videos (+${apGained} AP)`,
+            amount: apGained,
+            date: 'Ahora'
+          });
+          saveState();
+          alert(`🎉 ¡VICTORIA FINAL! Has completado el combate de ${currentMatchTotalRounds} videos y los 3 Jurados Digitales te otorgan +${apGained} Aura Points (AP).`);
+        } else {
+          vKaiRo.textContent = `"Combate finalizado. Faltó consistencia en la ráfaga de los ${currentMatchTotalRounds} videos."`;
+          vAuraNeo.textContent = `"Buen esfuerzo en el acuerdo de ${currentMatchTotalRounds} videos."`;
+          vValkyria.textContent = `"Sigan practicando para el próximo combate de videos."`;
+
+          appState.user.walletAP = Math.max(0, appState.user.walletAP - 50);
+          appState.transactions.unshift({
+            id: Date.now(),
+            type: 'loss',
+            desc: `Derrota en Batalla de ${currentMatchTotalRounds} Videos (-50 AP)`,
+            amount: -50,
+            date: 'Ahora'
+          });
+          saveState();
+          alert(`💥 DERROTA. Has completado la serie de ${currentMatchTotalRounds} videos. Se han restado 50 AP. ¡Sigue practicando!`);
+        }
+
+        resetMatchRounds();
       }
 
     }, 2000);
   }
+
+  // Inicializar UI de rondas al cargar
+  renderRoundsReel();
 
   // MODAL REGISTRO SUBMIT & MANEJO DE FOTOS
   const registerModal = document.getElementById('registerModal');

@@ -1036,6 +1036,64 @@ body {
   font-size: 11px;
 }
 
+/* ----- FORMATO DE MULTI-VIDEOS (3, 5 O 7 VIDEOS) ----- */
+.battle-format-selector-bar {
+  background: var(--bg-card);
+  border: 1px solid var(--border-neon);
+  border-radius: 12px;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.round-tracker-badge {
+  font-family: var(--font-head);
+  font-size: 13px;
+  color: var(--text-main);
+  background: rgba(0, 243, 255, 0.1);
+  border: 1px solid var(--cyan-neon);
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+.rounds-reel-card {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+}
+
+.round-reel-item {
+  background: rgba(14, 18, 30, 0.8);
+  border: 1px solid var(--border-neon);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-family: var(--font-head);
+  color: var(--text-muted);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+.round-reel-item.active {
+  border-color: var(--cyan-neon);
+  color: var(--cyan-neon);
+  background: rgba(0, 243, 255, 0.15);
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+}
+.round-reel-item.completed {
+  border-color: var(--green-safe);
+  color: var(--green-safe);
+  background: rgba(0, 255, 136, 0.1);
+}
+
 /* Responsividad */
 @media (max-width: 768px) {
   .header-container { flex-direction: column; align-items: flex-start; }

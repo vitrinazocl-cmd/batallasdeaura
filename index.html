@@ -79,6 +79,27 @@
         <p class="arena-subtitle">Demuestra tu aura en un video de máximo 15 segundos. Los 3 Jurados Digitales calificarán tu combate.</p>
       </div>
 
+      <!-- FORMATO DE ACUERDO DE COMBATE (3, 5 O 7 VIDEOS DE MÁX 15S) -->
+      <div class="battle-format-selector-bar">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <label class="form-label" style="margin-bottom: 0; color: var(--gold-neon); font-size: 14px;">🥊 ACUERDO DE COMBATE:</label>
+          <select id="battleFormatSelect" class="form-control" style="width: auto; padding: 6px 14px; font-weight: 700; border-color: var(--gold-neon); background: rgba(10, 12, 20, 0.9);">
+            <option value="3" selected>1ª Batalla: 3 Videos por Peleador (Inicial)</option>
+            <option value="5">2ª Batalla: 5 Videos por Peleador (Avanzada)</option>
+            <option value="7">3ª Batalla: 7 Videos por Peleador (Gran Final Maestro)</option>
+          </select>
+        </div>
+
+        <div class="round-tracker-badge" id="roundTrackerBadge">
+          RONDA DE VIDEOS: <strong style="color: var(--cyan-neon);" id="roundNumberText">VIDEO 1 DE 3</strong> (Máx 15s cada uno, sin mínimo)
+        </div>
+      </div>
+
+      <!-- CARRETE VISUAL DE RONDAS DE VIDEOS -->
+      <div class="rounds-reel-card" id="roundsReelContainer">
+        <!-- Carga dinámicamente indicadores de cada video enviados -->
+      </div>
+
       <!-- ESCENARIO DE PELEA RETRO-FUTURISTA -->
       <div class="battle-stage-card">
         <!-- HUD DE PELEADORES -->
