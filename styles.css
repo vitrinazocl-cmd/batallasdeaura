@@ -959,10 +959,19 @@ body {
 }
 
 /* ----- MÓDULO GUÍA DE MOVIMIENTOS & PUNTAJES ----- */
+.custom-lab-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
 .moves-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .move-card {
@@ -976,6 +985,8 @@ body {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 .move-card:hover {
   border-color: var(--gold-neon);
@@ -1025,6 +1036,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 .move-stat-item {
   display: flex;
@@ -1146,6 +1159,41 @@ body {
 
   .social-layout {
     grid-template-columns: 1fr;
+  }
+
+  .custom-lab-layout {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .moves-grid {
+    grid-template-columns: 1fr !important;
+    gap: 15px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .move-card {
+    width: 100% !important;
+    padding: 15px !important;
+    box-sizing: border-box !important;
+  }
+
+  .move-stats {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .move-stats .msg-action-btn,
+  .move-stats button {
+    width: 100%;
+    margin-top: 6px;
+    text-align: center;
+    justify-content: center;
   }
 
   .videos-duel-container {
