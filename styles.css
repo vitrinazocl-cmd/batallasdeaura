@@ -960,16 +960,38 @@ body {
 
 /* ----- MÓDULO GUÍA DE MOVIMIENTOS & PUNTAJES ----- */
 .custom-lab-layout {
-  display: grid;
-  grid-template-columns: minmax(280px, 360px) 1fr;
-  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.custom-lab-layout > * {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.custom-lab-layout .friends-sidebar {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+@media (min-width: 992px) {
+  .custom-lab-layout {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 25px;
+  }
 }
 
 .moves-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
   width: 100%;
   box-sizing: border-box;
 }
