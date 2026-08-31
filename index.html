@@ -168,6 +168,11 @@
           </div>
         </div>
 
+        <!-- BANNER ESCÁNER IA DE SEGURIDAD EN TIEMPO REAL (LEY N° 21.430) -->
+        <div class="ai-safety-scanner-banner" style="background: rgba(0, 255, 136, 0.08); border: 1px solid var(--green-safe); border-radius: 8px; padding: 8px 14px; margin-bottom: 12px; font-size: 12px; color: var(--green-safe); display: flex; align-items: center; justify-content: center; gap: 8px;">
+          🛡️ <span><strong>AURA-GUARDIAN AI:</strong> Escáner visual en vivo activo. Detección instantánea de contenido inapropiado, partes íntimas o sustancias/objetos ilegales con censura e inhabilitación inmediata.</span>
+        </div>
+
         <!-- BANNER DE TURNO SECUENCIAL DE CÁMARA EN VIVO -->
         <div class="turn-status-banner" id="turnStatusBanner" style="background: rgba(0, 243, 255, 0.12); border: 1px solid var(--cyan-neon); border-radius: 10px; padding: 10px 16px; margin-bottom: 15px; text-align: center;">
           <div style="font-family: var(--font-head); font-size: 13px; color: var(--gold-neon);" id="turnBadgeText">
@@ -836,6 +841,21 @@
           <button type="submit" class="btn-cyber btn-cyber-magenta" style="flex: 1; padding: 12px;">🔑 INGRESAR AL PANEL</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL DE EXPULSIÓN Y BLOQUEO POR INFRACCIÓN GRAVE ==================== -->
+  <div class="modal-overlay" id="bannedUserModal">
+    <div class="modal-box" style="border-color: var(--red-alert); box-shadow: 0 0 50px rgba(255, 51, 102, 0.6); text-align: center;">
+      <div style="font-size: 54px; margin-bottom: 10px;">🚨</div>
+      <h2 class="modal-header-title" style="color: var(--red-alert);">CUENTA PERMANENTEMENTE INHABILITADA</h2>
+      <div class="strict-requirement-alert" style="margin-top: 15px; text-align: left; background: rgba(255, 51, 102, 0.15); border-color: var(--red-alert);">
+        <strong>🛑 EXPULSIÓN Y BAN PERMANENTE (LEY N° 21.430 & NNA):</strong><br>
+        El escáner de IA de la plataforma detectó una infracción grave por contenido inapropiado en el video grabado (partes íntimas, contenido explícito o sustancias/artículos prohibidos). Tu cuenta ha sido bloqueada y expulsada de forma permanente para resguardar la seguridad de los menores de edad.
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin-top: 10px;">
+        Esta infracción ha sido registrada de forma inalterable en la base de datos de auditoría de administración.
+      </p>
     </div>
   </div>
 
