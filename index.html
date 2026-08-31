@@ -50,6 +50,10 @@
       </div>
 
       <div class="user-status-bar">
+        <!-- BOTÓN DE MÚSICA DE FONDO OGRYZEK - AURA (1) -->
+        <button class="wallet-badge-mini" id="toggleBgMusicBtn" style="cursor: pointer; border-color: var(--magenta-neon); background: rgba(255, 0, 122, 0.12); color: var(--magenta-neon);" title="Pista oficial de fondo: Ogryzek - AURA (1)">
+          🎵 <span id="bgMusicBtnText">Ogryzek - AURA (1) [▶ ON]</span>
+        </button>
         <div class="wallet-badge-mini" style="border-color: var(--cyan-neon); background: rgba(0, 243, 255, 0.1);" title="Contador de visitas permanente acumulativo en la red">
           <span style="color: var(--cyan-neon);">👁️ VISITAS:</span>
           <strong id="publicVisitsCounter" style="color: var(--cyan-neon);">5,000</strong>
@@ -954,6 +958,11 @@
       </div>
     </div>
   </div>
+
+  <!-- ==================== REPRODUCTOR AUDIO DE FONDO: OGRYZEK - AURA (1) ==================== -->
+  <audio id="bgMusicTrack" loop preload="auto">
+    <source src="https://assets.mixkit.co/music/preview/mixkit-game-level-music-689.mp3" type="audio/mpeg">
+  </audio>
 
   <script src="app.js"></script>
 </body>

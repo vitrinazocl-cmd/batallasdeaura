@@ -581,10 +581,69 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 600);
   }
 
+  // ==========================================================================
+  // MOTOR DE MÚSICA DE FONDO EN REPRODUCCIÓN CONTINUA: OGRYZEK - AURA (1)
+  // Suena todo el tiempo excepto cuando comienza una batalla en vivo.
+  // ==========================================================================
+  const bgMusicTrack = document.getElementById('bgMusicTrack');
+  const toggleBgMusicBtn = document.getElementById('toggleBgMusicBtn');
+  const bgMusicBtnText = document.getElementById('bgMusicBtnText');
+  let isBgMusicPlaying = false;
+  let isBattleActivePause = false;
+
+  function startBgMusic() {
+    if (!bgMusicTrack || isBattleActivePause) return;
+    bgMusicTrack.volume = 0.35;
+    bgMusicTrack.play().then(() => {
+      isBgMusicPlaying = true;
+      if (bgMusicBtnText) bgMusicBtnText.textContent = 'Ogryzek - AURA (1) [▶ ON]';
+    }).catch(() => {
+      // Espera interacción previa del usuario
+    });
+  }
+
+  function pauseBgMusicForBattle() {
+    if (bgMusicTrack && !bgMusicTrack.paused) {
+      bgMusicTrack.pause();
+      isBattleActivePause = true;
+      if (bgMusicBtnText) bgMusicBtnText.textContent = 'Ogryzek - AURA (1) [⏸️ PAUSADO POR COMBATE]';
+    }
+  }
+
+  function resumeBgMusicAfterBattle() {
+    if (bgMusicTrack && isBattleActivePause) {
+      isBattleActivePause = false;
+      startBgMusic();
+    }
+  }
+
+  if (toggleBgMusicBtn && bgMusicTrack) {
+    toggleBgMusicBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (bgMusicTrack.paused) {
+        isBattleActivePause = false;
+        startBgMusic();
+      } else {
+        bgMusicTrack.pause();
+        isBgMusicPlaying = false;
+        if (bgMusicBtnText) bgMusicBtnText.textContent = 'Ogryzek - AURA (1) [⏹️ OFF]';
+      }
+    });
+  }
+
+  // REPRODUCCIÓN AUTOMÁTICA AL PRIMER CLIC EN EL SITIO
+  window.addEventListener('click', () => {
+    if (!isBgMusicPlaying && !isBattleActivePause) {
+      startBgMusic();
+    }
+  }, { once: true });
+
   // TURNO 1: PELEADOR 1 (TÚ)
   if (recordP1CamBtn) {
     recordP1CamBtn.addEventListener('click', async () => {
       try {
+        pauseBgMusicForBattle(); // PAUSAR MÚSICA DE FONDO DURANTE EL COMBATE EN VIVO
+
         const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
         player1Video.srcObject = stream;
         player1Video.muted = true;
@@ -846,6 +905,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resetMatchRounds();
       }
 
+      resumeBgMusicAfterBattle(); // REANUDAR MÚSICA DE FONDO OGRYZEK - AURA (1) TRAS EL COMBATE
     }, 2000);
   }
 
