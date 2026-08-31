@@ -583,7 +583,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================================================
   // MOTOR DE MÚSICA DE FONDO EN REPRODUCCIÓN CONTINUA: OGRYZEK - AURA (1)
-  // Suena todo el tiempo excepto cuando comienza una batalla en vivo.
+  // Reproducción 100% automática sin necesidad de presionar ningún botón de play.
   // ==========================================================================
   const bgMusicTrack = document.getElementById('bgMusicTrack');
   const toggleBgMusicBtn = document.getElementById('toggleBgMusicBtn');
@@ -591,18 +591,35 @@ document.addEventListener('DOMContentLoaded', () => {
   let isBgMusicPlaying = false;
   let isBattleActivePause = false;
 
-  function startBgMusic() {
+  function attemptSeamlessAutoplay() {
     if (!bgMusicTrack || isBattleActivePause) return;
-    bgMusicTrack.volume = 0.45;
+    
+    // Iniciar reproducción transparente de inmediato
     const playPromise = bgMusicTrack.play();
     if (playPromise !== undefined) {
       playPromise.then(() => {
         isBgMusicPlaying = true;
         if (bgMusicBtnText) bgMusicBtnText.textContent = 'Ogryzek - AURA (1) [▶ ON]';
-      }).catch((err) => {
-        console.log('Esperando toque/clic del usuario para audio:', err);
+      }).catch(err => {
+        console.log('Autoplay status:', err);
       });
     }
+  }
+
+  function unmuteAudioSeamlessly() {
+    if (!bgMusicTrack) return;
+    bgMusicTrack.muted = false;
+    bgMusicTrack.volume = 0.45;
+    if (bgMusicTrack.paused && !isBattleActivePause) {
+      bgMusicTrack.play().then(() => {
+        isBgMusicPlaying = true;
+        if (bgMusicBtnText) bgMusicBtnText.textContent = 'Ogryzek - AURA (1) [▶ ON]';
+      }).catch(() => {});
+    }
+  }
+
+  function startBgMusic() {
+    unmuteAudioSeamlessly();
   }
 
   function pauseBgMusicForBattle() {
@@ -616,16 +633,16 @@ document.addEventListener('DOMContentLoaded', () => {
   function resumeBgMusicAfterBattle() {
     if (bgMusicTrack && isBattleActivePause) {
       isBattleActivePause = false;
-      startBgMusic();
+      unmuteAudioSeamlessly();
     }
   }
 
   if (toggleBgMusicBtn && bgMusicTrack) {
     toggleBgMusicBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (bgMusicTrack.paused) {
+      if (bgMusicTrack.paused || bgMusicTrack.muted) {
         isBattleActivePause = false;
-        startBgMusic();
+        unmuteAudioSeamlessly();
       } else {
         bgMusicTrack.pause();
         isBgMusicPlaying = false;
@@ -634,18 +651,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // DESBLOQUEAR Y REPRODUCIR AL PRIMER CLICK, TOUCH, KEYPRESS O SCROLL
-  const audioUnlockEvents = ['click', 'touchstart', 'pointerdown', 'keydown'];
-  audioUnlockEvents.forEach(evt => {
-    window.addEventListener(evt, () => {
-      if (!isBgMusicPlaying && !isBattleActivePause) {
-        startBgMusic();
-      }
-    }, { passive: true });
-  });
+  // REPRODUCCIÓN AUTOMÁTICA INMEDIATA AL INGRESAR A LA PLATAFORMA
+  attemptSeamlessAutoplay();
 
-  // INTENTO INICIAL AL CARGAR
-  setTimeout(() => startBgMusic(), 500);
+  // DESILENCIADO TRANSPARENTE EN CUALQUIER INTERACCIÓN SIN EXIGIR BOTÓN PLAY
+  const seamlessEvents = ['click', 'touchstart', 'pointerdown', 'mousemove', 'scroll', 'keydown'];
+  seamlessEvents.forEach(evt => {
+    window.addEventListener(evt, () => unmuteAudioSeamlessly(), { passive: true, once: false });
+  });
 
   // TURNO 1: PELEADOR 1 (TÚ)
   if (recordP1CamBtn) {
