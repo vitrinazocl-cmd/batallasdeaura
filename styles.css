@@ -1029,6 +1029,41 @@ body {
   border-radius: 12px;
   border: 1px solid var(--cyan-neon);
 }
+
+/* CAJA DE VIDEO DEMOSTRATIVO DE EJEMPLO */
+.move-demo-box {
+  position: relative;
+  width: 100%;
+  height: 165px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  border: 1px solid var(--cyan-neon);
+  box-shadow: 0 0 12px rgba(0, 243, 255, 0.25);
+  background: #000;
+}
+
+.move-demo-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.move-demo-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: rgba(10, 12, 20, 0.85);
+  border: 1px solid var(--gold-neon);
+  color: var(--gold-neon);
+  font-family: var(--font-head);
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+}
 .move-title {
   font-family: var(--font-head);
   font-size: 15px;
