@@ -44,6 +44,7 @@
       <div class="nav-container">
         <button class="nav-btn active" data-tab="arenaTab">🥊 ARENA DE PELEA 15S</button>
         <button class="nav-btn" data-tab="movesTab">📜 PASOS & PUNTAJES</button>
+        <button class="nav-btn" data-tab="customMovesTab">✨ MIS PASOS CREADOS</button>
         <button class="nav-btn" data-tab="walletTab">💎 BILLETERA DE AURA</button>
         <button class="nav-btn" data-tab="socialTab">💬 RED SOCIAL & CHAT</button>
         <button class="nav-btn" data-tab="rankingTab">🏆 RANKING CHILE</button>
@@ -315,7 +316,80 @@
       </div>
     </section>
 
-    <!-- TAB 3: BILLETERA DIGITAL DE AURA -->
+    <!-- TAB 3: CREACIÓN PROPIA DE PASOS Y MOVIMIENTOS -->
+    <section class="tab-content" id="customMovesTab">
+      <div class="transactions-card">
+        <div style="text-align: center; margin-bottom: 25px;">
+          <h2 style="font-family: var(--font-head); color: var(--cyan-neon); font-size: 24px; text-transform: uppercase;">✨ LABORATORIO DE PASOS Y MOVIMIENTOS PROPIOS</h2>
+          <p style="color: var(--text-muted); font-size: 15px;">¿Inventaste un movimiento único sin nombre oficial? Regístralo aquí, dale tu propia identidad y úsalo en tus batallas de aura.</p>
+        </div>
+
+        <div class="social-layout" style="grid-template-columns: 360px 1fr;">
+          <!-- FORMULARIO DE CREACIÓN -->
+          <div class="friends-sidebar" style="background: rgba(14, 18, 30, 0.95); border: 2px solid var(--cyan-neon);">
+            <h3 style="font-family: var(--font-head); color: var(--gold-neon); font-size: 16px; margin-bottom: 15px;">🔨 CREAR MI PASO ORIGINAL</h3>
+            
+            <form id="createCustomMoveForm">
+              <div class="form-group">
+                <label class="form-label">Nombre de tu Paso Inventado:</label>
+                <input type="text" id="customMoveName" class="form-control" placeholder="Ej: Ráfaga del Dragón de Valparaíso" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Categoría Original:</label>
+                <select id="customMoveCat" class="form-control" required>
+                  <option value="Ataque Creado">Ataque Creado por Mí</option>
+                  <option value="Defensa Original">Defensa Original</option>
+                  <option value="Danza de Aura Propia">Danza de Aura Propia</option>
+                  <option value="Remate Inventado">Remate Inventado</option>
+                  <option value="Estilo Libre Secreto">Estilo Libre Secreto</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Icono de Aura para tu Paso:</label>
+                <select id="customMoveIcon" class="form-control">
+                  <option value="🔥">🔥 Fuego de Aura</option>
+                  <option value="⚡">⚡ Relámpago Sónico</option>
+                  <option value="🌀">🌀 Vórtice Sombra</option>
+                  <option value="✨">✨ Destello Cyber-Pop</option>
+                  <option value="🐉">🐉 Dragón Legendario</option>
+                  <option value="👑">👑 Corona Suprema</option>
+                  <option value="🎭">🎭 Estilo Teatral</option>
+                  <option value="💥">💥 Impacto Cósmico</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Descripción de Cómo Hacerlo (Video 15s):</label>
+                <textarea id="customMoveDesc" class="form-control" rows="3" placeholder="Describe los movimientos de tus manos o cuerpo en el video..." required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Dificultad de Ejecución & Bono AP:</label>
+                <select id="customMoveDiff" class="form-control">
+                  <option value="Medio Cyber">+2.3 Pts Jurado (+60 AP)</option>
+                  <option value="Dificultad Legendaria" selected>+2.8 Pts Jurado (+90 AP)</option>
+                  <option value="Paso Supremo Secreto">+3.0 Pts Jurado (+120 AP)</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn-cyber btn-cyber-gold" style="width: 100%; justify-content: center; margin-top: 10px;">💾 GUARDAR MI PASO ORIGINAL</button>
+            </form>
+          </div>
+
+          <!-- GALERÍA DE PASOS CREADOS POR EL USUARIO -->
+          <div>
+            <h3 style="font-family: var(--font-head); color: var(--gold-neon); font-size: 18px; margin-bottom: 15px;">📜 MIS PASOS Y MOVIMIENTOS INVENTADOS</h3>
+            <div class="moves-grid" id="customMovesContainer">
+              <!-- Carga dinámicamente desde JS LocalStorage -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: BILLETERA DIGITAL DE AURA -->
     <section class="tab-content" id="walletTab">
       <div class="wallet-hero-card">
         <div class="wallet-balance-info">

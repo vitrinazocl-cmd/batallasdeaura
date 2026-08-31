@@ -66,6 +66,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
       { rank: 1, name: 'AuraLegend_SCL', age: '18+', tier: 'Cyber Diamante 👑', ap: 4800 },
       { rank: 2, name: 'MasterStrike_Iquique', age: '18+', tier: 'Platino 🌟', ap: 2200 }
+    ],
+    customMoves: [
+      {
+        id: 101,
+        name: 'Giro de Fuego de Santiago',
+        cat: 'Danza de Aura Propia',
+        icon: '🔥',
+        desc: 'Cruza de manos veloz con giro de 360 grados frente a la cámara en el segundo 10.',
+        diff: '+2.8 Pts Jurado (+90 AP)',
+        author: 'AuraMaster_CL'
+      },
+      {
+        id: 102,
+        name: 'Chasquido Sónico Secreto',
+        cat: 'Ataque Creado',
+        icon: '⚡',
+        desc: 'Doble chasquido de dedos proyectando energía imaginaria directo al rival.',
+        diff: '+2.3 Pts Jurado (+60 AP)',
+        author: 'AuraMaster_CL'
+      }
     ]
   };
 
@@ -121,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTransactions();
     renderSocialSection();
     renderLeaderboard();
+    renderCustomMoves();
   }
 
   function renderTransactions() {
@@ -240,6 +261,78 @@ document.addEventListener('DOMContentLoaded', () => {
       tbody.appendChild(tr);
     });
   }
+
+  // RENDEREIZAR PASOS Y MOVIMIENTOS PROPIOS CREADOS POR EL USUARIO
+  function renderCustomMoves() {
+    const container = document.getElementById('customMovesContainer');
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (!appState.customMoves || appState.customMoves.length === 0) {
+      container.innerHTML = '<div style="font-size:14px; color:var(--text-muted);">Aún no has creado ningún paso inventado. ¡Usa el formulario para registrar tu primer movimiento original!</div>';
+      return;
+    }
+
+    appState.customMoves.forEach(move => {
+      const card = document.createElement('div');
+      card.className = 'move-card';
+      card.innerHTML = `
+        <div class="move-header">
+          <span class="move-icon">${move.icon}</span>
+          <div>
+            <h4 class="move-title">${move.name}</h4>
+            <div class="move-cat">${move.cat} • Por: ${move.author || appState.user.username}</div>
+          </div>
+        </div>
+        <p class="move-desc">${move.desc}</p>
+        <div class="move-stats">
+          <div class="move-stat-item">
+            <span class="stat-lbl">Potencial Jurados:</span>
+            <strong style="color: var(--cyan-neon); font-family: var(--font-head);">${move.diff}</strong>
+          </div>
+          <button class="msg-action-btn del" onclick="window.deleteCustomMove(${move.id})" style="font-size: 12px; padding: 4px 8px;">🗑️ Eliminar</button>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // FORMSUBMIT DE CREACIÓN DE PASOS PROPIOS
+  const createCustomMoveForm = document.getElementById('createCustomMoveForm');
+  if (createCustomMoveForm) {
+    createCustomMoveForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('customMoveName').value.trim();
+      const cat = document.getElementById('customMoveCat').value;
+      const icon = document.getElementById('customMoveIcon').value;
+      const desc = document.getElementById('customMoveDesc').value.trim();
+      const diff = document.getElementById('customMoveDiff').value;
+
+      const newMove = {
+        id: Date.now(),
+        name: name,
+        cat: cat,
+        icon: icon,
+        desc: desc,
+        diff: diff,
+        author: appState.user.username
+      };
+
+      if (!appState.customMoves) appState.customMoves = [];
+      appState.customMoves.unshift(newMove);
+      saveState();
+
+      createCustomMoveForm.reset();
+      alert(`✨ ¡Enhorabuena! Tu movimiento inventado "${name}" ha sido guardado en tu Laboratorio de Aura.`);
+    });
+  }
+
+  window.deleteCustomMove = function(id) {
+    if (confirm('¿Deseas eliminar este paso inventado de tu laboratorio?')) {
+      appState.customMoves = appState.customMoves.filter(m => m.id !== id);
+      saveState();
+    }
+  };
 
   // MODAL REGISTRO: CÁLCULO DINÁMICO DE EDAD EXACTA Y FOTO DE REGISTRO INTERNO
   const regExactAgeInput = document.getElementById('regExactAge');
