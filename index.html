@@ -27,6 +27,26 @@
   <meta name="twitter:description" content="⚡ Arena digital de batallas de aura en videos de 15 segundos. Compite seguro desde tu casa.">
   <meta name="twitter:image" content="https://www.batallasdeaura.cl/og_banner.jpg">
 
+  <!-- GOOGLE INDEXING & SCHEMA.ORG STRUCTURED DATA FOR CHILE -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Batallas de Aura Chile",
+    "description": "Red social de peleas digitales de 15 segundos para jóvenes en Chile.",
+    "genre": ["Fighting", "Social Arena", "E-Sports"],
+    "gamePlatform": "Web Browser",
+    "url": "https://www.batallasdeaura.cl",
+    "author": {
+      "@type": "Organization",
+      "name": "Batallas de Aura Digital Arena"
+    }
+  }
+  </script>
+
+  <!-- ONESIGNAL WEB PUSH NOTIFICATIONS SDK LOADER -->
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+
   <link rel="icon" type="image/jpeg" href="logo.jpg">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -139,6 +159,29 @@
         </div>
       </div>
     </div>
+
+    <!-- BANNER DE CRECIMIENTO VIRAL: REFERIDOS Y NOTIFICACIONES PUSH -->
+    <div class="mission-banner-card" style="border: 2px solid var(--magenta-neon); background: linear-gradient(135deg, rgba(255, 0, 122, 0.12), rgba(18, 22, 36, 0.95)); box-shadow: 0 0 25px rgba(255, 0, 122, 0.2); margin-bottom: 25px;">
+      <div class="mission-icon" style="font-size: 36px;">🎁🔔</div>
+      <div style="flex: 1;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h3 class="mission-title" style="color: var(--magenta-neon); font-size: 18px; margin-bottom: 4px;">🎁 GANA +100 AP POR CADA AMIGO QUE SE REGISTRE</h3>
+            <p style="color: var(--text-main); font-size: 13.5px; margin: 0; line-height: 1.5;">
+              Copia tu enlace único de referido o activa las notificaciones push para recibir alertas de nuevos retos y la premiación del 27.
+            </p>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn-cyber btn-cyber-magenta" id="copyReferralLinkBtn" style="padding: 10px 16px; font-size: 12.5px;">
+              🔗 COPIAR MI ENLACE (+100 AP)
+            </button>
+            <button class="btn-cyber" id="enablePushBtn" style="background: rgba(0, 243, 255, 0.15); border: 1px solid var(--cyan-neon); color: var(--cyan-neon); font-weight: 800; padding: 10px 16px; font-size: 12.5px;">
+              🔔 ACTIVAR ALERTAS PUSH
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <section class="tab-content active" id="arenaTab">
       <div class="arena-header">
         <div style="display: inline-block; background: rgba(0, 243, 255, 0.1); border: 1px solid var(--cyan-neon); padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; color: var(--cyan-neon); font-family: var(--font-head); margin-bottom: 10px;">
@@ -234,6 +277,7 @@
           <button class="btn-cyber btn-cyber-gold" id="recordP1CamBtn">📷 1. GRABAR EN VIVO (PELEADOR 1 - TÚ)</button>
           <button class="btn-cyber btn-cyber-magenta" id="recordP2CamBtn" disabled style="opacity: 0.4; cursor: not-allowed;">📷 2. GRABAR EN VIVO (PELEADOR 2 - RIVAL)</button>
           <button class="btn-cyber" id="simBattleBtn">🤖 SIMULAR COMBATE IA</button>
+          <button class="btn-cyber" id="exportSocialClipBtn" style="background: rgba(255, 0, 122, 0.15); border: 1px solid var(--magenta-neon); color: var(--magenta-neon); font-weight: 800;">🚀 EXPORTAR A TIKTOK / REELS</button>
         </div>
       </div>
 

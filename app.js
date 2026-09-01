@@ -191,6 +191,87 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ==========================================================================
+  // SUITE DE CRECIMIENTO VIRAL: REFERIDOS (+100 AP), PUSH NOTIFICATIONS & SOCIAL
+  // ==========================================================================
+  const copyReferralLinkBtn = document.getElementById('copyReferralLinkBtn');
+  const enablePushBtn = document.getElementById('enablePushBtn');
+  const exportSocialClipBtn = document.getElementById('exportSocialClipBtn');
+
+  // 1. DETECCIÓN Y BONIFICACIÓN AUTOMÁTICA POR ENLACE DE REFERIDO (?ref=USERNAME)
+  function detectAndRewardReferral() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const referrer = urlParams.get('ref');
+
+    if (referrer && referrer !== appState.user.username) {
+      const rewardedKey = `aura_referral_rewarded_${referrer}`;
+      if (!localStorage.getItem(rewardedKey)) {
+        localStorage.setItem(rewardedKey, 'true');
+        appState.user.walletAP += 100;
+        appState.transactions.unshift({
+          id: Date.now(),
+          type: 'win',
+          desc: `🎁 Bonificación por Ingresar con Enlace de Referido de ${referrer} (+100 AP)`,
+          amount: 100,
+          date: 'Ahora'
+        });
+        saveState();
+        alert(`🎉 ¡BIENVENIDO A BATALLAS DE AURA!\nHas recibido +100 AP de regalo por ingresar con el enlace de referido de ${referrer}.`);
+      }
+    }
+  }
+
+  detectAndRewardReferral();
+
+  // 2. COPIAR ENLACE ÚNICO DE REFERIDO DEL USUARIO
+  if (copyReferralLinkBtn) {
+    copyReferralLinkBtn.addEventListener('click', () => {
+      const username = appState.user.username || 'AuraFighter';
+      const refUrl = `https://www.batallasdeaura.cl/?ref=${encodeURIComponent(username)}`;
+
+      navigator.clipboard.writeText(refUrl).then(() => {
+        alert(`🔗 ¡ENLACE ÚNICO COPIADO AL PORTAPAPELES!\n\n${refUrl}\n\nCompártelo en tus redes. Ganarás +100 AP por cada amigo que ingrese y se registre.`);
+      }).catch(() => {
+        prompt('Copia tu enlace único de referido:', refUrl);
+      });
+    });
+  }
+
+  // 3. SUSCRIPCIÓN A NOTIFICACIONES PUSH WEB (ONESIGNAL / FCM)
+  if (enablePushBtn) {
+    enablePushBtn.addEventListener('click', () => {
+      if ('Notification' in window) {
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            alert('🔔 ¡NOTIFICACIONES PUSH ACTIVADAS!\nRecibirás alertas instantáneas sobre veredictos de batallas, retos de usuarios y la premiación del 27.');
+            if (window.OneSignal) {
+              window.OneSignal.push(function() {
+                window.OneSignal.showNativePrompt();
+              });
+            }
+          } else {
+            alert('⚠️ Permiso de notificaciones denegado en tu navegador.');
+          }
+        });
+      } else {
+        alert('ℹ️ Notificaciones push activadas para la versión web.');
+      }
+    });
+  }
+
+  // 4. EXPORTADOR DE CLIPS Y DESAFÍOS A TIKTOK / REELS / YOUTUBE SHORTS
+  if (exportSocialClipBtn) {
+    exportSocialClipBtn.addEventListener('click', () => {
+      const hashtagText = `🥊 ¡Desafío de 15 segundos en BatallasDeAura.cl!\n\n¿Puedes superar mi nota de Aura? Compite en peleas digitales desde tu casa sin pánico escénico.\n\n#BatallasDeAura #ChileSafeKids #StreetFighterOnline #AuraChallenge #ChileGaming #ViralChile\n\n👉 https://www.batallasdeaura.cl`;
+      
+      navigator.clipboard.writeText(hashtagText).then(() => {
+        alert(`🚀 ¡TEXTO Y HASHTAGS VIRALES COPIADOS!\n\nAbre TikTok, Instagram Reels o YouTube Shorts y pega este texto en tu video para masificar tu desafío.`);
+      }).catch(() => {
+        prompt('Copia el texto viral para tu video:', hashtagText);
+      });
+    });
+  }
+
   function goToHome() {
     // 1. Activar pestaña principal de Arena (Home)
     const arenaNavBtn = document.querySelector('.nav-btn[data-tab="arenaTab"]');
