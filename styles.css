@@ -298,15 +298,15 @@ body {
   color: var(--magenta-neon);
 }
 
-/* Hamburger Menu Drawer - Centered Cyberpunk Modal */
+/* Hamburger Menu Drawer - Fixed Cyberpunk Modal */
 .hamburger-menu-drawer {
   position: fixed !important;
-  top: 50% !important;
+  top: 20px !important;
   left: 50% !important;
-  transform: translate(-50%, -46%) scale(0.95);
+  transform: translateX(-50%) scale(0.96);
   width: calc(100vw - 24px) !important;
   max-width: 460px !important;
-  max-height: 85vh !important;
+  max-height: calc(100vh - 40px) !important;
   background: rgba(12, 16, 28, 0.98) !important;
   border: 2px solid var(--cyan-neon) !important;
   border-radius: 18px !important;
@@ -326,18 +326,18 @@ body {
   opacity: 1 !important;
   visibility: visible !important;
   pointer-events: auto !important;
-  transform: translate(-50%, -50%) scale(1) !important;
+  transform: translateX(-50%) scale(1) !important;
 }
 
 .drawer-header {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
-  padding: 14px 20px !important;
+  padding: 12px 18px !important;
   background: rgba(0, 243, 255, 0.12) !important;
   border-bottom: 1px solid rgba(0, 243, 255, 0.25) !important;
   font-family: var(--font-head) !important;
-  font-size: 14px !important;
+  font-size: 13px !important;
   font-weight: 800 !important;
   color: var(--cyan-neon) !important;
   letter-spacing: 1px !important;
@@ -361,10 +361,10 @@ body {
 .drawer-content {
   display: flex !important;
   flex-direction: column !important;
-  padding: 14px 14px 24px 14px !important;
-  gap: 8px !important;
+  padding: 10px 12px 16px 12px !important;
+  gap: 6px !important;
   overflow-y: auto !important;
-  max-height: calc(85vh - 55px) !important;
+  max-height: calc(100vh - 100px) !important;
   -webkit-overflow-scrolling: touch !important;
   touch-action: pan-y !important;
   box-sizing: border-box !important;
@@ -391,13 +391,13 @@ body {
   border-radius: 10px !important;
   color: #ffffff !important;
   font-family: var(--font-head) !important;
-  font-size: 13px !important;
+  font-size: 12px !important;
   font-weight: 700 !important;
-  padding: 12px 18px !important;
+  padding: 9px 14px !important;
   cursor: pointer !important;
   display: flex !important;
   align-items: center !important;
-  gap: 12px !important;
+  gap: 10px !important;
   width: 100% !important;
   text-align: left !important;
   transition: all 0.2s ease !important;
@@ -419,7 +419,7 @@ body {
   border-color: var(--cyan-neon) !important;
   color: var(--cyan-neon) !important;
   font-weight: 800 !important;
-  box-shadow: 0 0 15px rgba(0, 243, 255, 0.2) !important;
+  box-shadow: 0 0 12px rgba(0, 243, 255, 0.2) !important;
 }
 
 .drawer-content .nav-btn.btn-admin-nav {
@@ -427,7 +427,7 @@ body {
   border: 2px solid var(--magenta-neon) !important;
   color: #ffffff !important;
   font-weight: 800 !important;
-  margin-top: 10px !important;
+  margin-top: 6px !important;
   box-shadow: 0 0 12px rgba(255, 0, 122, 0.3) !important;
 }
 
@@ -1680,8 +1680,9 @@ body {
   }
 
   .hamburger-menu-drawer {
+    top: 15px !important;
     width: calc(100vw - 16px) !important;
-    max-height: 80vh !important;
+    max-height: calc(100vh - 30px) !important;
   }
 
   .drawer-content .nav-btn {
