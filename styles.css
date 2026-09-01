@@ -502,16 +502,19 @@ body {
   margin-top: 4px;
 }
 
-.tab-content {
-  display: none;
-  animation: fadeIn 0.4s ease-in-out;
+.tab-content:not(.active) {
+  display: none !important;
+  content-visibility: hidden !important;
 }
 .tab-content.active {
-  display: block;
+  display: block !important;
+  content-visibility: visible !important;
+  animation: fadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(5px); }
   to { opacity: 1; transform: translateY(0); }
 }
 

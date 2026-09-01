@@ -337,27 +337,44 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ACTUALIZACIÓN GLOBAL DE UI
+  let isUpdatingUI = false;
   function updateUI() {
-    document.getElementById('headerWalletAP').textContent = appState.user.walletAP;
-    document.getElementById('headerAgeBracket').textContent = `Rango: ${appState.user.ageBracket} (${appState.user.exactAge} años)`;
-    document.getElementById('headerUserName').textContent = appState.user.username;
-    document.getElementById('headerAvatarImg').src = appState.user.avatar;
-    document.getElementById('hudP1Name').textContent = `${appState.user.username} (Tú)`;
-    document.getElementById('hudP1Avatar').src = appState.user.avatar;
+    if (isUpdatingUI) return;
+    isUpdatingUI = true;
 
-    document.getElementById('walletTotalPoints').textContent = appState.user.walletAP;
-    
-    let tierName = 'AURA DE BRONCE';
-    if (appState.user.walletAP > 1500) tierName = 'NIVEL: CYBER DIAMANTE 💎';
-    else if (appState.user.walletAP > 800) tierName = 'NIVEL: AURA DE PLATINO 🌟';
-    else if (appState.user.walletAP > 300) tierName = 'NIVEL: AURA DE ORO ⚡';
-    else if (appState.user.walletAP > 100) tierName = 'NIVEL: AURA DE PLATA 🛡️';
-    document.getElementById('walletTierName').textContent = tierName;
+    requestAnimationFrame(() => {
+      const headerWalletAP = document.getElementById('headerWalletAP');
+      const headerAgeBracket = document.getElementById('headerAgeBracket');
+      const headerUserName = document.getElementById('headerUserName');
+      const headerAvatarImg = document.getElementById('headerAvatarImg');
+      const hudP1Name = document.getElementById('hudP1Name');
+      const hudP1Avatar = document.getElementById('hudP1Avatar');
+      const walletTotalPoints = document.getElementById('walletTotalPoints');
+      const walletTierName = document.getElementById('walletTierName');
 
-    renderTransactions();
-    renderSocialSection();
-    renderLeaderboard();
-    renderCustomMoves();
+      if (headerWalletAP) headerWalletAP.textContent = appState.user.walletAP;
+      if (headerAgeBracket) headerAgeBracket.textContent = `Rango: ${appState.user.ageBracket} (${appState.user.exactAge} años)`;
+      if (headerUserName) headerUserName.textContent = appState.user.username;
+      if (headerAvatarImg) headerAvatarImg.src = appState.user.avatar;
+      if (hudP1Name) hudP1Name.textContent = `${appState.user.username} (Tú)`;
+      if (hudP1Avatar) hudP1Avatar.src = appState.user.avatar;
+
+      if (walletTotalPoints) walletTotalPoints.textContent = appState.user.walletAP;
+      
+      let tierName = 'AURA DE BRONCE';
+      if (appState.user.walletAP > 1500) tierName = 'NIVEL: CYBER DIAMANTE 💎';
+      else if (appState.user.walletAP > 800) tierName = 'NIVEL: AURA DE PLATINO 🌟';
+      else if (appState.user.walletAP > 300) tierName = 'NIVEL: AURA DE ORO ⚡';
+      else if (appState.user.walletAP > 100) tierName = 'NIVEL: AURA DE PLATA 🛡️';
+      if (walletTierName) walletTierName.textContent = tierName;
+
+      renderTransactions();
+      renderSocialSection();
+      renderLeaderboard();
+      renderCustomMoves();
+
+      isUpdatingUI = false;
+    });
   }
 
   function renderTransactions() {
