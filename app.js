@@ -181,6 +181,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') closeHamburgerMenu();
   });
 
+  // COMPARTIR EN WHATSAPP CON 1 CLIC
+  const shareWhatsAppBtn = document.getElementById('shareWhatsAppBtn');
+  if (shareWhatsAppBtn) {
+    shareWhatsAppBtn.addEventListener('click', () => {
+      const promoText = `🚀 ¿Te gustan las batallas, pero no tienes dónde competir?\n\nEn BatallasDeAura.cl puedes enfrentarte a chicos de tu misma edad desde cualquier rincón de Chile o del mundo.\n\n🎤 Demuestra tu talento.\n💻 Compite desde donde quieras.\n🌎 Conoce nuevos rivales.\n🏆 Haz que tu nombre destaque.\n\nSi te da vergüenza batallar en la calle, pero online te sientes imparable, este espacio fue creado para ti.\n\n✅ Plataforma segura y moderada.\n✅ Categorías por edad.\n✅ Tolerancia cero a conductas inapropiadas.\n\nEl talento no tiene dirección. Tu próxima batalla comienza aquí.\n\n👉 https://www.batallasdeaura.cl`;
+      const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(promoText)}`;
+      window.open(url, '_blank');
+    });
+  }
+
   function goToHome() {
     // 1. Activar pestaña principal de Arena (Home)
     const arenaNavBtn = document.querySelector('.nav-btn[data-tab="arenaTab"]');
