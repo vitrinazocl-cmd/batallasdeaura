@@ -499,6 +499,52 @@ body {
   box-shadow: var(--shadow-neon-gold);
 }
 
+.btn-cyber-home {
+  background: linear-gradient(135deg, rgba(0, 243, 255, 0.2) 0%, rgba(0, 136, 255, 0.3) 100%);
+  border: 1px solid var(--cyan-neon);
+  color: var(--cyan-neon);
+  box-shadow: 0 0 12px rgba(0, 243, 255, 0.3);
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 800;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-cyber-home:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 22px rgba(0, 243, 255, 0.7);
+  background: linear-gradient(135deg, var(--gold-neon) 0%, #ff9900 100%);
+  border-color: var(--gold-neon);
+  color: #050814;
+}
+
+.module-header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+}
+
+.module-badge-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cyan-neon);
+  font-family: var(--font-head);
+  letter-spacing: 1px;
+}
+
 /* ----- LOS 3 JURADOS DIGITALES ----- */
 .judges-section {
   margin-top: 35px;

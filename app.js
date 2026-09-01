@@ -137,6 +137,32 @@ document.addEventListener('DOMContentLoaded', () => {
   const navBtns = document.querySelectorAll('.nav-btn');
   const tabContents = document.querySelectorAll('.tab-content');
 
+  function goToHome() {
+    // 1. Activar pestaña principal de Arena (Home)
+    const arenaNavBtn = document.querySelector('.nav-btn[data-tab="arenaTab"]');
+    navBtns.forEach(b => b.classList.remove('active'));
+    tabContents.forEach(c => c.classList.remove('active'));
+
+    if (arenaNavBtn) arenaNavBtn.classList.add('active');
+    const arenaTab = document.getElementById('arenaTab');
+    if (arenaTab) arenaTab.classList.add('active');
+
+    // 2. Cerrar modales si están abiertos
+    const adminLoginModal = document.getElementById('adminLoginModal');
+    if (adminLoginModal) adminLoginModal.classList.remove('active');
+
+    const giftModal = document.getElementById('giftModal');
+    if (giftModal) giftModal.classList.remove('active');
+
+    const registerModal = document.getElementById('registerModal');
+    if (registerModal && appState.user.adultVerified) {
+      registerModal.classList.remove('active');
+    }
+
+    // 3. Desplazamiento suave al inicio de página
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   navBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const targetTab = btn.getAttribute('data-tab');
@@ -147,6 +173,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const activeEl = document.getElementById(targetTab);
       if (activeEl) activeEl.classList.add('active');
     });
+  });
+
+  // Event listener para clic en Logo (Regresar al Home)
+  const logoClick = document.getElementById('logoClick');
+  if (logoClick) {
+    logoClick.addEventListener('click', goToHome);
+  }
+
+  // Event listener global para cualquier botón con clase .btn-go-home
+  document.addEventListener('click', (e) => {
+    const targetBtn = e.target.closest('.btn-go-home');
+    if (targetBtn) {
+      e.preventDefault();
+      goToHome();
+    }
   });
 
   // ACTUALIZACIÓN GLOBAL DE UI
@@ -1040,6 +1081,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       saveState();
       enforceGatekeeper();
+      registerUserInAdminDB(appState.user);
 
       if (exactAge >= 18) {
         alert(`🎉 ¡ACCESO CONCEDIDO ${username}!\n🔒 Tu foto selfie de identidad fue guardada en el registro interno de seguridad (privado).\n✅ Bienvenido a Batallas de Aura.`);
@@ -1156,6 +1198,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data) {
         const parsed = JSON.parse(data);
         parsed.visitsCount = Math.max(visitsFloor, parsed.visitsCount || BASE_VISITS_START);
+        if (parsed.userRegistry) {
+          parsed.userRegistry.forEach(u => {
+            if (!u.avatar) u.avatar = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(u.username)}`;
+            if (!u.registryPhoto) u.registryPhoto = 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop';
+          });
+        }
         return parsed;
       }
     } catch (e) {
@@ -1165,11 +1213,61 @@ document.addEventListener('DOMContentLoaded', () => {
       visitsCount: visitsFloor,
       battlesCount: 38,
       userRegistry: [
-        { id: 1001, username: 'AuraMaster_CL', exactAge: 13, bracket: '12-15 (Teens)', verified: true, date: '2026-08-31 09:12' },
-        { id: 1002, username: 'CyberWarrior_Stgo', exactAge: 14, bracket: '12-15 (Teens)', verified: true, date: '2026-08-31 10:05' },
-        { id: 1003, username: 'NeonNinja_Valpo', exactAge: 14, bracket: '12-15 (Teens)', verified: true, date: '2026-08-31 11:30' },
-        { id: 1004, username: 'MiniAura_Antofa', exactAge: 10, bracket: '8-12 (Junior)', verified: true, date: '2026-08-31 12:15' },
-        { id: 1005, username: 'Legend_Peleador18', exactAge: 21, bracket: '18+ (Torneo Leyendas)', verified: true, date: '2026-08-31 14:00' }
+        {
+          id: 1001,
+          username: 'AuraMaster_CL',
+          exactAge: 13,
+          bracket: '12-15 (Teens)',
+          verified: true,
+          ap: 350,
+          avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=AuraFighter1',
+          registryPhoto: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop',
+          date: '2026-08-31 09:12'
+        },
+        {
+          id: 1002,
+          username: 'CyberWarrior_Stgo',
+          exactAge: 14,
+          bracket: '12-15 (Teens)',
+          verified: true,
+          ap: 1890,
+          avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=RivalCyber',
+          registryPhoto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop',
+          date: '2026-08-31 10:05'
+        },
+        {
+          id: 1003,
+          username: 'NeonNinja_Valpo',
+          exactAge: 14,
+          bracket: '12-15 (Teens)',
+          verified: true,
+          ap: 1200,
+          avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=NinjaAura',
+          registryPhoto: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop',
+          date: '2026-08-31 11:30'
+        },
+        {
+          id: 1004,
+          username: 'MiniAura_Antofa',
+          exactAge: 10,
+          bracket: '8-12 (Junior)',
+          verified: true,
+          ap: 1540,
+          avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=MiniChamp',
+          registryPhoto: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop',
+          date: '2026-08-31 12:15'
+        },
+        {
+          id: 1005,
+          username: 'Legend_Peleador18',
+          exactAge: 21,
+          bracket: '18+ (Torneo Leyendas)',
+          verified: true,
+          ap: 4800,
+          avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=LegendSCL',
+          registryPhoto: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop',
+          date: '2026-08-31 14:00'
+        }
       ],
       interactionLogs: [
         { id: 5001, type: 'VISITA_SITIO', desc: 'Ingreso de usuario a plataforma www.batallasdeaura.cl', user: 'AuraMaster_CL', date: '2026-08-31 15:30' },
@@ -1218,7 +1316,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   logVisitEvent();
 
-  // REGISTRO INMUTABLE DE NUEVO USUARIO
+  // REGISTRO INMUTABLE DE NUEVO USUARIO CON FOTOGRAFÍAS Y DATOS
   function registerUserInAdminDB(userObj) {
     adminDB.userRegistry.unshift({
       id: Date.now(),
@@ -1226,6 +1324,9 @@ document.addEventListener('DOMContentLoaded', () => {
       exactAge: userObj.exactAge,
       bracket: getBracketFromAge(userObj.exactAge).label,
       verified: true,
+      ap: userObj.walletAP || 350,
+      avatar: userObj.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(userObj.username)}`,
+      registryPhoto: userObj.registryPhoto || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop',
       date: new Date().toLocaleString()
     });
 
@@ -1238,6 +1339,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     saveAdminDB();
+    renderAdminDashboard();
   }
 
   // ==========================================================================
@@ -1295,6 +1397,9 @@ document.addEventListener('DOMContentLoaded', () => {
     renderAdminDashboard();
   }
 
+  let currentAdminUserSearch = '';
+  let isGridViewActive = false;
+
   function renderAdminDashboard() {
     const adminStatVisits = document.getElementById('adminStatVisits');
     const adminStatUsers = document.getElementById('adminStatUsers');
@@ -1306,22 +1411,104 @@ document.addEventListener('DOMContentLoaded', () => {
     if (adminStatBattles) adminStatBattles.textContent = (adminDB.battlesCount + appState.transactions.length).toLocaleString();
     if (adminStatAP) adminStatAP.textContent = `${appState.user.walletAP + 1850} AP`;
 
-    // RENDERIZAR TABLA DE USUARIOS REGISTRADOS PERMANENTES
+    // FILTRADO DE USUARIOS REGISTRADOS
+    const filteredUsers = adminDB.userRegistry.filter(u => {
+      if (!currentAdminUserSearch) return true;
+      const term = currentAdminUserSearch.toLowerCase();
+      return (u.username && u.username.toLowerCase().includes(term)) ||
+             (u.bracket && u.bracket.toLowerCase().includes(term)) ||
+             String(u.exactAge).includes(term) ||
+             String(u.id).includes(term);
+    });
+
+    // 1. RENDERIZAR TABLA CON FOTOGRAFÍAS Y DATOS COMPLETOS
     const adminUsersTbody = document.getElementById('adminUsersTbody');
     if (adminUsersTbody) {
       adminUsersTbody.innerHTML = '';
-      adminDB.userRegistry.forEach(u => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><strong style="color: var(--cyan-neon);">#${u.id}</strong></td>
-          <td><strong>${sanitizeHTML(u.username)}</strong></td>
-          <td>${u.exactAge} años</td>
-          <td><span style="color: var(--gold-neon); font-weight: 700;">${u.bracket}</span></td>
-          <td><span style="color: var(--green-safe);">🔒 FOTO & DATOS OK</span></td>
-          <td>${u.date}</td>
-        `;
-        adminUsersTbody.appendChild(tr);
-      });
+      if (filteredUsers.length === 0) {
+        adminUsersTbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color: var(--text-muted); padding: 15px;">No se encontraron usuarios coincidentes en la búsqueda.</td></tr>';
+      } else {
+        filteredUsers.forEach(u => {
+          const avatarUrl = u.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(u.username)}`;
+          const registryUrl = u.registryPhoto || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop';
+          const safeUser = sanitizeHTML(u.username);
+          const regDate = u.date || 'Reciente';
+
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><strong style="color: var(--cyan-neon);">#${u.id}</strong></td>
+            <td>
+              <img src="${avatarUrl}" alt="Avatar" class="avatar-mini" style="width: 42px; height: 42px; cursor: pointer; border-width: 2px;" onclick="window.viewAdminPhoto('${avatarUrl}', '${safeUser}', 'Foto de Perfil Pública', '${regDate}')" title="Clic para ver foto de perfil">
+            </td>
+            <td>
+              <img src="${registryUrl}" alt="Foto Identidad" style="width: 48px; height: 48px; border-radius: 8px; border: 2px solid var(--gold-neon); object-fit: cover; cursor: pointer; box-shadow: var(--shadow-neon-gold);" onclick="window.viewAdminPhoto('${registryUrl}', '${safeUser}', 'Fotografía de Registro de Identidad (Tutor/Selfie)', '${regDate}')" title="Clic para ampliar foto de identidad">
+            </td>
+            <td><strong>${safeUser}</strong></td>
+            <td>${u.exactAge} años</td>
+            <td><span style="color: var(--gold-neon); font-weight: 700;">${u.bracket}</span></td>
+            <td><span style="color: var(--green-safe);">🔒 FOTO & DATOS OK</span></td>
+            <td>${regDate}</td>
+            <td>
+              <button type="button" class="btn-cyber" style="padding: 4px 10px; font-size: 11px; background: rgba(0, 243, 255, 0.15); border: 1px solid var(--cyan-neon); color: var(--cyan-neon);" onclick="window.viewAdminPhoto('${registryUrl}', '${safeUser}', 'Fotografía de Registro de Identidad (Tutor/Selfie)', '${regDate}')">
+                🔍 FOTO HD
+              </button>
+            </td>
+          `;
+          adminUsersTbody.appendChild(tr);
+        });
+      }
+    }
+
+    // 2. RENDERIZAR GRID DE CARDS CON FOTOGRAFÍAS EN DETALLE
+    const adminUsersGridView = document.getElementById('adminUsersGridView');
+    if (adminUsersGridView) {
+      adminUsersGridView.innerHTML = '';
+      if (filteredUsers.length === 0) {
+        adminUsersGridView.innerHTML = '<div style="font-size:14px; color:var(--text-muted); padding: 15px;">No se encontraron usuarios coincidentes.</div>';
+      } else {
+        filteredUsers.forEach(u => {
+          const avatarUrl = u.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(u.username)}`;
+          const registryUrl = u.registryPhoto || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop';
+          const safeUser = sanitizeHTML(u.username);
+          const regDate = u.date || 'Reciente';
+
+          const card = document.createElement('div');
+          card.className = 'move-card';
+          card.style.borderColor = 'var(--gold-neon)';
+          card.style.background = 'rgba(14, 18, 30, 0.95)';
+
+          card.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,215,0,0.2); padding-bottom: 8px;">
+              <span style="font-family: var(--font-head); color: var(--cyan-neon); font-size: 13px;">ID: #${u.id}</span>
+              <span class="age-tag">${u.exactAge} años</span>
+            </div>
+
+            <div style="display: flex; gap: 15px; margin-bottom: 15px; align-items: center;">
+              <div style="text-align: center;">
+                <div style="font-size: 10px; color: var(--text-muted); margin-bottom: 4px;">AVATAR</div>
+                <img src="${avatarUrl}" style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--cyan-neon); object-fit: cover; cursor: pointer;" onclick="window.viewAdminPhoto('${avatarUrl}', '${safeUser}', 'Foto de Perfil Pública', '${regDate}')" title="Clic para ampliar foto de perfil">
+              </div>
+
+              <div style="text-align: center; flex: 1;">
+                <div style="font-size: 10px; color: var(--gold-neon); font-weight: 700; margin-bottom: 4px;">FOTO IDENTIDAD (REGISTRO)</div>
+                <img src="${registryUrl}" style="width: 100%; height: 75px; border-radius: 8px; border: 2px solid var(--gold-neon); object-fit: cover; cursor: pointer; box-shadow: var(--shadow-neon-gold);" onclick="window.viewAdminPhoto('${registryUrl}', '${safeUser}', 'Fotografía de Registro de Identidad (Tutor/Selfie)', '${regDate}')" title="Clic para ampliar fotografía HD">
+              </div>
+            </div>
+
+            <div style="line-height: 1.6; font-size: 13px;">
+              <div><strong>👤 Usuario:</strong> <strong style="color: var(--text-main);">${safeUser}</strong></div>
+              <div><strong>🎯 Segmento:</strong> <span style="color: var(--gold-neon);">${u.bracket}</span></div>
+              <div><strong>⚡ Puntos AP:</strong> <span style="color: var(--green-safe);">${u.ap || 350} AP</span></div>
+              <div><strong>🕒 Fecha Registro:</strong> <span style="color: var(--text-muted);">${regDate}</span></div>
+            </div>
+
+            <button type="button" class="btn-cyber btn-cyber-gold" style="width: 100%; justify-content: center; margin-top: 12px; font-size: 12px; padding: 6px 12px;" onclick="window.viewAdminPhoto('${registryUrl}', '${safeUser}', 'Fotografía de Registro de Identidad (Tutor/Selfie)', '${regDate}')">
+              📷 AMPLIAR FOTO REGISTRO HD
+            </button>
+          `;
+          adminUsersGridView.appendChild(card);
+        });
+      }
     }
 
     // RENDERIZAR TABLA DE LOGS PERMANENTES
@@ -1340,6 +1527,61 @@ document.addEventListener('DOMContentLoaded', () => {
         adminLogsTbody.appendChild(tr);
       });
     }
+  }
+
+  // FUNCIONALIDAD MODAL VISOR DE FOTOGRAFÍAS EN HD
+  window.viewAdminPhoto = function(imgSrc, username, typeLabel, regDate) {
+    const photoViewerModal = document.getElementById('photoViewerModal');
+    const photoViewerImg = document.getElementById('photoViewerImg');
+    const photoViewerUser = document.getElementById('photoViewerUser');
+    const photoViewerType = document.getElementById('photoViewerType');
+    const photoViewerDate = document.getElementById('photoViewerDate');
+
+    if (photoViewerImg) photoViewerImg.src = imgSrc;
+    if (photoViewerUser) photoViewerUser.textContent = username;
+    if (photoViewerType) photoViewerType.textContent = typeLabel;
+    if (photoViewerDate) photoViewerDate.textContent = regDate;
+
+    if (photoViewerModal) photoViewerModal.classList.add('active');
+  };
+
+  const closePhotoViewerModalBtn = document.getElementById('closePhotoViewerModalBtn');
+  const closePhotoViewerBtn = document.getElementById('closePhotoViewerBtn');
+  const photoViewerModal = document.getElementById('photoViewerModal');
+
+  if (closePhotoViewerModalBtn && photoViewerModal) {
+    closePhotoViewerModalBtn.addEventListener('click', () => photoViewerModal.classList.remove('active'));
+  }
+  if (closePhotoViewerBtn && photoViewerModal) {
+    closePhotoViewerBtn.addEventListener('click', () => photoViewerModal.classList.remove('active'));
+  }
+
+  // EVENT LISTENERS DE BÚSQUEDA Y VISTA GRID/TABLA EN ADMIN
+  const adminUserSearchInput = document.getElementById('adminUserSearchInput');
+  if (adminUserSearchInput) {
+    adminUserSearchInput.addEventListener('input', (e) => {
+      currentAdminUserSearch = e.target.value.trim();
+      renderAdminDashboard();
+    });
+  }
+
+  const toggleUserViewBtn = document.getElementById('toggleUserViewBtn');
+  if (toggleUserViewBtn) {
+    toggleUserViewBtn.addEventListener('click', () => {
+      const tableView = document.getElementById('adminUsersTableView');
+      const gridView = document.getElementById('adminUsersGridView');
+      isGridViewActive = !isGridViewActive;
+
+      if (isGridViewActive) {
+        if (tableView) tableView.style.display = 'none';
+        if (gridView) gridView.style.display = 'grid';
+        toggleUserViewBtn.textContent = '📋 CAMBIAR A VISTA DE TABLA';
+      } else {
+        if (tableView) tableView.style.display = 'block';
+        if (gridView) gridView.style.display = 'none';
+        toggleUserViewBtn.textContent = '🖼️ CAMBIAR A VISTA DE CARDS';
+      }
+    });
   }
 
   if (logoutAdminBtn) {
