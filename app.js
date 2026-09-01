@@ -1163,7 +1163,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================================================
   // BASE DE DATOS PERMANENTE E INMUTABLE DE ADMINISTRACIÓN (SIN BORRADO)
   // ==========================================================================
-  const ADMIN_DB_KEY = 'batallas_de_aura_admin_db_v1';
+  const ADMIN_DB_KEY = 'batallas_de_aura_admin_db_v2';
+  const OLD_ADMIN_DB_KEY = 'batallas_de_aura_admin_db_v1';
   const PERMANENT_VISITS_KEY = 'batallas_aura_permanent_visits_floor_v1';
   const BASE_VISITS_START = 5000;
 
@@ -1194,14 +1195,28 @@ document.addEventListener('DOMContentLoaded', () => {
   function loadAdminDB() {
     const visitsFloor = getStoredVisitsCount();
     try {
-      const data = localStorage.getItem(ADMIN_DB_KEY);
+      let data = localStorage.getItem(ADMIN_DB_KEY);
+      if (!data) {
+        data = localStorage.getItem(OLD_ADMIN_DB_KEY);
+      }
       if (data) {
         const parsed = JSON.parse(data);
         parsed.visitsCount = Math.max(visitsFloor, parsed.visitsCount || BASE_VISITS_START);
         if (parsed.userRegistry) {
-          parsed.userRegistry.forEach(u => {
-            if (!u.avatar) u.avatar = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(u.username)}`;
-            if (!u.registryPhoto) u.registryPhoto = 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop';
+          const samplePhotos = [
+            'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop'
+          ];
+          parsed.userRegistry.forEach((u, idx) => {
+            if (!u.avatar || u.avatar.length < 5) {
+              u.avatar = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(u.username)}`;
+            }
+            if (!u.registryPhoto || u.registryPhoto.length < 5) {
+              u.registryPhoto = samplePhotos[idx % samplePhotos.length];
+            }
           });
         }
         return parsed;
