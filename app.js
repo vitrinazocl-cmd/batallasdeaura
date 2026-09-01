@@ -315,11 +315,20 @@ document.addEventListener('DOMContentLoaded', () => {
       if (hamburgerActiveLabel) hamburgerActiveLabel.textContent = btn.textContent.trim();
 
       const activeEl = document.getElementById(targetTab);
-      if (activeEl) activeEl.classList.add('active');
+      if (activeEl) {
+        activeEl.classList.add('active');
+        if (targetTab === 'movesTab') playMoveDemoVideos();
+      }
 
       closeHamburgerMenu();
     });
   });
+
+  function playMoveDemoVideos() {
+    document.querySelectorAll('.move-demo-video').forEach(v => {
+      v.play().catch(() => {});
+    });
+  }
 
   // Event listener para clic en Logo (Regresar al Home)
   const logoClick = document.getElementById('logoClick');
