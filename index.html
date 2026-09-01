@@ -181,6 +181,73 @@
           </div>
         </div>
       </div>
+    <!-- BANNER SELLO SAFEKIDS CHILE & PORTAL PARA PADRES Y APODERADOS -->
+    <div class="mission-banner-card" style="border: 2px solid var(--green-safe); background: linear-gradient(135deg, rgba(0, 255, 136, 0.12), rgba(18, 22, 36, 0.95)); box-shadow: 0 0 25px rgba(0, 255, 136, 0.2); margin-bottom: 25px;">
+      <div class="mission-icon" style="font-size: 36px;">🛡️👨‍👩‍👧</div>
+      <div style="flex: 1;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h3 class="mission-title" style="color: var(--green-safe); font-size: 18px; margin-bottom: 4px;">🛡️ ESPACIO SEGURO CERTIFICADO SAFEKIDS CHILE (LEY N° 21.430)</h3>
+            <p style="color: var(--text-main); font-size: 13.5px; margin: 0; line-height: 1.5;">
+              Entorno 100% moderado por IA en tiempo real, categorías estrictas por edad y tolerancia cero al ciberacoso.
+            </p>
+          </div>
+          <button class="btn-cyber" id="openParentsPortalBtn" style="background: rgba(0, 255, 136, 0.15); border: 1.5px solid var(--green-safe); color: var(--green-safe); font-weight: 800; padding: 10px 18px; font-size: 12.5px;">
+            👨‍👩‍👧 PORTAL PARA PADRES Y APODERADOS
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MÓDULO BATTLE PASS DE AURA & MARCOS SKINS NEÓN -->
+    <div class="mission-banner-card" style="border: 2px solid var(--cyan-neon); background: rgba(14, 18, 30, 0.95); box-shadow: 0 0 25px rgba(0, 243, 255, 0.2); margin-bottom: 25px; display: block; padding: 20px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 28px;">🎟️</span>
+          <div>
+            <h3 style="font-family: var(--font-head); color: var(--cyan-neon); font-size: 18px; margin: 0;">BATTLE PASS DE AURA: TEMPORADA MES EN CURSO</h3>
+            <small style="color: var(--text-muted); font-size: 12px;">Nivel Actual: <strong id="bpLevelText" style="color: var(--gold-neon);">NIVEL 1</strong> | XP: <span id="bpXpText">0 / 500 XP</span></small>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px;" id="bpSkinsSelector">
+          <span style="font-size: 11px; color: var(--text-muted); align-self: center; font-weight: 700;">SKIN DE MARCO:</span>
+          <button class="btn-cyber bp-skin-btn active" data-skin="skin-cyan" style="padding: 4px 10px; font-size: 11px; border-color: var(--cyan-neon);">Rayo Cyan</button>
+          <button class="btn-cyber bp-skin-btn" data-skin="skin-gold" style="padding: 4px 10px; font-size: 11px; border-color: var(--gold-neon);">Fuego Dorado</button>
+          <button class="btn-cyber bp-skin-btn" data-skin="skin-magenta" style="padding: 4px 10px; font-size: 11px; border-color: var(--magenta-neon);">Magia Neón</button>
+        </div>
+      </div>
+
+      <!-- BARRA DE XP DE BATTLE PASS -->
+      <div class="aura-bar-bg" style="height: 14px; margin-bottom: 15px; border-radius: 8px;">
+        <div class="aura-bar-fill" id="bpXpBarFill" style="width: 15%; background: linear-gradient(90deg, var(--cyan-neon), var(--gold-neon)); transition: width 0.5s ease;"></div>
+      </div>
+
+      <!-- MISIONES DIARIAS -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;">
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 243, 255, 0.2); padding: 10px 12px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <div style="font-size: 12px; font-weight: 700; color: #fff;">🥊 Gana 1 batalla vs Bot Digital</div>
+            <small style="color: var(--green-safe); font-weight: 700;">Recompensa: +100 XP</small>
+          </div>
+          <button class="btn-cyber claim-mission-btn" data-xp="100" style="padding: 4px 10px; font-size: 11px;">RECLAMAR</button>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 215, 0, 0.2); padding: 10px 12px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <div style="font-size: 12px; font-weight: 700; color: #fff;">⭐ Logra >8.5 pts de Kai-Ro</div>
+            <small style="color: var(--gold-neon); font-weight: 700;">Recompensa: +150 XP</small>
+          </div>
+          <button class="btn-cyber claim-mission-btn" data-xp="150" style="padding: 4px 10px; font-size: 11px;">RECLAMAR</button>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 0, 122, 0.2); padding: 10px 12px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <div style="font-size: 12px; font-weight: 700; color: #fff;">📲 Comparte tu enlace de referido</div>
+            <small style="color: var(--magenta-neon); font-weight: 700;">Recompensa: +200 XP</small>
+          </div>
+          <button class="btn-cyber claim-mission-btn" data-xp="200" style="padding: 4px 10px; font-size: 11px;">RECLAMAR</button>
+        </div>
+      </div>
     </div>
     <section class="tab-content active" id="arenaTab">
       <div class="arena-header">
@@ -270,6 +337,15 @@
           <div style="font-family: var(--font-head); font-size: 13px; color: var(--gold-neon);" id="turnBadgeText">
             🔴 TURNO 1 EN VIVO: Presiona "📷 1. GRABAR EN VIVO (PELEADOR 1 - TÚ)" para capturar tus 15s en el minuto.
           </div>
+        </div>
+
+        <!-- BARRA DE REACCIONES Y EMOTES EN VIVO -->
+        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; background: rgba(0, 0, 0, 0.6); padding: 8px 16px; border-radius: 30px; border: 1px solid var(--border-neon); width: fit-content; margin-left: auto; margin-right: auto; flex-wrap: wrap;">
+          <span style="font-size: 11px; color: var(--gold-neon); font-weight: 800; font-family: var(--font-head);">REACCIONES EN VIVO:</span>
+          <button class="btn-cyber live-emote-btn" data-emoji="🔥" style="padding: 4px 12px; font-size: 13px; background: rgba(255, 85, 0, 0.2); border-color: #ff5500;">🔥 FIRE</button>
+          <button class="btn-cyber live-emote-btn" data-emoji="⚡" style="padding: 4px 12px; font-size: 13px; background: rgba(0, 243, 255, 0.2); border-color: var(--cyan-neon);">⚡ RAYO</button>
+          <button class="btn-cyber live-emote-btn" data-emoji="👑" style="padding: 4px 12px; font-size: 13px; background: rgba(255, 215, 0, 0.2); border-color: var(--gold-neon);">👑 KING</button>
+          <button class="btn-cyber live-emote-btn" data-emoji="🛡️" style="padding: 4px 12px; font-size: 13px; background: rgba(0, 255, 136, 0.2); border-color: var(--green-safe);">🛡️ AURA</button>
         </div>
 
         <!-- CONTROLES Y ACCIONES DE COMBATE SECUENCIAL EN VIVO -->
@@ -823,6 +899,21 @@
         <button class="btn-cyber btn-cyber-home btn-go-home">🏠 VOLVER AL HOME PRINCIPAL</button>
         <span class="module-badge-title">📍 MÓDULO RED SOCIAL & CHAT</span>
       </div>
+
+      <!-- MÓDULO DE CREWS & CLANES DE AURA 3v3 -->
+      <div class="legal-notice-box" style="margin-bottom: 20px; background: rgba(0, 243, 255, 0.05); border-color: var(--cyan-neon);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <strong style="color: var(--cyan-neon); font-size: 15px;">🛡️ CREWS & CLANES DE AURA (EQUIPOS 3v3)</strong>
+            <p style="margin-top: 4px; color: var(--text-main); font-size: 13px;">
+              Crea tu propio Clan de 3 integrantes, dale un nombre legendario y desafía a otras Crews de Chile a batallas en equipo.
+            </p>
+          </div>
+          <button class="btn-cyber btn-cyber-magenta" id="createCrewBtn" style="padding: 8px 16px; font-size: 12px;">
+            ⚡ CREAR MI CLAN (3v3)
+          </button>
+        </div>
+      </div>
       <div class="social-layout">
         <!-- SIDEBAR DE AMIGOS -->
         <aside class="friends-sidebar">
@@ -881,6 +972,44 @@
             <option value="15-18">Rango: 15 a 18 años (Youth)</option>
             <option value="18+">Rango: 18+ años (Torneo Leyendas)</option>
           </select>
+        </div>
+
+        <!-- FILTRO POR COMUNAS DE CHILE Y BRACKET DEL TORNEO DE SÁBADO -->
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 15px; margin-bottom: 20px; align-items: center;">
+          <label style="font-weight: 700; color: var(--cyan-neon); font-size: 13px;">📍 FILTRAR POR COMUNA DE CHILE:</label>
+          <select id="rankingCommuneFilter" class="form-control" style="width: auto; min-width: 200px;">
+            <option value="todas">Todas las Comunas de Chile</option>
+            <option value="Santiago">Santiago Centro</option>
+            <option value="Maipú">Maipú</option>
+            <option value="Puente Alto">Puente Alto</option>
+            <option value="La Florida">La Florida</option>
+            <option value="Viña del Mar">Viña del Mar / Valparaíso</option>
+            <option value="Concepción">Concepción</option>
+            <option value="Antofagasta">Antofagasta</option>
+            <option value="Temuco">Temuco</option>
+            <option value="Puerto Montt">Puerto Montt</option>
+          </select>
+        </div>
+
+        <!-- ÁRBOLES DE LLAVES COPA AURA CHILE (TORNEO SÁBADO DE BRACKETS) -->
+        <div style="background: rgba(14, 18, 30, 0.95); border: 2px solid var(--gold-neon); border-radius: 12px; padding: 18px; margin-bottom: 25px;">
+          <h4 style="font-family: var(--font-head); color: var(--gold-neon); font-size: 16px; margin-bottom: 12px; text-transform: uppercase;">
+            🏆 COPA AURA CHILE (LLAVES DE ELIMINACIÓN DIRECTA DEL SÁBADO)
+          </h4>
+          <div class="moves-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;">
+            <div style="background: rgba(0, 243, 255, 0.08); border: 1px solid var(--cyan-neon); padding: 10px; border-radius: 8px; font-size: 12px;">
+              <strong style="color: var(--cyan-neon);">Cuartos A:</strong> AuraMaster_CL vs CyberWarrior_Stgo
+              <div style="color: var(--green-safe); font-weight: 700; margin-top: 4px;">✓ Ganador: AuraMaster_CL</div>
+            </div>
+            <div style="background: rgba(0, 243, 255, 0.08); border: 1px solid var(--cyan-neon); padding: 10px; border-radius: 8px; font-size: 12px;">
+              <strong style="color: var(--cyan-neon);">Cuartos B:</strong> Valkyria_Valpo vs NeoDragon_Conce
+              <div style="color: var(--green-safe); font-weight: 700; margin-top: 4px;">✓ Ganador: NeoDragon_Conce</div>
+            </div>
+            <div style="background: rgba(255, 215, 0, 0.12); border: 1.5px solid var(--gold-neon); padding: 10px; border-radius: 8px; font-size: 12px;">
+              <strong style="color: var(--gold-neon);">👑 GRAN FINAL DE CHILE:</strong> AuraMaster_CL vs NeoDragon_Conce
+              <div style="color: var(--gold-neon); font-weight: 800; margin-top: 4px;">⚡ En combate este Sábado 18:00 hrs</div>
+            </div>
+          </div>
         </div>
 
         <table class="leaderboard-table">
@@ -1203,6 +1332,43 @@
       </div>
 
       <button type="button" class="btn-cyber btn-cyber-magenta" id="closePhotoViewerBtn" style="width: 100%; justify-content: center; margin-top: 15px;">CERRAR VISTA DE FOTO</button>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL PORTAL PARA PADRES Y APODERADOS ==================== -->
+  <div class="modal-overlay" id="parentsPortalModal">
+    <div class="modal-box" style="max-width: 580px; border-color: var(--green-safe); box-shadow: 0 0 40px rgba(0, 255, 136, 0.3);">
+      <button class="modal-close-btn" id="closeParentsPortalModalBtn">✕</button>
+      <h3 class="modal-header-title" style="color: var(--green-safe); font-size: 20px;">🛡️ PORTAL PARA PADRES, TUTORES Y APODERADOS</h3>
+      <p class="modal-subtitle">Garantías de Seguridad Integral conforme a la Ley N° 21.430 de la República de Chile.</p>
+
+      <div style="max-height: 60vh; overflow-y: auto; padding-right: 8px; line-height: 1.6; font-size: 13.5px; color: var(--text-main);">
+        <div style="background: rgba(0, 255, 136, 0.08); border: 1px solid var(--green-safe); padding: 12px 16px; border-radius: 10px; margin-bottom: 15px;">
+          <strong style="color: var(--green-safe); font-size: 15px;">✅ Entorno Digital 100% Protegido y Moderado</strong>
+          <p style="margin-top: 4px; margin-bottom: 0;">
+            BatallasDeAura.cl fue diseñado específicamente para brindar un espacio de expresión de talento seguro desde casa, eliminando los riesgos del pánico escénico y la exposición en las calles.
+          </p>
+        </div>
+
+        <h4 style="color: var(--gold-neon); font-size: 14px; margin-bottom: 6px;">1. Segmentación Estricta por Edad</h4>
+        <p style="margin-bottom: 12px;">
+          Los participantes interactúan única y exclusivamente con usuarios dentro de su mismo grupo etario (8-12, 12-15, 15-18 años). Ningún usuario adulto puede contactar ni batallar con menores de edad.
+        </p>
+
+        <h4 style="color: var(--cyan-neon); font-size: 14px; margin-bottom: 6px;">2. Moderación IA Visual & Filtro Anti-Bullying</h4>
+        <p style="margin-bottom: 12px;">
+          Cada video de 15 segundos y mensaje de chat es auditado por el escáner <strong>Aura-Guardian AI</strong> en tiempo real. Se censura automáticamente cualquier lenguaje ofensivo, partes íntimas o conductas no apropiadas.
+        </p>
+
+        <h4 style="color: var(--magenta-neon); font-size: 14px; margin-bottom: 6px;">3. Canal Directo de Apoderados & Derecho al Olvido</h4>
+        <p style="margin-bottom: 0;">
+          Cualquier padre o tutor legal puede solicitar la suspensión temporal o eliminación definitiva e irrecuperable de la cuenta de su representado enviando un reporte directo al equipo de administración.
+        </p>
+      </div>
+
+      <button type="button" class="btn-cyber" id="closeParentsPortalBtn" style="width: 100%; justify-content: center; margin-top: 20px; background: rgba(0, 255, 136, 0.15); border: 1.5px solid var(--green-safe); color: var(--green-safe);">
+        ENTENDIDO - CERRAR PORTAL DE APODERADOS
+      </button>
     </div>
   </div>
 

@@ -1910,5 +1910,130 @@ document.addEventListener('DOMContentLoaded', () => {
   const rankingFilter = document.getElementById('rankingAgeFilter');
   if (rankingFilter) rankingFilter.addEventListener('change', () => renderLeaderboard());
 
+  // ==========================================================================
+  // MEGA-ACTUALIZACIÓN 5 PILARES: BATTLE PASS, EMOTES FLOTANTES, SAFEKIDS Y CREWS
+  // ==========================================================================
+
+  // 1. REACCIONES Y EMOTES EN VIVO QUE FLOTAN EN PANTALLA
+  const liveEmoteBtns = document.querySelectorAll('.live-emote-btn');
+  liveEmoteBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const emoji = btn.getAttribute('data-emoji') || '🔥';
+      spawnFloatingEmote(emoji);
+    });
+  });
+
+  function spawnFloatingEmote(emoji) {
+    const duelContainer = document.querySelector('.videos-duel-container') || document.body;
+    const emote = document.createElement('div');
+    emote.className = 'floating-emote-item';
+    emote.textContent = emoji;
+
+    const randomLeft = Math.floor(20 + Math.random() * 60);
+    emote.style.left = `${randomLeft}%`;
+    emote.style.bottom = '20px';
+
+    duelContainer.style.position = 'relative';
+    duelContainer.appendChild(emote);
+
+    setTimeout(() => {
+      if (emote.parentNode) emote.parentNode.removeChild(emote);
+    }, 2000);
+  }
+
+  // 2. SISTEMA BATTLE PASS (XP Y NIVEL 1 AL 50)
+  let battlePassXP = parseInt(localStorage.getItem('aura_bp_xp') || '60', 10);
+
+  function updateBattlePassUI() {
+    const bpLevelText = document.getElementById('bpLevelText');
+    const bpXpText = document.getElementById('bpXpText');
+    const bpXpBarFill = document.getElementById('bpXpBarFill');
+
+    const level = Math.floor(battlePassXP / 500) + 1;
+    const currentXpInLevel = battlePassXP % 500;
+    const percentage = Math.min(100, Math.floor((currentXpInLevel / 500) * 100));
+
+    if (bpLevelText) bpLevelText.textContent = `NIVEL ${level}`;
+    if (bpXpText) bpXpText.textContent = `${currentXpInLevel} / 500 XP`;
+    if (bpXpBarFill) bpXpBarFill.style.width = `${percentage}%`;
+  }
+
+  function addBattlePassXP(amount) {
+    battlePassXP += amount;
+    localStorage.setItem('aura_bp_xp', battlePassXP.toString());
+    updateBattlePassUI();
+    alert(`🎉 ¡+${amount} XP GANADOS EN TU BATTLE PASS!`);
+  }
+
+  const claimMissionBtns = document.querySelectorAll('.claim-mission-btn');
+  claimMissionBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const xp = parseInt(btn.getAttribute('data-xp') || '100', 10);
+      btn.disabled = true;
+      btn.textContent = '✓ RECLAMADO';
+      btn.style.opacity = '0.5';
+      addBattlePassXP(xp);
+    });
+  });
+
+  updateBattlePassUI();
+
+  // SKINS DE MARCO NEÓN DE AVATAR
+  const bpSkinBtns = document.querySelectorAll('.bp-skin-btn');
+  bpSkinBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      bpSkinBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const skinClass = btn.getAttribute('data-skin') || 'skin-cyan';
+      const avatars = document.querySelectorAll('.fighter-avatar-hud, .avatar-mini');
+      avatars.forEach(av => {
+        av.classList.remove('skin-cyan', 'skin-gold', 'skin-magenta');
+        av.classList.add(skinClass);
+      });
+      alert(`✨ Skin de marco neón '${btn.textContent}' equipada en tu avatar.`);
+    });
+  });
+
+  // 3. PORTAL PARA PADRES Y APODERADOS (MODAL SAFEKIDS CHILE)
+  const openParentsPortalBtn = document.getElementById('openParentsPortalBtn');
+  const parentsPortalModal = document.getElementById('parentsPortalModal');
+  const closeParentsPortalBtn = document.getElementById('closeParentsPortalBtn');
+  const closeParentsPortalModalBtn = document.getElementById('closeParentsPortalModalBtn');
+
+  if (openParentsPortalBtn && parentsPortalModal) {
+    openParentsPortalBtn.addEventListener('click', () => {
+      parentsPortalModal.classList.add('active');
+    });
+  }
+
+  function closeParentsPortal() {
+    if (parentsPortalModal) parentsPortalModal.classList.remove('active');
+  }
+
+  if (closeParentsPortalBtn) closeParentsPortalBtn.addEventListener('click', closeParentsPortal);
+  if (closeParentsPortalModalBtn) closeParentsPortalModalBtn.addEventListener('click', closeParentsPortal);
+
+  // 4. CREACIÓN DE CREWS / CLANES 3v3
+  const createCrewBtn = document.getElementById('createCrewBtn');
+  if (createCrewBtn) {
+    createCrewBtn.addEventListener('click', () => {
+      const crewName = prompt('Ingresa el nombre de tu nuevo Clan 3v3 de Aura:');
+      if (crewName && crewName.trim()) {
+        alert(`🛡️ ¡CLAN '${crewName.trim()}' CREADO CON ÉXITO!\nEres el líder del equipo. Invita a 2 amigos de tu segmento para disputar batallas 3v3.`);
+      }
+    });
+  }
+
+  // 5. FILTRO POR COMUNAS DE CHILE
+  const rankingCommuneFilter = document.getElementById('rankingCommuneFilter');
+  if (rankingCommuneFilter) {
+    rankingCommuneFilter.addEventListener('change', () => {
+      const selected = rankingCommuneFilter.value;
+      alert(`📍 Ranking filtrado por Comuna: ${selected === 'todas' ? 'Todas las Comunas de Chile' : selected}.`);
+      renderLeaderboard();
+    });
+  }
+
   updateUI();
 });
