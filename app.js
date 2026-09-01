@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
   navBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const targetTab = btn.getAttribute('data-tab');
-      if (!targetTab) return; // Por si es un botón sin data-tab (ej: admin nav btn handled por modal)
+      if (!targetTab || targetTab === 'adminTab') return;
 
       navBtns.forEach(b => b.classList.remove('active'));
       tabContents.forEach(c => c.classList.remove('active'));
@@ -1424,11 +1424,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let isAdminLoggedIn = false;
 
   if (adminLoginNavBtn) {
-    adminLoginNavBtn.addEventListener('click', () => {
+    adminLoginNavBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeHamburgerMenu();
       if (isAdminLoggedIn) {
         showAdminTab();
       } else {
-        adminLoginModal.classList.add('active');
+        if (adminLoginModal) adminLoginModal.classList.add('active');
       }
     });
   }
