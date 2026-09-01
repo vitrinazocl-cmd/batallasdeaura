@@ -133,9 +133,53 @@ document.addEventListener('DOMContentLoaded', () => {
     updateUI();
   }
 
-  // NAVEGACIÓN Y TABS
+  // NAVEGACIÓN, TABS Y MENÚ HAMBURGUESA
   const navBtns = document.querySelectorAll('.nav-btn');
   const tabContents = document.querySelectorAll('.tab-content');
+  const hamburgerToggleBtn = document.getElementById('hamburgerToggleBtn');
+  const hamburgerMenuDrawer = document.getElementById('hamburgerMenuDrawer');
+  const hamburgerOverlay = document.getElementById('hamburgerOverlay');
+  const hamburgerCloseBtn = document.getElementById('hamburgerCloseBtn');
+  const hamburgerActiveLabel = document.getElementById('hamburgerActiveLabel');
+
+  function openHamburgerMenu() {
+    if (hamburgerMenuDrawer) hamburgerMenuDrawer.classList.add('open');
+    if (hamburgerOverlay) hamburgerOverlay.classList.add('open');
+    if (hamburgerToggleBtn) hamburgerToggleBtn.classList.add('active');
+  }
+
+  function closeHamburgerMenu() {
+    if (hamburgerMenuDrawer) hamburgerMenuDrawer.classList.remove('open');
+    if (hamburgerOverlay) hamburgerOverlay.classList.remove('open');
+    if (hamburgerToggleBtn) hamburgerToggleBtn.classList.remove('active');
+  }
+
+  function toggleHamburgerMenu() {
+    if (hamburgerMenuDrawer && hamburgerMenuDrawer.classList.contains('open')) {
+      closeHamburgerMenu();
+    } else {
+      openHamburgerMenu();
+    }
+  }
+
+  if (hamburgerToggleBtn) {
+    hamburgerToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleHamburgerMenu();
+    });
+  }
+
+  if (hamburgerCloseBtn) {
+    hamburgerCloseBtn.addEventListener('click', closeHamburgerMenu);
+  }
+
+  if (hamburgerOverlay) {
+    hamburgerOverlay.addEventListener('click', closeHamburgerMenu);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeHamburgerMenu();
+  });
 
   function goToHome() {
     // 1. Activar pestaña principal de Arena (Home)
@@ -143,11 +187,16 @@ document.addEventListener('DOMContentLoaded', () => {
     navBtns.forEach(b => b.classList.remove('active'));
     tabContents.forEach(c => c.classList.remove('active'));
 
-    if (arenaNavBtn) arenaNavBtn.classList.add('active');
+    if (arenaNavBtn) {
+      arenaNavBtn.classList.add('active');
+      if (hamburgerActiveLabel) hamburgerActiveLabel.textContent = arenaNavBtn.textContent.trim();
+    }
     const arenaTab = document.getElementById('arenaTab');
     if (arenaTab) arenaTab.classList.add('active');
 
-    // 2. Cerrar modales si están abiertos
+    // 2. Cerrar menú hamburguesa y modales si están abiertos
+    closeHamburgerMenu();
+
     const adminLoginModal = document.getElementById('adminLoginModal');
     if (adminLoginModal) adminLoginModal.classList.remove('active');
 
@@ -166,12 +215,18 @@ document.addEventListener('DOMContentLoaded', () => {
   navBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const targetTab = btn.getAttribute('data-tab');
+      if (!targetTab) return; // Por si es un botón sin data-tab (ej: admin nav btn handled por modal)
+
       navBtns.forEach(b => b.classList.remove('active'));
       tabContents.forEach(c => c.classList.remove('active'));
 
       btn.classList.add('active');
+      if (hamburgerActiveLabel) hamburgerActiveLabel.textContent = btn.textContent.trim();
+
       const activeEl = document.getElementById(targetTab);
       if (activeEl) activeEl.classList.add('active');
+
+      closeHamburgerMenu();
     });
   });
 
@@ -1408,6 +1463,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const adminTab = document.getElementById('adminTab');
     if (adminTab) adminTab.classList.add('active');
     if (adminLoginNavBtn) adminLoginNavBtn.classList.add('active');
+    if (hamburgerActiveLabel) hamburgerActiveLabel.textContent = '⚙️ ADMIN';
+    closeHamburgerMenu();
 
     renderAdminDashboard();
   }

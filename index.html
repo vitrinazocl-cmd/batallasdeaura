@@ -70,18 +70,37 @@
       </div>
     </div>
 
-    <!-- NAVBAR NAVEGACIÓN PRINCIPAL -->
+    <!-- NAVBAR NAVEGACIÓN PRINCIPAL (MENÚ HAMBURGUESA) -->
     <nav class="app-nav">
       <div class="nav-container">
-        <button class="nav-btn active" data-tab="arenaTab">🥊 ARENA DE PELEA 15S</button>
-        <button class="nav-btn" data-tab="trainingTab">🤖 MODO ENTRENAMIENTO</button>
-        <button class="nav-btn" data-tab="movesTab">📜 PASOS & PUNTAJES</button>
-        <button class="nav-btn" data-tab="customMovesTab">✨ MIS PASOS CREADOS</button>
-        <button class="nav-btn" data-tab="walletTab">💎 BILLETERA DE AURA</button>
-        <button class="nav-btn" data-tab="socialTab">💬 RED SOCIAL & CHAT</button>
-        <button class="nav-btn" data-tab="rankingTab">🏆 RANKING CHILE</button>
-        <button class="nav-btn" data-tab="legalTab">⚖️ NORMATIVA & MISIÓN SEGURO</button>
-        <button class="nav-btn btn-admin-nav" id="adminLoginNavBtn" style="background: rgba(255, 0, 122, 0.15); border: 1px solid var(--magenta-neon); color: var(--magenta-neon); font-weight: 800;">⚙️ ADMIN</button>
+        <button class="hamburger-toggle-btn" id="hamburgerToggleBtn" aria-label="Abrir Menú de Navegación" title="Menú de Navegación Principal">
+          <div class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <span class="hamburger-label" id="hamburgerActiveLabel">🥊 ARENA DE PELEA 15S</span>
+          <span class="hamburger-arrow">▼</span>
+        </button>
+
+        <div class="hamburger-menu-drawer" id="hamburgerMenuDrawer">
+          <div class="drawer-header">
+            <span>⚡ NAVEGACIÓN DE AURA</span>
+            <button class="drawer-close-btn" id="hamburgerCloseBtn" title="Cerrar Menú">&times;</button>
+          </div>
+          <div class="drawer-content">
+            <button class="nav-btn active" data-tab="arenaTab">🥊 ARENA DE PELEA 15S</button>
+            <button class="nav-btn" data-tab="trainingTab">🤖 MODO ENTRENAMIENTO</button>
+            <button class="nav-btn" data-tab="movesTab">📜 PASOS & PUNTAJES</button>
+            <button class="nav-btn" data-tab="customMovesTab">✨ MIS PASOS CREADOS</button>
+            <button class="nav-btn" data-tab="walletTab">💎 BILLETERA DE AURA</button>
+            <button class="nav-btn" data-tab="socialTab">💬 RED SOCIAL & CHAT</button>
+            <button class="nav-btn" data-tab="rankingTab">🏆 RANKING CHILE</button>
+            <button class="nav-btn" data-tab="legalTab">⚖️ NORMATIVA & MISIÓN SEGURO</button>
+            <button class="nav-btn btn-admin-nav" id="adminLoginNavBtn" style="background: rgba(255, 0, 122, 0.15); border: 1px solid var(--magenta-neon); color: var(--magenta-neon); font-weight: 800;">⚙️ ADMIN</button>
+          </div>
+        </div>
+        <div class="hamburger-overlay" id="hamburgerOverlay"></div>
       </div>
     </nav>
   </header>

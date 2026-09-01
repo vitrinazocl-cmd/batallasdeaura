@@ -197,44 +197,230 @@ body {
   object-fit: cover;
 }
 
-/* Navigation Tabs */
+/* Navigation Tabs & Hamburger Menu */
 .app-nav {
-  background: rgba(14, 18, 30, 0.9);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(14, 18, 30, 0.95);
+  border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+  position: relative;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
+
 .nav-container {
   max-width: 1280px;
   margin: 0 auto;
+  padding: 8px 16px;
   display: flex;
   justify-content: center;
-  gap: 8px;
-  padding: 0 10px;
-  overflow-x: auto;
+  align-items: center;
+  position: relative;
 }
-.nav-btn {
+
+/* Hamburger Toggle Button */
+.hamburger-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, rgba(0, 243, 255, 0.12), rgba(255, 0, 122, 0.12));
+  border: 1px solid var(--cyan-neon);
+  color: var(--text-main);
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 800;
+  padding: 10px 22px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 12px rgba(0, 243, 255, 0.25);
+}
+
+.hamburger-toggle-btn:hover {
+  border-color: var(--gold-neon);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+.hamburger-toggle-btn.active {
+  border-color: var(--magenta-neon);
+  background: rgba(255, 0, 122, 0.2);
+  box-shadow: 0 0 20px rgba(255, 0, 122, 0.4);
+}
+
+/* Hamburger 3-Line Icon */
+.hamburger-icon {
+  width: 20px;
+  height: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger-icon span {
+  display: block;
+  width: 100%;
+  height: 2.5px;
+  background-color: var(--cyan-neon);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.hamburger-toggle-btn:hover .hamburger-icon span {
+  background-color: var(--gold-neon);
+}
+
+.hamburger-toggle-btn.active .hamburger-icon span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+  background-color: var(--magenta-neon);
+}
+.hamburger-toggle-btn.active .hamburger-icon span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-toggle-btn.active .hamburger-icon span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+  background-color: var(--magenta-neon);
+}
+
+.hamburger-label {
+  color: var(--cyan-neon);
+  letter-spacing: 0.5px;
+}
+
+.hamburger-arrow {
+  font-size: 10px;
+  color: var(--cyan-neon);
+  transition: transform 0.3s ease;
+}
+
+.hamburger-toggle-btn.active .hamburger-arrow {
+  transform: rotate(180deg);
+  color: var(--magenta-neon);
+}
+
+/* Hamburger Menu Drawer */
+.hamburger-menu-drawer {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  width: calc(100% - 32px);
+  max-width: 480px;
+  background: rgba(14, 18, 30, 0.98);
+  border: 2px solid var(--cyan-neon);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 243, 255, 0.25);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1010;
+  overflow: hidden;
+}
+
+.hamburger-menu-drawer.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(8px);
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  background: rgba(0, 243, 255, 0.08);
+  border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--cyan-neon);
+  letter-spacing: 1px;
+}
+
+.drawer-close-btn {
   background: transparent;
   border: none;
   color: var(--text-muted);
+  font-size: 22px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  line-height: 1;
+}
+
+.drawer-close-btn:hover {
+  color: var(--magenta-neon);
+}
+
+.drawer-content {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 4px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* Nav buttons inside Hamburger Drawer */
+.drawer-content .nav-btn {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: var(--text-main);
   font-family: var(--font-head);
   font-size: 13px;
   font-weight: 700;
-  padding: 14px 20px;
+  padding: 12px 18px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
-  border-bottom: 3px solid transparent;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.drawer-content .nav-btn:hover {
+  background: rgba(0, 243, 255, 0.1);
+  border-color: rgba(0, 243, 255, 0.4);
+  color: var(--cyan-neon);
+  transform: translateX(4px);
+}
+
+.drawer-content .nav-btn.active {
+  background: linear-gradient(90deg, rgba(0, 243, 255, 0.2), rgba(0, 243, 255, 0.05));
+  border-color: var(--cyan-neon);
+  color: var(--cyan-neon);
+  font-weight: 800;
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.15);
+}
+
+.drawer-content .nav-btn.btn-admin-nav:hover {
+  background: rgba(255, 0, 122, 0.25) !important;
+  border-color: var(--magenta-neon) !important;
+  color: #fff !important;
+}
+
+/* Hamburger Overlay Backdrop */
+.hamburger-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(5, 7, 15, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1005;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
   transition: all 0.3s ease;
-  white-space: nowrap;
 }
-.nav-btn:hover {
-  color: var(--cyan-neon);
-}
-.nav-btn.active {
-  color: var(--cyan-neon);
-  border-bottom-color: var(--cyan-neon);
-  background: rgba(0, 243, 255, 0.05);
-  text-shadow: 0 0 10px var(--cyan-neon);
+
+.hamburger-overlay.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 /* ----- LAYOUT CONTENEDOR MAIN ----- */
