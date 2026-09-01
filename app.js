@@ -1453,18 +1453,23 @@ document.addEventListener('DOMContentLoaded', () => {
           tr.innerHTML = `
             <td><strong style="color: var(--cyan-neon);">#${u.id}</strong></td>
             <td>
-              <img src="${avatarUrl}" alt="Avatar" class="avatar-mini" style="width: 42px; height: 42px; cursor: pointer; border-width: 2px;" onclick="window.viewAdminPhoto('${avatarUrl}', '${safeUser}', 'Foto de Perfil Pública', '${regDate}')" title="Clic para ver foto de perfil">
-            </td>
-            <td>
-              <img src="${registryUrl}" alt="Foto Identidad" style="width: 48px; height: 48px; border-radius: 8px; border: 2px solid var(--gold-neon); object-fit: cover; cursor: pointer; box-shadow: var(--shadow-neon-gold);" onclick="window.viewAdminPhoto('${registryUrl}', '${safeUser}', 'Fotografía de Registro de Identidad (Tutor/Selfie)', '${regDate}')" title="Clic para ampliar foto de identidad">
+              <img src="${avatarUrl}" alt="Avatar" class="avatar-mini" style="width: 44px; height: 44px; cursor: pointer; border-width: 2px;" onclick="window.viewAdminPhoto('${avatarUrl}', '${safeUser}', 'Foto de Perfil Pública', '${regDate}')" title="Clic para ver foto de perfil">
             </td>
             <td><strong>${safeUser}</strong></td>
             <td>${u.exactAge} años</td>
             <td><span style="color: var(--gold-neon); font-weight: 700;">${u.bracket}</span></td>
-            <td><span style="color: var(--green-safe);">🔒 FOTO & DATOS OK</span></td>
+            <td>
+              <div style="display: flex; align-items: center; gap: 10px; background: rgba(0, 255, 136, 0.06); padding: 6px 10px; border-radius: 8px; border: 1px solid var(--green-safe);">
+                <img src="${registryUrl}" alt="Foto Tutor/Adulto" style="width: 48px; height: 48px; border-radius: 8px; border: 2px solid var(--gold-neon); object-fit: cover; cursor: pointer; box-shadow: var(--shadow-neon-gold);" onclick="window.viewAdminPhoto('${registryUrl}', '${safeUser}', 'Fotografía de Adulto Responsable / Tutor Legal', '${regDate}')" title="Clic para ver fotografía de adulto/tutor en HD">
+                <div>
+                  <span style="color: var(--green-safe); font-weight: 700; font-size: 12px; display: block;">🔒 FOTO ADULTO / TUTOR OK</span>
+                  <small style="color: var(--text-muted); font-size: 11px;">Identidad Verificada</small>
+                </div>
+              </div>
+            </td>
             <td>${regDate}</td>
             <td>
-              <button type="button" class="btn-cyber" style="padding: 4px 10px; font-size: 11px; background: rgba(0, 243, 255, 0.15); border: 1px solid var(--cyan-neon); color: var(--cyan-neon);" onclick="window.viewAdminPhoto('${registryUrl}', '${safeUser}', 'Fotografía de Registro de Identidad (Tutor/Selfie)', '${regDate}')">
+              <button type="button" class="btn-cyber" style="padding: 6px 12px; font-size: 11px; background: rgba(0, 243, 255, 0.15); border: 1px solid var(--cyan-neon); color: var(--cyan-neon);" onclick="window.viewAdminPhoto('${registryUrl}', '${safeUser}', 'Fotografía de Adulto Responsable / Tutor Legal (Verificación Ley N° 21.430)', '${regDate}')">
                 🔍 FOTO HD
               </button>
             </td>
