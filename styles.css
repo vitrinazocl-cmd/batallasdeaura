@@ -298,70 +298,90 @@ body {
   color: var(--magenta-neon);
 }
 
-/* Hamburger Menu Drawer */
+/* Hamburger Menu Drawer - Centered Cyberpunk Modal */
 .hamburger-menu-drawer {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 50%;
-  transform: translateX(-50%) translateY(-10px);
-  width: calc(100% - 24px);
-  max-width: 460px;
-  background: rgba(14, 18, 30, 0.98);
-  border: 2px solid var(--cyan-neon);
-  border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 243, 255, 0.3);
-  backdrop-filter: blur(16px);
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -46%) scale(0.95);
+  width: calc(100vw - 24px) !important;
+  max-width: 460px !important;
+  max-height: 85vh !important;
+  background: rgba(12, 16, 28, 0.98) !important;
+  border: 2px solid var(--cyan-neon) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(0, 243, 255, 0.35) !important;
+  backdrop-filter: blur(20px) !important;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 9999 !important;
-  overflow: hidden;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
 }
 
 .hamburger-menu-drawer.open {
   opacity: 1 !important;
   visibility: visible !important;
   pointer-events: auto !important;
-  transform: translateX(-50%) translateY(0);
+  transform: translate(-50%, -50%) scale(1) !important;
 }
 
 .drawer-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 20px;
-  background: rgba(0, 243, 255, 0.1);
-  border-bottom: 1px solid rgba(0, 243, 255, 0.25);
-  font-family: var(--font-head);
-  font-size: 13px;
-  font-weight: 800;
-  color: var(--cyan-neon);
-  letter-spacing: 1px;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 14px 20px !important;
+  background: rgba(0, 243, 255, 0.12) !important;
+  border-bottom: 1px solid rgba(0, 243, 255, 0.25) !important;
+  font-family: var(--font-head) !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  color: var(--cyan-neon) !important;
+  letter-spacing: 1px !important;
+  flex-shrink: 0 !important;
 }
 
 .drawer-close-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-size: 24px;
-  cursor: pointer;
-  transition: color 0.2s ease;
-  line-height: 1;
+  background: transparent !important;
+  border: none !important;
+  color: var(--text-muted) !important;
+  font-size: 26px !important;
+  cursor: pointer !important;
+  transition: color 0.2s ease !important;
+  line-height: 1 !important;
 }
 
 .drawer-close-btn:hover {
-  color: var(--magenta-neon);
+  color: var(--magenta-neon) !important;
 }
 
 .drawer-content {
   display: flex !important;
   flex-direction: column !important;
-  padding: 12px;
-  gap: 8px;
-  max-height: 75vh;
-  overflow-y: auto;
-  box-sizing: border-box;
+  padding: 14px 14px 24px 14px !important;
+  gap: 8px !important;
+  overflow-y: auto !important;
+  max-height: calc(85vh - 55px) !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+  box-sizing: border-box !important;
+  flex: 1 1 auto !important;
+}
+
+/* Scrollbar personalizado para el menú */
+.drawer-content::-webkit-scrollbar {
+  width: 6px;
+}
+.drawer-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.drawer-content::-webkit-scrollbar-thumb {
+  background: var(--cyan-neon);
+  border-radius: 4px;
 }
 
 /* Nav buttons inside Hamburger Drawer */
@@ -384,6 +404,7 @@ body {
   box-sizing: border-box !important;
   opacity: 1 !important;
   visibility: visible !important;
+  flex-shrink: 0 !important;
 }
 
 .drawer-content .nav-btn:hover {
@@ -402,18 +423,19 @@ body {
 }
 
 .drawer-content .nav-btn.btn-admin-nav {
-  background: rgba(255, 0, 122, 0.18) !important;
-  border: 1px solid var(--magenta-neon) !important;
-  color: var(--magenta-neon) !important;
+  background: rgba(255, 0, 122, 0.22) !important;
+  border: 2px solid var(--magenta-neon) !important;
+  color: #ffffff !important;
   font-weight: 800 !important;
-  margin-top: 8px !important;
+  margin-top: 10px !important;
+  box-shadow: 0 0 12px rgba(255, 0, 122, 0.3) !important;
 }
 
 .drawer-content .nav-btn.btn-admin-nav:hover {
-  background: rgba(255, 0, 122, 0.35) !important;
+  background: rgba(255, 0, 122, 0.4) !important;
   border-color: var(--magenta-neon) !important;
   color: #ffffff !important;
-  box-shadow: 0 0 18px rgba(255, 0, 122, 0.5) !important;
+  box-shadow: 0 0 20px rgba(255, 0, 122, 0.6) !important;
 }
 
 /* Hamburger Overlay Backdrop */
