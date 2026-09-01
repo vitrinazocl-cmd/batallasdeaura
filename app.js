@@ -1157,9 +1157,31 @@ document.addEventListener('DOMContentLoaded', () => {
   const botCards = document.querySelectorAll('.training-bot-card');
   const trainingBotAvatar = document.getElementById('trainingBotAvatar');
   const trainingBotName = document.getElementById('trainingBotName');
-  const startTrainingCamBtn = document.getElementById('startTrainingCamBtn');
-  const simTrainingBtn = document.getElementById('simTrainingBtn');
+  // ==========================================================================
+  // MÓDULO DE ENTRENAMIENTO 1v1 (1 ROUND DE 15 SEGUNDOS VS BOT DIGITAL)
+  // ==========================================================================
+  const recordTrainingCamBtn = document.getElementById('recordTrainingCamBtn');
+  const simTrainingBattleBtn = document.getElementById('simTrainingBattleBtn');
+
+  const trainingP1Video = document.getElementById('trainingP1Video');
+  const trainingP1Status = document.getElementById('trainingP1Status');
+  const trainingBotStatus = document.getElementById('trainingBotStatus');
+  const trainingTimerBadge = document.getElementById('trainingTimerBadge');
+
+  const trainingBotVisualAvatar = document.getElementById('trainingBotVisualAvatar');
+  const trainingBotVisualName = document.getElementById('trainingBotVisualName');
+  const trainingBotActionText = document.getElementById('trainingBotActionText');
+
+  const trainingVerdictKaiRo = document.getElementById('trainingVerdictKaiRo');
+  const trainingVerdictAuraNeo = document.getElementById('trainingVerdictAuraNeo');
+  const trainingVerdictValkyria = document.getElementById('trainingVerdictValkyria');
+
+  const trainingScoreKaiRo = document.getElementById('trainingScoreKaiRo');
+  const trainingScoreAuraNeo = document.getElementById('trainingScoreAuraNeo');
+  const trainingScoreValkyria = document.getElementById('trainingScoreValkyria');
   const trainingFeedbackText = document.getElementById('trainingFeedbackText');
+
+  let isTrainingRecording = false;
 
   botCards.forEach(card => {
     card.addEventListener('click', () => {
@@ -1181,20 +1203,109 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (trainingBotAvatar) trainingBotAvatar.src = `https://api.dicebear.com/7.x/bottts/svg?seed=${currentTrainingBot.seed}`;
       if (trainingBotName) trainingBotName.textContent = `${currentTrainingBot.name} (Rival Digital)`;
+      if (trainingBotVisualAvatar) trainingBotVisualAvatar.src = `https://api.dicebear.com/7.x/bottts/svg?seed=${currentTrainingBot.seed}`;
+      if (trainingBotVisualName) trainingBotVisualName.textContent = `${currentTrainingBot.name} AI`;
     });
   });
 
-  function executeTrainingSession() {
-    if (trainingFeedbackText) {
-      trainingFeedbackText.innerHTML = `🤖 <em>${currentTrainingBot.name} ejecutando simulación de sparring... Evaluando postura de aura...</em>`;
+  // FUNCIÓN PARA GRABAR 15 SEGUNDOS DE WEBRTC O DISPUTAR SIMULACIÓN DE PRÁCTICA
+  async function startTrainingBattle(isLiveCam = true) {
+    if (isTrainingRecording) return;
+
+    pauseBgMusicForBattle();
+    isTrainingRecording = true;
+
+    if (recordTrainingCamBtn) {
+      recordTrainingCamBtn.disabled = true;
+      recordTrainingCamBtn.style.opacity = '0.5';
+    }
+    if (simTrainingBattleBtn) {
+      simTrainingBattleBtn.disabled = true;
+      simTrainingBattleBtn.style.opacity = '0.5';
     }
 
+    if (trainingP1Status) trainingP1Status.innerHTML = '🔴 REC: Grabando 15s en vivo...';
+    if (trainingBotStatus) trainingBotStatus.innerHTML = '⚡ BOT AI: Analizando tu combo...';
+    if (trainingBotActionText) trainingBotActionText.textContent = `${currentTrainingBot.name} preparando escudo de reacción...`;
+
+    if (trainingBotVisualAvatar) {
+      trainingBotVisualAvatar.style.transform = 'scale(1.15) rotate(5deg)';
+    }
+
+    // 1. INICIAR CÁMARA WEBRTC SI ES EN VIVO
+    if (isLiveCam && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        if (trainingP1Video) {
+          trainingP1Video.srcObject = stream;
+          trainingP1Video.play();
+        }
+      } catch (e) {
+        console.warn('Cámara WebRTC no disponible para entrenamiento:', e);
+      }
+    }
+
+    // 2. CONTEO REGRESIVO DE 15 SEGUNDOS
+    let secondsLeft = 15;
+    if (trainingTimerBadge) trainingTimerBadge.textContent = `${secondsLeft}s REC`;
+
+    const timerInterval = setInterval(() => {
+      secondsLeft--;
+      if (trainingTimerBadge) trainingTimerBadge.textContent = `${secondsLeft}s REC`;
+
+      if (secondsLeft <= 0) {
+        clearInterval(timerInterval);
+        if (trainingTimerBadge) trainingTimerBadge.textContent = '15s MAX';
+        finishTrainingBattleRound(isLiveCam);
+      }
+    }, 1000);
+  }
+
+  function finishTrainingBattleRound(isLiveCam) {
+    // Apagar cámara
+    if (trainingP1Video && trainingP1Video.srcObject) {
+      const tracks = trainingP1Video.srcObject.getTracks();
+      tracks.forEach(track => track.stop());
+    }
+
+    if (trainingP1Status) trainingP1Status.innerHTML = '✅ Video P1 15s Grabado';
+    if (trainingBotStatus) trainingBotStatus.innerHTML = `🤖 ${currentTrainingBot.name}: Respuesta Lista`;
+    if (trainingBotActionText) trainingBotActionText.textContent = `¡Respuesta de Combo ejecutada por ${currentTrainingBot.name}!`;
+    if (trainingBotVisualAvatar) trainingBotVisualAvatar.style.transform = 'scale(1)';
+
+    // EVALUACIÓN DE LOS 3 JURADOS DIGITALES
+    if (trainingVerdictKaiRo) trainingVerdictKaiRo.textContent = 'Kai-Ro: "Calificando postura técnica y fluidez del video de 15s..."';
+    if (trainingVerdictAuraNeo) trainingVerdictAuraNeo.textContent = 'Aura-Neo: "Evaluando brillo e impacto de energía..."';
+    if (trainingVerdictValkyria) trainingVerdictValkyria.textContent = 'Valkyria-X: "Midiendo timing de remate vs el Bot..."';
+
     setTimeout(() => {
+      // Cálculo de notas de los 3 Jurados (1.0 a 10.0)
+      const scoreKaiRo = (8.0 + Math.random() * 1.9).toFixed(1);
+      const scoreAuraNeo = (7.8 + Math.random() * 2.1).toFixed(1);
+      const scoreValkyria = (8.2 + Math.random() * 1.7).toFixed(1);
+
+      const totalScore = ((parseFloat(scoreKaiRo) + parseFloat(scoreAuraNeo) + parseFloat(scoreValkyria)) / 3).toFixed(1);
+
+      if (trainingScoreKaiRo) trainingScoreKaiRo.textContent = `SCORE: ${scoreKaiRo} / 10`;
+      if (trainingScoreAuraNeo) trainingScoreAuraNeo.textContent = `SCORE: ${scoreAuraNeo} / 10`;
+      if (trainingScoreValkyria) trainingScoreValkyria.textContent = `SCORE: ${scoreValkyria} / 10`;
+
+      if (trainingVerdictKaiRo) {
+        trainingVerdictKaiRo.textContent = `"Excelente ejecución de 15s. Mantuviste buena distancia y fluidez de remate (${scoreKaiRo} pts)."`;
+      }
+      if (trainingVerdictAuraNeo) {
+        trainingVerdictAuraNeo.textContent = `"Gran impacto visual neón. Lograste superar la defensa de ${currentTrainingBot.name} (${scoreAuraNeo} pts)."`;
+      }
+      if (trainingVerdictValkyria) {
+        trainingVerdictValkyria.textContent = `"Cierre de combo preciso a los 15 segundos exactos (${scoreValkyria} pts)."`;
+      }
+
+      // Recompensa y registro en Billetera
       appState.user.walletAP += currentTrainingBot.reward;
       appState.transactions.unshift({
         id: Date.now(),
         type: 'win',
-        desc: `Práctica de Entrenamiento vs ${currentTrainingBot.name} (+${currentTrainingBot.reward} AP)`,
+        desc: `Victoria 1v1 Práctica (1 Round 15s) vs ${currentTrainingBot.name} (+${currentTrainingBot.reward} AP)`,
         amount: currentTrainingBot.reward,
         date: 'Ahora'
       });
@@ -1202,18 +1313,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (trainingFeedbackText) {
         trainingFeedbackText.innerHTML = `
-          ✅ <strong>¡Entrenamiento con ${currentTrainingBot.name} completado con éxito!</strong><br>
-           Kai-Ro: <em>"Excelente fluidez de movimiento. Has ganado +${currentTrainingBot.reward} AP de práctica."</em><br>
-           Aura-Neo: <em>"Tu energía de escenario mejoró un +20% en esta sesión."</em><br>
-           Valkyria-X: <em>"Estás listo para ingresar a la Arena PvP de 2 usuarios reales."</em>
+          🎉 <strong>¡VICTORIA DE PRÁCTICA (1 ROUND 15S)!</strong><br>
+          Has obtenido un puntaje total de <strong>${totalScore} / 10</strong> frente a <strong>${currentTrainingBot.name}</strong>.<br>
+          <span style="color: var(--green-safe); font-weight: 700;">🎁 Recompensa: +${currentTrainingBot.reward} Aura Points (AP) acreditados a tu Billetera.</span><br>
+          <small style="color: var(--cyan-neon);">¡Estás 100% preparado para ingresar a la Arena PvP de 2 usuarios reales!</small>
         `;
       }
-      alert(`🎯 ¡Sesión de Entrenamiento Finalizada! Has ganado +${currentTrainingBot.reward} AP de práctica vs ${currentTrainingBot.name}.`);
+
+      alert(`🏆 ¡COMBATE DE PRÁCTICA COMPLETADO! Total: ${totalScore} pts. Has ganado +${currentTrainingBot.reward} AP de entrenamiento vs ${currentTrainingBot.name}.`);
+
+      isTrainingRecording = false;
+      if (recordTrainingCamBtn) {
+        recordTrainingCamBtn.disabled = false;
+        recordTrainingCamBtn.style.opacity = '1';
+      }
+      if (simTrainingBattleBtn) {
+        simTrainingBattleBtn.disabled = false;
+        simTrainingBattleBtn.style.opacity = '1';
+      }
+
+      resumeBgMusicAfterBattle();
     }, 2000);
   }
 
-  if (startTrainingCamBtn) startTrainingCamBtn.addEventListener('click', executeTrainingSession);
-  if (simTrainingBtn) simTrainingBtn.addEventListener('click', executeTrainingSession);
+  if (recordTrainingCamBtn) {
+    recordTrainingCamBtn.addEventListener('click', () => startTrainingBattle(true));
+  }
+  if (simTrainingBattleBtn) {
+    simTrainingBattleBtn.addEventListener('click', () => startTrainingBattle(false));
+  }
 
   // ==========================================================================
   // BASE DE DATOS PERMANENTE E INMUTABLE DE ADMINISTRACIÓN (SIN BORRADO)
