@@ -463,8 +463,13 @@ body {
 /* ----- LAYOUT CONTENEDOR MAIN ----- */
 .main-wrapper {
   max-width: 1280px;
+  width: 100% !important;
   margin: 25px auto;
   padding: 0 20px;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  box-sizing: border-box !important;
 }
 
 /* Mission Banner Card */
@@ -473,7 +478,10 @@ body {
   border: 1px solid var(--green-safe);
   border-radius: 14px;
   padding: 16px 24px;
-  margin-bottom: 25px;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  margin-bottom: 20px !important;
   display: flex;
   align-items: center;
   gap: 16px;
