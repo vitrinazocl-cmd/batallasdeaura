@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Batallas de Aura - Red Social de Pelea Digital 15s (Chile)</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob: 'unsafe-inline'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' https: data: blob:; media-src 'self' https: blob:; connect-src 'self' https:;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(self), microphone=(self)">
+  <!-- RESOURCE PRECONNECT & PERFORMANCE OPTIMIZATION -->
+  <link rel="preconnect" href="https://api.dicebear.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.onesignal.com">
+
+  <!-- OPEN GRAPH & METADATOS DE COMPARTIR EN REDES SOCIALES (FACEBOOK, WHATSAPP, INSTAGRAM, TWITTER) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Batallas de Aura - Red Social de Pelea Digital 15s (Chile)">
+  <meta property="og:description" content="⚡ Arena digital de batallas de aura en videos de 15 segundos. Compite seguro desde tu casa sin pánico escénico en tu segmento de edad estricto.">
+  <meta property="og:image" content="https://www.batallasdeaura.cl/og_banner.jpg">
+  <meta property="og:image:secure_url" content="https://www.batallasdeaura.cl/og_banner.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://www.batallasdeaura.cl/">
+  <meta property="og:site_name" content="Batallas de Aura Chile">
+
+  <!-- TWITTER CARDS METADATA -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Batallas de Aura - Red Social de Pelea Digital 15s (Chile)">
+  <meta name="twitter:description" content="⚡ Arena digital de batallas de aura en videos de 15 segundos. Compite seguro desde tu casa.">
+  <meta name="twitter:image" content="https://www.batallasdeaura.cl/og_banner.jpg">
+
+  <!-- GOOGLE INDEXING & SCHEMA.ORG STRUCTURED DATA FOR CHILE -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Batallas de Aura Chile",
+    "description": "Red social de peleas digitales de 15 segundos para jóvenes en Chile.",
+    "genre": ["Fighting", "Social Arena", "E-Sports"],
+    "gamePlatform": "Web Browser",
+    "url": "https://www.batallasdeaura.cl",
+    "author": {
+      "@type": "Organization",
+      "name": "Batallas de Aura Digital Arena"
+    }
+  }
+  </script>
+
+  <!-- ONESIGNAL WEB PUSH NOTIFICATIONS SDK LOADER -->
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ==================== HEADER PRINCIPAL ==================== -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo-brand" id="logoClick" title="Volver al Home Principal (Arena)">
+        <img src="logo.jpg" alt="Batallas de Aura Logo" style="width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--cyan-neon); object-fit: cover; box-shadow: var(--shadow-neon-cyan);">
+        <div class="logo-text">
+          <h1>BATALLAS DE AURA</h1>
+          <div class="logo-tag">Chile SafeKids Digital Arena</div>
+        </div>
+      </div>
+
+      <!-- BANNER SAFE-ZONE: COMBATE DESDE CASA SIN PÁNICO ESCÉNICO -->
+      <div class="safezone-header-badge" title="Espacio seguro para vencer el pánico escénico">
+        🛡️ <span>Tu Casa, Tu Arena Segura</span>
+        <small style="display:block; font-size:10px; color:var(--cyan-neon);">Cero Pánico Escénico</small>
+      </div>
+
+      <div class="user-status-bar">
+        <!-- BOTÓN DE MÚSICA DE FONDO OGRYZEK - AURA (1) -->
+        <button class="wallet-badge-mini" id="toggleBgMusicBtn" style="cursor: pointer; border-color: var(--magenta-neon); background: rgba(255, 0, 122, 0.12); color: var(--magenta-neon);" title="Pista oficial de fondo: Ogryzek - AURA (1)">
+          🎵 <span id="bgMusicBtnText">Ogryzek - AURA (1) [▶ ON]</span>
+        </button>
+        <div class="wallet-badge-mini" style="border-color: var(--cyan-neon); background: rgba(0, 243, 255, 0.1);" title="Contador de visitas permanente acumulativo en la red">
+          <span style="color: var(--cyan-neon);">👁️ VISITAS:</span>
+          <strong id="publicVisitsCounter" style="color: var(--cyan-neon);">5,000</strong>
+        </div>
+        <div class="wallet-badge-mini" title="Tus puntos acumulados de Aura">
+          <span>⚡ AP:</span>
+          <strong id="headerWalletAP">350</strong>
+        </div>
+        <div class="age-tag" id="headerAgeBracket">Rango: 12-15 años (13 años)</div>
+        <button class="user-profile-btn" id="openProfileBtn">
+          <img src="https://api.dicebear.com/7.x/bottts/svg?seed=AuraFighter1" alt="Avatar" class="avatar-mini" id="headerAvatarImg">
+          <span id="headerUserName">AuraMaster_CL</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- NAVBAR NAVEGACIÓN PRINCIPAL (MENÚ HAMBURGUESA) -->
+    <nav class="app-nav">
+      <div class="nav-container">
+        <button class="hamburger-toggle-btn" id="hamburgerToggleBtn" aria-label="Abrir Menú de Navegación" title="Menú de Navegación Principal">
+          <div class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <span class="hamburger-label" id="hamburgerActiveLabel">🥊 ARENA DE PELEA 15S</span>
+          <span class="hamburger-arrow">▼</span>
+        </button>
+
+        <div class="hamburger-menu-drawer" id="hamburgerMenuDrawer">
+          <div class="drawer-header">
+            <span>⚡ NAVEGACIÓN DE AURA</span>
+            <button class="drawer-close-btn" id="hamburgerCloseBtn" title="Cerrar Menú">&times;</button>
+          </div>
+          <div class="drawer-content">
+            <button class="nav-btn active" data-tab="arenaTab">🥊 ARENA DE PELEA 15S</button>
+            <button class="nav-btn" data-tab="trainingTab">🤖 MODO ENTRENAMIENTO</button>
+            <button class="nav-btn" data-tab="movesTab">📜 PASOS & PUNTAJES</button>
+            <button class="nav-btn" data-tab="customMovesTab">✨ MIS PASOS CREADOS</button>
+            <button class="nav-btn" data-tab="walletTab">💎 BILLETERA DE AURA</button>
+            <button class="nav-btn" data-tab="socialTab">💬 RED SOCIAL & CHAT</button>
+            <button class="nav-btn" data-tab="rankingTab">🏆 RANKING CHILE</button>
+            <button class="nav-btn" data-tab="legalTab">⚖️ NORMATIVA & MISIÓN SEGURO</button>
+            <button class="nav-btn btn-admin-nav" id="adminLoginNavBtn" data-tab="adminTab">⚙️ ADMIN (PANEL DE CONTROL)</button>
+          </div>
+        </div>
+        <div class="hamburger-overlay" id="hamburgerOverlay"></div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ==================== MAIN CONTENT WRAPPER ==================== -->
+  <main class="main-wrapper">
+
+    <!-- VIDEO REEL PRINCIPAL DE BIENVENIDA (VIDEOPLAYBACK 10) -->
+    <div class="mission-banner-card" style="border: 2px solid var(--cyan-neon); background: rgba(14, 18, 30, 0.95); box-shadow: 0 0 30px rgba(0, 243, 255, 0.3); margin-bottom: 25px; padding: 10px; overflow: hidden; border-radius: 16px; display: block;">
+      <div style="position: relative; width: 100%; border-radius: 12px; overflow: hidden; background: #000; border: 1px solid rgba(0, 243, 255, 0.3);">
+        <video id="heroPromoVideo" autoplay loop muted playsinline preload="metadata" style="width: 100%; max-height: 420px; object-fit: cover; display: block; border-radius: 10px; will-change: transform;">
+          <source src="videoplayback%20(10).mp4" type="video/mp4">
+          Tu navegador no soporta reproducción de video HTML5.
+        </video>
+        <div style="position: absolute; bottom: 12px; left: 12px; background: rgba(0, 0, 0, 0.75); border: 1px solid var(--cyan-neon); backdrop-filter: blur(8px); padding: 6px 14px; border-radius: 20px; font-family: var(--font-head); font-size: 11px; font-weight: 800; color: var(--cyan-neon); text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px;">
+          <span>⚡ REEL OFICIAL DE BATALLAS DE AURA CHILE</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO PRINCIPAL DE BIENVENIDA & ANUNCIO DE PREMIACIÓN MENSUAL DÍA 27 -->
+    <div class="mission-banner-card" style="border: 2px solid var(--gold-neon); background: linear-gradient(135deg, rgba(255, 215, 0, 0.12), rgba(18, 22, 36, 0.95)); box-shadow: 0 0 25px rgba(255, 215, 0, 0.25);">
+      <div class="mission-icon">🎁🏆</div>
+      <div>
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px;">
+          <h3 class="mission-title" style="color: var(--gold-neon); font-size: 19px; margin-bottom: 0;">🎁 PREMIACIÓN A DOMICILIO: DÍA 27 DE CADA MES</h3>
+          <span style="background: var(--gold-neon); color: #000; font-family: var(--font-head); font-size: 11px; font-weight: 900; padding: 3px 10px; border-radius: 12px; text-transform: uppercase;">🚚 ENVÍO DIRECTO A TU CASA</span>
+        </div>
+        <p class="mission-desc" style="color: var(--text-main); font-size: 14px; line-height: 1.6;">
+          <strong>¡TODOS LOS DÍAS 27 DE CADA MES SE PREMIA AL PELEADOR RANKING #1!</strong> El usuario que obtenga el máximo puntaje de batallas (AP) de su segmento al día 27 ganará un <strong>Premio Exclusivo Oficial de Aura</strong> que será enviado <strong>directamente al domicilio del ganador</strong>. ¡Compite en tus batallas desde casa, suma puntos y corona tu ranking!
+        </p>
+      </div>
+    </div>
+
+    <!-- BANNER DE DIFUSIÓN Y COMPARTIR EN WHATSAPP -->
+    <div class="mission-banner-card" style="border: 2px solid #25D366; background: linear-gradient(135deg, rgba(37, 211, 102, 0.15), rgba(18, 22, 36, 0.95)); box-shadow: 0 0 25px rgba(37, 211, 102, 0.25); margin-bottom: 25px;">
+      <div class="mission-icon" style="font-size: 36px;">💬📲</div>
+      <div style="flex: 1;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h3 class="mission-title" style="color: #25D366; font-size: 18px; margin-bottom: 4px;">🚀 ¡DESAFÍA A TUS AMIGOS EN WHATSAPP!</h3>
+            <p style="color: var(--text-main); font-size: 13.5px; margin: 0; line-height: 1.5;">
+              Comparte la invitación a la plataforma en tu WhatsApp con 1 clic. Desafía a chicos de tu misma edad de todo Chile a competir online.
+            </p>
+          </div>
+          <button class="btn-cyber" id="shareWhatsAppBtn" style="background: linear-gradient(135deg, #25D366, #128C7E); border: 1px solid #25D366; color: #ffffff; font-weight: 900; padding: 10px 20px; font-size: 13px; cursor: pointer; box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);">
+            📲 COMPARTIR EN WHATSAPP
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BANNER DE CRECIMIENTO VIRAL: REFERIDOS Y NOTIFICACIONES PUSH -->
+    <div class="mission-banner-card" style="border: 2px solid var(--magenta-neon); background: linear-gradient(135deg, rgba(255, 0, 122, 0.12), rgba(18, 22, 36, 0.95)); box-shadow: 0 0 25px rgba(255, 0, 122, 0.2); margin-bottom: 25px;">
+      <div class="mission-icon" style="font-size: 36px;">🎁🔔</div>
+      <div style="flex: 1;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h3 class="mission-title" style="color: var(--magenta-neon); font-size: 18px; margin-bottom: 4px;">🎁 GANA +100 AP POR CADA AMIGO QUE SE REGISTRE</h3>
+            <p style="color: var(--text-main); font-size: 13.5px; margin: 0; line-height: 1.5;">
+              Copia tu enlace único de referido o activa las notificaciones push para recibir alertas de nuevos retos y la premiación del 27.
+            </p>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn-cyber btn-cyber-magenta" id="copyReferralLinkBtn" style="padding: 10px 16px; font-size: 12.5px;">
+              🔗 COPIAR MI ENLACE (+100 AP)
+            </button>
+            <button class="btn-cyber" id="enablePushBtn" style="background: rgba(0, 243, 255, 0.15); border: 1px solid var(--cyan-neon); color: var(--cyan-neon); font-weight: 800; padding: 10px 16px; font-size: 12.5px;">
+              🔔 ACTIVAR ALERTAS PUSH
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BANNER SELLO SAFEKIDS CHILE & PORTAL PARA PADRES Y APODERADOS -->
+    <div class="mission-banner-card" style="border: 2px solid var(--green-safe); background: linear-gradient(135deg, rgba(0, 255, 136, 0.12), rgba(18, 22, 36, 0.95)); box-shadow: 0 0 25px rgba(0, 255, 136, 0.2); margin-bottom: 25px;">
+      <div class="mission-icon" style="font-size: 36px;">🛡️👨‍👩‍👧</div>
+      <div style="flex: 1;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h3 class="mission-title" style="color: var(--green-safe); font-size: 18px; margin-bottom: 4px;">🛡️ ESPACIO SEGURO CERTIFICADO SAFEKIDS CHILE (LEY N° 21.430)</h3>
+            <p style="color: var(--text-main); font-size: 13.5px; margin: 0; line-height: 1.5;">
+              Entorno 100% moderado por IA en tiempo real, categorías estrictas por edad y tolerancia cero al ciberacoso.
+            </p>
+          </div>
+          <button class="btn-cyber" id="openParentsPortalBtn" style="background: rgba(0, 255, 136, 0.15); border: 1.5px solid var(--green-safe); color: var(--green-safe); font-weight: 800; padding: 10px 18px; font-size: 12.5px;">
+            👨‍👩‍👧 PORTAL PARA PADRES Y APODERADOS
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MÓDULO BATTLE PASS DE AURA & MARCOS SKINS NEÓN -->
+    <div class="mission-banner-card" style="border: 2px solid var(--cyan-neon); background: rgba(14, 18, 30, 0.95); box-shadow: 0 0 25px rgba(0, 243, 255, 0.2); margin-bottom: 25px; display: block; padding: 20px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 28px;">🎟️</span>
+          <div>
+            <h3 style="font-family: var(--font-head); color: var(--cyan-neon); font-size: 18px; margin: 0;">BATTLE PASS DE AURA: TEMPORADA MES EN CURSO</h3>
+            <small style="color: var(--text-muted); font-size: 12px;">Nivel Actual: <strong id="bpLevelText" style="color: var(--gold-neon);">NIVEL 1</strong> | XP: <span id="bpXpText">0 / 500 XP</span></small>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px;" id="bpSkinsSelector">
+          <span style="font-size: 11px; color: var(--text-muted); align-self: center; font-weight: 700;">SKIN DE MARCO:</span>
+          <button class="btn-cyber bp-skin-btn active" data-skin="skin-cyan" style="padding: 4px 10px; font-size: 11px; border-color: var(--cyan-neon);">Rayo Cyan</button>
+          <button class="btn-cyber bp-skin-btn" data-skin="skin-gold" style="padding: 4px 10px; font-size: 11px; border-color: var(--gold-neon);">Fuego Dorado</button>
+          <button class="btn-cyber bp-skin-btn" data-skin="skin-magenta" style="padding: 4px 10px; font-size: 11px; border-color: var(--magenta-neon);">Magia Neón</button>
+        </div>
+      </div>
+
+      <!-- BARRA DE XP DE BATTLE PASS -->
+      <div class="aura-bar-bg" style="height: 14px; margin-bottom: 15px; border-radius: 8px;">
+        <div class="aura-bar-fill" id="bpXpBarFill" style="width: 15%; background: linear-gradient(90deg, var(--cyan-neon), var(--gold-neon)); transition: width 0.5s ease;"></div>
+      </div>
+
+      <!-- MISIONES DIARIAS -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;">
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(0, 243, 255, 0.2); padding: 10px 12px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <div style="font-size: 12px; font-weight: 700; color: #fff;">🥊 Gana 1 batalla vs Bot Digital</div>
+            <small style="color: var(--green-safe); font-weight: 700;">Recompensa: +100 XP</small>
+          </div>
+          <button class="btn-cyber claim-mission-btn" data-xp="100" style="padding: 4px 10px; font-size: 11px;">RECLAMAR</button>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 215, 0, 0.2); padding: 10px 12px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <div style="font-size: 12px; font-weight: 700; color: #fff;">⭐ Logra >8.5 pts de Kai-Ro</div>
+            <small style="color: var(--gold-neon); font-weight: 700;">Recompensa: +150 XP</small>
+          </div>
+          <button class="btn-cyber claim-mission-btn" data-xp="150" style="padding: 4px 10px; font-size: 11px;">RECLAMAR</button>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 0, 122, 0.2); padding: 10px 12px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <div style="font-size: 12px; font-weight: 700; color: #fff;">📲 Comparte tu enlace de referido</div>
+            <small style="color: var(--magenta-neon); font-weight: 700;">Recompensa: +200 XP</small>
+          </div>
+          <button class="btn-cyber claim-mission-btn" data-xp="200" style="padding: 4px 10px; font-size: 11px;">RECLAMAR</button>
+        </div>
+      </div>
+    </div>
+    <section class="tab-content active" id="arenaTab">
+      <div class="arena-header">
+        <div style="display: inline-block; background: rgba(0, 243, 255, 0.1); border: 1px solid var(--cyan-neon); padding: 4px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; color: var(--cyan-neon); font-family: var(--font-head); margin-bottom: 10px;">
+          🏠 HOME PRINCIPAL
+        </div>
+        <h2 class="arena-title">⚡ ARENA DIGITAL DE COMBATE 1v1 ⚡</h2>
+        <p class="arena-subtitle">Demuestra tu aura en un video de máximo 15 segundos. Los 3 Jurados Digitales calificarán tu combate.</p>
+      </div>
+
+      <!-- FORMATO DE ACUERDO DE COMBATE (3, 5 O 7 VIDEOS DE MÁX 15S) -->
+      <div class="battle-format-selector-bar">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <label class="form-label" style="margin-bottom: 0; color: var(--gold-neon); font-size: 14px;">🥊 ACUERDO DE COMBATE:</label>
+          <select id="battleFormatSelect" class="form-control" style="width: auto; padding: 6px 14px; font-weight: 700; border-color: var(--gold-neon); background: rgba(10, 12, 20, 0.9);">
+            <option value="3" selected>1ª Batalla: 3 Videos por Peleador (Inicial)</option>
+            <option value="5">2ª Batalla: 5 Videos por Peleador (Avanzada)</option>
+            <option value="7">3ª Batalla: 7 Videos por Peleador (Gran Final Maestro)</option>
+          </select>
+        </div>
+
+        <div class="round-tracker-badge" id="roundTrackerBadge">
+          RONDA DE VIDEOS: <strong style="color: var(--cyan-neon);" id="roundNumberText">VIDEO 1 DE 3</strong> (Máx 15s cada uno, sin mínimo)
+        </div>
+      </div>
+
+      <!-- CARRETE VISUAL DE RONDAS DE VIDEOS -->
+      <div class="rounds-reel-card" id="roundsReelContainer">
+        <!-- Carga dinámicamente indicadores de cada video enviados -->
+      </div>
+
+      <!-- ESCENARIO DE PELEA RETRO-FUTURISTA -->
+      <div class="battle-stage-card">
+        <!-- HUD DE PELEADORES -->
+        <div class="stage-top-bar">
+          <div class="fighter-hud p1">
+            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=AuraFighter1" alt="Jugador 1" class="fighter-avatar-hud" id="hudP1Avatar">
+            <div class="fighter-info">
+              <div class="fighter-name" id="hudP1Name">AuraMaster_CL (Tú)</div>
+              <div class="aura-bar-bg">
+                <div class="aura-bar-fill" id="p1AuraBar" style="width: 100%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vs-badge-center">VS</div>
+
+          <div class="fighter-hud p2">
+            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=RivalCyber" alt="Jugador 2" class="fighter-avatar-hud" id="hudP2Avatar">
+            <div class="fighter-info">
+              <div class="fighter-name" id="hudP2Name">CyberWarrior_Stgo</div>
+              <div class="aura-bar-bg">
+                <div class="aura-bar-fill" id="p2AuraBar" style="width: 100%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEWPORT DE VIDEOS PARALELOS -->
+        <div class="stage-arena-viewport">
+          <div class="stage-overlay-grid"></div>
+          
+          <div class="videos-duel-container">
+            <!-- VIDEO JUGADOR 1 -->
+            <div class="video-box-card">
+              <span class="timer-countdown-badge" id="video1Timer">15s MAX</span>
+              <video id="player1Video" class="video-element" autoplay playsinline muted loop poster="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=400&auto=format&fit=crop"></video>
+              <div style="margin-top: 6px; font-weight: 700; font-size: 13px;" id="p1VideoStatus">Tu Ataque de Aura desde Casa</div>
+            </div>
+
+            <!-- VIDEO JUGADOR 2 -->
+            <div class="video-box-card p2-card">
+              <span class="timer-countdown-badge" id="video2Timer">15s MAX</span>
+              <video id="player2Video" class="video-element" autoplay playsinline muted loop poster="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=400&auto=format&fit=crop"></video>
+              <div style="margin-top: 6px; font-weight: 700; font-size: 13px;" id="p2VideoStatus">Respuesta del Rival de tu Edad</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BANNER ESCÁNER IA DE SEGURIDAD EN TIEMPO REAL (LEY N° 21.430) -->
+        <div class="ai-safety-scanner-banner" style="background: rgba(0, 255, 136, 0.08); border: 1px solid var(--green-safe); border-radius: 8px; padding: 8px 14px; margin-bottom: 12px; font-size: 12px; color: var(--green-safe); display: flex; align-items: center; justify-content: center; gap: 8px;">
+          🛡️ <span><strong>AURA-GUARDIAN AI:</strong> Escáner visual en vivo activo. Detección instantánea de contenido inapropiado, partes íntimas o sustancias/objetos ilegales con censura e inhabilitación inmediata.</span>
+        </div>
+
+        <!-- BANNER DE TURNO SECUENCIAL DE CÁMARA EN VIVO -->
+        <div class="turn-status-banner" id="turnStatusBanner" style="background: rgba(0, 243, 255, 0.12); border: 1px solid var(--cyan-neon); border-radius: 10px; padding: 10px 16px; margin-bottom: 15px; text-align: center;">
+          <div style="font-family: var(--font-head); font-size: 13px; color: var(--gold-neon);" id="turnBadgeText">
+            🔴 TURNO 1 EN VIVO: Presiona "📷 1. GRABAR EN VIVO (PELEADOR 1 - TÚ)" para capturar tus 15s en el minuto.
+          </div>
+        </div>
+
+        <!-- BARRA DE REACCIONES Y EMOTES EN VIVO -->
+        <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; background: rgba(0, 0, 0, 0.6); padding: 8px 16px; border-radius: 30px; border: 1px solid var(--border-neon); width: fit-content; margin-left: auto; margin-right: auto; flex-wrap: wrap;">
+          <span style="font-size: 11px; color: var(--gold-neon); font-weight: 800; font-family: var(--font-head);">REACCIONES EN VIVO:</span>
+          <button class="btn-cyber live-emote-btn" data-emoji="🔥" style="padding: 4px 12px; font-size: 13px; background: rgba(255, 85, 0, 0.2); border-color: #ff5500;">🔥 FIRE</button>
+          <button class="btn-cyber live-emote-btn" data-emoji="⚡" style="padding: 4px 12px; font-size: 13px; background: rgba(0, 243, 255, 0.2); border-color: var(--cyan-neon);">⚡ RAYO</button>
+          <button class="btn-cyber live-emote-btn" data-emoji="👑" style="padding: 4px 12px; font-size: 13px; background: rgba(255, 215, 0, 0.2); border-color: var(--gold-neon);">👑 KING</button>
+          <button class="btn-cyber live-emote-btn" data-emoji="🛡️" style="padding: 4px 12px; font-size: 13px; background: rgba(0, 255, 136, 0.2); border-color: var(--green-safe);">🛡️ AURA</button>
+        </div>
+
+        <!-- CONTROLES Y ACCIONES DE COMBATE SECUENCIAL EN VIVO -->
+        <div class="arena-actions-bar">
+          <button class="btn-cyber btn-cyber-gold" id="recordP1CamBtn">📷 1. GRABAR EN VIVO (PELEADOR 1 - TÚ)</button>
+          <button class="btn-cyber btn-cyber-magenta" id="recordP2CamBtn" disabled style="opacity: 0.4; cursor: not-allowed;">📷 2. GRABAR EN VIVO (PELEADOR 2 - RIVAL)</button>
+          <button class="btn-cyber" id="simBattleBtn">🤖 SIMULAR COMBATE IA</button>
+          <button class="btn-cyber" id="exportSocialClipBtn" style="background: rgba(255, 0, 122, 0.15); border: 1px solid var(--magenta-neon); color: var(--magenta-neon); font-weight: 800;">🚀 EXPORTAR A TIKTOK / REELS</button>
+        </div>
+      </div>
+
+      <!-- SECCIÓN DE LOS 3 JURADOS DIGITALES -->
+      <div class="judges-section">
+        <h3 class="judges-title">👑 PANEL DE 3 JURADOS DIGITALES DE AURA</h3>
+        
+        <div class="judges-grid">
+          <!-- JUEZ 1: KAI-RO -->
+          <div class="judge-card kai-ro">
+            <div class="judge-avatar-wrapper">
+              <img src="https://api.dicebear.com/7.x/bottts/svg?seed=KaiRoJudge" alt="Kai-Ro" class="judge-img">
+            </div>
+            <div class="judge-name">KAI-RO</div>
+            <div class="judge-role">El Maestro del Estilo (Techno-Samurai)</div>
+            <div class="judge-verdict-box" id="verdictKaiRo">"Esperando el combate para evaluar la fluidez y postura de aura."</div>
+            <div class="judge-score-badge" id="scoreKaiRo">SCORE: -- / 10</div>
+          </div>
+
+          <!-- JUEZ 2: AURA-NEO -->
+          <div class="judge-card aura-neo">
+            <div class="judge-avatar-wrapper">
+              <img src="https://api.dicebear.com/7.x/bottts/svg?seed=AuraNeoJudge" alt="Aura-Neo" class="judge-img">
+            </div>
+            <div class="judge-name">AURA-NEO</div>
+            <div class="judge-role">Centinela Cyber-Pop (Star Warrior)</div>
+            <div class="judge-verdict-box" id="verdictAuraNeo">"¡Siente la energía del escenario! Queremos ver brillo cósmico."</div>
+            <div class="judge-score-badge" id="scoreAuraNeo">SCORE: -- / 10</div>
+          </div>
+
+          <!-- JUEZ 3: VALKYRIA-X -->
+          <div class="judge-card valkyria">
+            <div class="judge-avatar-wrapper">
+              <img src="https://api.dicebear.com/7.x/bottts/svg?seed=ValkyriaJudge" alt="Valkyria-X" class="judge-img">
+            </div>
+            <div class="judge-name">VALKYRIA-X</div>
+            <div class="judge-role">Jueza Suprema (Mech-Guardian)</div>
+            <div class="judge-verdict-box" id="verdictValkyria">"Analizaré la precisión de tiempo y la defensa contra el contraataque."</div>
+            <div class="judge-score-badge" id="scoreValkyria">SCORE: -- / 10</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: MÓDULO DE ENTRENAMIENTO 1v1 VS BOT DIGITAL (1 ROUND DE 15S) -->
+    <section class="tab-content" id="trainingTab">
+      <div class="transactions-card">
+        <div class="module-header-nav">
+          <button class="btn-cyber btn-cyber-home btn-go-home">🏠 VOLVER AL HOME PRINCIPAL</button>
+          <span class="module-badge-title">📍 MÓDULO DE ENTRENAMIENTO DIGITAL (1 ROUND 15S)</span>
+        </div>
+        <div style="text-align: center; margin-bottom: 25px;">
+          <h2 style="font-family: var(--font-head); color: var(--gold-neon); font-size: 24px; text-transform: uppercase;">🤖 DOJO DE ENTRENAMIENTO DIGITAL 1v1 (VS IA BOT)</h2>
+          <p style="color: var(--text-muted); font-size: 15px;">Practica una batalla real de 1 Round (15 segundos) enviando tu video en vivo o simulación frente a un Bot Digital con juzgamiento en tiempo real por los 3 Jurados AI.</p>
+        </div>
+
+        <!-- SELECCIÓN DE BOT DE ENTRENAMIENTO -->
+        <div style="margin-bottom: 25px;">
+          <h3 style="font-family: var(--font-head); color: var(--cyan-neon); font-size: 16px; margin-bottom: 12px;">1. SELECCIONA TU RIVAL DIGITAL DE PRÁCTICA:</h3>
+          <div class="moves-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+            
+            <div class="move-card training-bot-card active" data-bot="AuraBot-Alpha" style="border-color: var(--cyan-neon); cursor: pointer;">
+              <div class="move-header">
+                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=AuraBotAlpha" alt="AuraBot-Alpha" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--cyan-neon);">
+                <div>
+                  <h4 class="move-title">AuraBot-Alpha</h4>
+                  <div class="move-cat">Nivel: Principiante (Ataques Básicos)</div>
+                </div>
+              </div>
+              <p class="move-desc">Ideal para tus primeros 15s de práctica. Responde con movimientos suaves de aura.</p>
+              <div style="font-size: 12px; color: var(--green-safe); font-weight: 700;">Recompensa Práctica: +30 AP</div>
+            </div>
+
+            <div class="move-card training-bot-card" data-bot="CyberBot-Zero" style="cursor: pointer;">
+              <div class="move-header">
+                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=CyberBotZero" alt="CyberBot-Zero" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--magenta-neon);">
+                <div>
+                  <h4 class="move-title">CyberBot-Zero</h4>
+                  <div class="move-cat">Nivel: Intermedio (Escudo & Contra)</div>
+                </div>
+              </div>
+              <p class="move-desc">Responde con velocidad y escudos neón. Pon a prueba tus combos creados.</p>
+              <div style="font-size: 12px; color: var(--green-safe); font-weight: 700;">Recompensa Práctica: +50 AP</div>
+            </div>
+
+            <div class="move-card training-bot-card" data-bot="OmegaBot-X" style="cursor: pointer;">
+              <div class="move-header">
+                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=OmegaBotX" alt="OmegaBot-X" style="width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--gold-neon);">
+                <div>
+                  <h4 class="move-title">OmegaBot-X</h4>
+                  <div class="move-cat">Nivel: Legendario (Remates Cósmicos)</div>
+                </div>
+              </div>
+              <p class="move-desc">IA avanzada de sparring que evalúa la velocidad máxima y tu precisión de remate.</p>
+              <div style="font-size: 12px; color: var(--green-safe); font-weight: 700;">Recompensa Práctica: +80 AP</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- STAGE DE COMBATE DE ENTRENAMIENTO 1v1 -->
+        <div class="battle-stage-card" style="border-color: var(--gold-neon); background: rgba(14, 18, 30, 0.95); border-radius: 16px; padding: 20px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);">
+          <!-- HUD SUPERIOR -->
+          <div class="stage-top-bar" style="margin-bottom: 20px;">
+            <div class="fighter-hud p1">
+              <img src="https://api.dicebear.com/7.x/bottts/svg?seed=AuraFighter1" class="fighter-avatar-hud" id="trainingP1Avatar">
+              <div class="fighter-info">
+                <div class="fighter-name" id="trainingP1Name">AuraMaster_CL (Tú en Práctica)</div>
+                <div class="aura-bar-bg"><div class="aura-bar-fill" id="trainingP1Health" style="width: 100%;"></div></div>
+              </div>
+            </div>
+
+            <div style="text-align: center;">
+              <div class="vs-badge-center" style="background: linear-gradient(135deg, var(--gold-neon), #ff9900); color: #000; font-weight: 900; padding: 6px 16px; border-radius: 20px;">1 ROUND 15S</div>
+              <small style="display: block; color: var(--cyan-neon); font-size: 11px; margin-top: 4px; font-weight: 700;" id="trainingTimerBadge">15s MAX</small>
+            </div>
+
+            <div class="fighter-hud p2">
+              <img src="https://api.dicebear.com/7.x/bottts/svg?seed=AuraBotAlpha" class="fighter-avatar-hud" id="trainingBotAvatar">
+              <div class="fighter-info">
+                <div class="fighter-name" id="trainingBotName">AuraBot-Alpha (Rival Digital)</div>
+                <div class="aura-bar-bg"><div class="aura-bar-fill" id="trainingBotHealth" style="width: 100%; background: linear-gradient(90deg, #ffd700, #ff5500);"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DUAL STAGE DE VIDEOS 1v1 DE ENTRENAMIENTO -->
+          <div class="videos-duel-container" style="margin-bottom: 20px;">
+            <!-- VIDEO P1 (USUARIO EN VIVO) -->
+            <div class="video-box p1-box" style="border: 2px solid var(--cyan-neon); border-radius: 12px; overflow: hidden; background: #000; position: relative;">
+              <video id="trainingP1Video" autoplay playsinline muted style="width: 100%; height: 260px; object-fit: cover; background: #000;"></video>
+              <div class="video-badge p1-badge" style="position: absolute; top: 10px; left: 10px; background: rgba(0, 243, 255, 0.85); color: #000; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 800;" id="trainingP1Status">
+                📹 CÁMARA P1 EN VIVO (15s)
+              </div>
+            </div>
+
+            <!-- VIDEO P2 (BOT DIGITAL RESPUESTA) -->
+            <div class="video-box p2-box" style="border: 2px solid var(--gold-neon); border-radius: 12px; overflow: hidden; background: #000; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+              <div id="trainingBotVisualBox" style="text-align: center; padding: 20px;">
+                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=AuraBotAlpha" id="trainingBotVisualAvatar" style="width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--gold-neon); box-shadow: var(--shadow-neon-gold); transition: transform 0.3s ease;">
+                <div style="font-family: var(--font-head); color: var(--gold-neon); font-size: 14px; margin-top: 10px;" id="trainingBotVisualName">AuraBot-Alpha AI</div>
+                <div style="font-size: 12px; color: var(--text-muted);" id="trainingBotActionText">Esperando tu ráfaga de 15 segundos...</div>
+              </div>
+              <div class="video-badge p2-badge" style="position: absolute; top: 10px; right: 10px; background: rgba(255, 215, 0, 0.85); color: #000; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 800;" id="trainingBotStatus">
+                🤖 RIVAL DIGITAL AI
+              </div>
+            </div>
+          </div>
+
+          <!-- BOTONES DE ACCIÓN PARA DISPUTAR 1 ROUND -->
+          <div class="arena-actions-bar" style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+            <button class="btn-cyber btn-cyber-gold" id="recordTrainingCamBtn" style="padding: 12px 24px; font-size: 14px;">
+              📷 GRABAR VIDEO 15S Y DISPUTAR ROUND
+            </button>
+            <button class="btn-cyber" id="simTrainingBattleBtn" style="padding: 12px 24px; font-size: 14px;">
+              🤖 SIMULAR COMBATE DE ENTRENAMIENTO IA
+            </button>
+          </div>
+        </div>
+
+        <!-- MÓDULO DE EVALUACIÓN DE LOS 3 JURADOS DIGITALES DE ENTRENAMIENTO -->
+        <div style="margin-top: 25px;">
+          <h3 style="font-family: var(--font-head); color: var(--cyan-neon); font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">
+            ⚖️ CALIFICACIÓN DE LOS 3 JURADOS DIGITALES (1 ROUND 15S)
+          </h3>
+
+          <div class="judges-section" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; margin-bottom: 20px;">
+            <!-- JURADO 1: KAI-RO -->
+            <div class="judge-card" style="border: 1px solid var(--cyan-neon); background: rgba(14, 18, 30, 0.9); padding: 16px; border-radius: 12px;">
+              <div class="judge-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                <span class="judge-avatar" style="font-size: 26px;">🤖</span>
+                <div>
+                  <h4 class="judge-name" style="color: var(--cyan-neon); font-family: var(--font-head); font-size: 14px; margin: 0;">Kai-Ro (Técnica & Postura)</h4>
+                  <small style="color: var(--text-muted); font-size: 11px;">Especialista en Fluidez y Ritmo</small>
+                </div>
+              </div>
+              <p class="judge-verdict" id="trainingVerdictKaiRo" style="font-size: 13px; color: var(--text-main); line-height: 1.5; min-height: 48px;">
+                Selecciona tu rival digital y presiona "Grabar Video 15s" para recibir tu veredicto.
+              </p>
+              <div class="judge-score" id="trainingScoreKaiRo" style="font-family: var(--font-head); color: var(--cyan-neon); font-size: 15px; font-weight: 800; text-align: right; margin-top: 6px;">
+                SCORE: 0.0 / 10
+              </div>
+            </div>
+
+            <!-- JURADO 2: AURA-NEO -->
+            <div class="judge-card" style="border: 1px solid var(--gold-neon); background: rgba(14, 18, 30, 0.9); padding: 16px; border-radius: 12px;">
+              <div class="judge-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                <span class="judge-avatar" style="font-size: 26px;">✨</span>
+                <div>
+                  <h4 class="judge-name" style="color: var(--gold-neon); font-family: var(--font-head); font-size: 14px; margin: 0;">Aura-Neo (Energía & Brillo)</h4>
+                  <small style="color: var(--text-muted); font-size: 11px;">Evaluador de Impacto Visual</small>
+                </div>
+              </div>
+              <p class="judge-verdict" id="trainingVerdictAuraNeo" style="font-size: 13px; color: var(--text-main); line-height: 1.5; min-height: 48px;">
+                Despliega tus mejores movimientos de 15 segundos para impresionar al jurado.
+              </p>
+              <div class="judge-score" id="trainingScoreAuraNeo" style="font-family: var(--font-head); color: var(--gold-neon); font-size: 15px; font-weight: 800; text-align: right; margin-top: 6px;">
+                SCORE: 0.0 / 10
+              </div>
+            </div>
+
+            <!-- JURADO 3: VALKYRIA-X -->
+            <div class="judge-card" style="border: 1px solid var(--magenta-neon); background: rgba(14, 18, 30, 0.9); padding: 16px; border-radius: 12px;">
+              <div class="judge-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                <span class="judge-avatar" style="font-size: 26px;">⚔️</span>
+                <div>
+                  <h4 class="judge-name" style="color: var(--magenta-neon); font-family: var(--font-head); font-size: 14px; margin: 0;">Valkyria-X (Defensa & Remate)</h4>
+                  <small style="color: var(--text-muted); font-size: 11px;">Jueza de Precisión y Cierre</small>
+                </div>
+              </div>
+              <p class="judge-verdict" id="trainingVerdictValkyria" style="font-size: 13px; color: var(--text-main); line-height: 1.5; min-height: 48px;">
+                El remate final de tu rutina determinará la victoria de práctica.
+              </p>
+              <div class="judge-score" id="trainingScoreValkyria" style="font-family: var(--font-head); color: var(--magenta-neon); font-size: 15px; font-weight: 800; text-align: right; margin-top: 6px;">
+                SCORE: 0.0 / 10
+              </div>
+            </div>
+          </div>
+
+          <!-- CUADRO RESUMEN DE FEEDBACK Y RECOMPENSA -->
+          <div class="legal-notice-box" style="background: rgba(255, 215, 0, 0.05); border-color: var(--gold-neon);">
+            <strong>🎯 Resultado de la Batalla de Entrenamiento:</strong>
+            <p id="trainingFeedbackText" style="margin-top: 5px; color: var(--text-main); line-height: 1.6;">
+              Haz clic en "Grabar Video 15s" para activar tu cámara en vivo y medir tu aura frente al Bot Digital en un combate de 1 Round.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 3: GUÍA DE MOVIMIENTOS & PUNTAJES DE AURA -->
+    <section class="tab-content" id="movesTab">
+      <div class="transactions-card">
+        <div class="module-header-nav">
+          <button class="btn-cyber btn-cyber-home btn-go-home">🏠 VOLVER AL HOME PRINCIPAL</button>
+          <span class="module-badge-title" style="color: var(--gold-neon);">📍 MÓDULO GUÍA DE PASOS & PUNTAJES</span>
+        </div>
+        <div style="text-align: center; margin-bottom: 25px;">
+          <h2 style="font-family: var(--font-head); color: var(--gold-neon); font-size: 24px; text-transform: uppercase;">📜 GUÍA DE MOVIMIENTOS PRINCIPALES DE AURA & PUNTAJES</h2>
+          <p style="color: var(--text-muted); font-size: 15px;">Ejecuta estos pasos en tu video de 15 segundos para impresionar a los 3 Jurados Digitales y obtener el máximo puntaje de Aura (AP).</p>
+        </div>
+
+        <div class="moves-grid">
+          <!-- CARD MOVIMIENTO 1 -->
+          <div class="move-card">
+            <div class="move-header">
+              <span class="move-icon">🐉</span>
+              <div>
+                <h4 class="move-title">1. Dragón de Aura Final (Remate Mítico)</h4>
+                <div class="move-cat">Categoría: Remate de Alto Impacto</div>
+              </div>
+            </div>
+
+            <!-- VIDEO DEMOSTRATIVO DE EJEMPLO DE ATAQUE DE AURA -->
+            <div class="move-demo-box">
+              <video class="move-demo-video" autoplay loop muted playsinline preload="auto">
+                <source src="videoplayback%20(10).mp4#t=0,15" type="video/mp4">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-laser-lights-in-a-dark-room-41551-large.mp4" type="video/mp4">
+              </video>
+              <div class="move-demo-badge">▶️ DEMO DE EJEMPLO EN VIVO (15s)</div>
+            </div>
+
+            <p class="move-desc">Cruza los brazos frente al pecho y despliégalos velozmente hacia los lados simulando una ráfaga cósmica al segundo 12 del video.</p>
+            <div class="move-stats">
+              <div class="move-stat-item">
+                <span class="stat-lbl">Jurados:</span>
+                <strong style="color: var(--gold-neon); font-family: var(--font-head);">+2.8 Pts</strong>
+              </div>
+              <div class="move-stat-item">
+                <span class="stat-lbl">Bono Aura:</span>
+                <strong style="color: var(--green-safe); font-family: var(--font-head);">+100 AP Extra</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD MOVIMIENTO 2 -->
+          <div class="move-card">
+            <div class="move-header">
+              <span class="move-icon">🗡️</span>
+              <div>
+                <h4 class="move-title">2. Corte Cyber-Samurai (Técnica Kai-Ro)</h4>
+                <div class="move-cat">Categoría: Ataque Rápido</div>
+              </div>
+            </div>
+
+            <!-- VIDEO DEMOSTRATIVO DE EJEMPLO DE ATAQUE DE AURA -->
+            <div class="move-demo-box">
+              <video class="move-demo-video" autoplay loop muted playsinline preload="auto">
+                <source src="videoplayback%20(10).mp4#t=5,20" type="video/mp4">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-neon-lights-of-a-futuristic-tunnel-41566-large.mp4" type="video/mp4">
+              </video>
+              <div class="move-demo-badge">▶️ DEMO DE EJEMPLO EN VIVO (15s)</div>
+            </div>
+
+            <p class="move-desc">Realiza un trazado diagonal con la mano simulando desenfundar un sable de energía neón. Evaluado con máxima precisión por Kai-Ro.</p>
+            <div class="move-stats">
+              <div class="move-stat-item">
+                <span class="stat-lbl">Jurados:</span>
+                <strong style="color: var(--cyan-neon); font-family: var(--font-head);">+2.5 Pts</strong>
+              </div>
+              <div class="move-stat-item">
+                <span class="stat-lbl">Bono Aura:</span>
+                <strong style="color: var(--green-safe); font-family: var(--font-head);">+75 AP Extra</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD MOVIMIENTO 3 -->
+          <div class="move-card">
+            <div class="move-header">
+              <span class="move-icon">✨</span>
+              <div>
+                <h4 class="move-title">3. Danza Cyber-Pop & Brillo Star (Técnica Aura-Neo)</h4>
+                <div class="move-cat">Categoría: Carisma & Estilo</div>
+              </div>
+            </div>
+
+            <!-- VIDEO DEMOSTRATIVO DE EJEMPLO DE ATAQUE DE AURA -->
+            <div class="move-demo-box">
+              <video class="move-demo-video" autoplay loop muted playsinline preload="auto">
+                <source src="videoplayback%20(10).mp4#t=10,25" type="video/mp4">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-party-lights-in-a-disco-41553-large.mp4" type="video/mp4">
+              </video>
+              <div class="move-demo-badge">▶️ DEMO DE EJEMPLO EN VIVO (15s)</div>
+            </div>
+
+            <p class="move-desc">Giro dinámico con chasquido de dedos proyectando destellos de luz. Otorga máxima calificación de estilo a Aura-Neo.</p>
+            <div class="move-stats">
+              <div class="move-stat-item">
+                <span class="stat-lbl">Jurados:</span>
+                <strong style="color: var(--magenta-neon); font-family: var(--font-head);">+2.3 Pts</strong>
+              </div>
+              <div class="move-stat-item">
+                <span class="stat-lbl">Bono Aura:</span>
+                <strong style="color: var(--green-safe); font-family: var(--font-head);">+60 AP Extra</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD MOVIMIENTO 4 -->
+          <div class="move-card">
+            <div class="move-header">
+              <span class="move-icon">🛡️</span>
+              <div>
+                <h4 class="move-title">4. Escudo Neón Impenetrable (Técnica Valkyria-X)</h4>
+                <div class="move-cat">Categoría: Defensa Absoluta</div>
+              </div>
+            </div>
+
+            <!-- VIDEO DEMOSTRATIVO DE EJEMPLO DE ATAQUE DE AURA -->
+            <div class="move-demo-box">
+              <video class="move-demo-video" autoplay loop muted playsinline preload="auto">
+                <source src="videoplayback%20(10).mp4#t=15,30" type="video/mp4">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-laser-lights-background-41561-large.mp4" type="video/mp4">
+              </video>
+              <div class="move-demo-badge">▶️ DEMO DE EJEMPLO EN VIVO (15s)</div>
+            </div>
+
+            <p class="move-desc">Extiende la palma de la mano hacia adelante formando una barrera protectora invisible al recibir el ataque del rival.</p>
+            <div class="move-stats">
+              <div class="move-stat-item">
+                <span class="stat-lbl">Jurados:</span>
+                <strong style="color: var(--gold-neon); font-family: var(--font-head);">+2.4 Pts</strong>
+              </div>
+              <div class="move-stat-item">
+                <span class="stat-lbl">Bono Aura:</span>
+                <strong style="color: var(--green-safe); font-family: var(--font-head);">+70 AP Extra</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD MOVIMIENTO 5 -->
+          <div class="move-card">
+            <div class="move-header">
+              <span class="move-icon">⚡</span>
+              <div>
+                <h4 class="move-title">5. Ráfaga de Onda de Choque Sónica</h4>
+                <div class="move-cat">Categoría: Contraataque Instantáneo</div>
+              </div>
+            </div>
+
+            <!-- VIDEO DEMOSTRATIVO DE EJEMPLO DE ATAQUE DE AURA -->
+            <div class="move-demo-box">
+              <video class="move-demo-video" autoplay loop muted playsinline preload="auto">
+                <source src="videoplayback%20(10).mp4#t=20,35" type="video/mp4">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-light-bursts-in-a-dark-background-41557-large.mp4" type="video/mp4">
+              </video>
+              <div class="move-demo-badge">▶️ DEMO DE EJEMPLO EN VIVO (15s)</div>
+            </div>
+
+            <p class="move-desc">Doble impacto de palmas hacia la cámara generando una vibración de aura. Recomendado en los primeros 5 segundos del video.</p>
+            <div class="move-stats">
+              <div class="move-stat-item">
+                <span class="stat-lbl">Jurados:</span>
+                <strong style="color: var(--cyan-neon); font-family: var(--font-head);">+2.2 Pts</strong>
+              </div>
+              <div class="move-stat-item">
+                <span class="stat-lbl">Bono Aura:</span>
+                <strong style="color: var(--green-safe); font-family: var(--font-head);">+50 AP Extra</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD MOVIMIENTO 6 -->
+          <div class="move-card">
+            <div class="move-header">
+              <span class="move-icon">🌀</span>
+              <div>
+                <h4 class="move-title">6. Desplazamiento de Sombra (Esquiva Cyber)</h4>
+                <div class="move-cat">Categoría: Agilidad</div>
+              </div>
+            </div>
+
+            <!-- VIDEO DEMOSTRATIVO DE EJEMPLO DE ATAQUE DE AURA -->
+            <div class="move-demo-box">
+              <video class="move-demo-video" autoplay loop muted playsinline preload="auto">
+                <source src="videoplayback%20(10).mp4#t=25,40" type="video/mp4">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-blinking-neon-lights-in-a-tunnel-41564-large.mp4" type="video/mp4">
+              </video>
+              <div class="move-demo-badge">▶️ DEMO DE EJEMPLO EN VIVO (15s)</div>
+            </div>
+
+            <p class="move-desc">Inclinación rápida lateral con cambio de plano para esquivar la técnica del oponente y quedar listo para el remate.</p>
+            <div class="move-stats">
+              <div class="move-stat-item">
+                <span class="stat-lbl">Jurados:</span>
+                <strong style="color: var(--purple-neon); font-family: var(--font-head);">+2.0 Pts</strong>
+              </div>
+              <div class="move-stat-item">
+                <span class="stat-lbl">Bono Aura:</span>
+                <strong style="color: var(--green-safe); font-family: var(--font-head);">+45 AP Extra</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: CREACIÓN PROPIA DE PASOS Y MOVIMIENTOS -->
+    <section class="tab-content" id="customMovesTab">
+      <div class="transactions-card">
+        <div class="module-header-nav">
+          <button class="btn-cyber btn-cyber-home btn-go-home">🏠 VOLVER AL HOME PRINCIPAL</button>
+          <span class="module-badge-title">📍 MÓDULO LABORATORIO DE PASOS CREADOS</span>
+        </div>
+        <div style="text-align: center; margin-bottom: 25px;">
+          <h2 style="font-family: var(--font-head); color: var(--cyan-neon); font-size: 24px; text-transform: uppercase;">✨ LABORATORIO DE PASOS Y MOVIMIENTOS PROPIOS</h2>
+          <p style="color: var(--text-muted); font-size: 15px;">¿Inventaste un movimiento único sin nombre oficial? Regístralo aquí, dale tu propia identidad y úsalo en tus batallas de aura.</p>
+        </div>
+
+        <div class="custom-lab-layout">
+          <!-- FORMULARIO DE CREACIÓN -->
+          <div class="friends-sidebar" style="background: rgba(14, 18, 30, 0.95); border: 2px solid var(--cyan-neon);">
+            <h3 style="font-family: var(--font-head); color: var(--gold-neon); font-size: 16px; margin-bottom: 15px;">🔨 CREAR MI PASO ORIGINAL</h3>
+            
+            <form id="createCustomMoveForm">
+              <div class="form-group">
+                <label class="form-label">Nombre de tu Paso Inventado:</label>
+                <input type="text" id="customMoveName" class="form-control" placeholder="Ej: Ráfaga del Dragón de Valparaíso" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Categoría Original:</label>
+                <select id="customMoveCat" class="form-control" required>
+                  <option value="Ataque Creado">Ataque Creado por Mí</option>
+                  <option value="Defensa Original">Defensa Original</option>
+                  <option value="Danza de Aura Propia">Danza de Aura Propia</option>
+                  <option value="Remate Inventado">Remate Inventado</option>
+                  <option value="Estilo Libre Secreto">Estilo Libre Secreto</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Icono de Aura para tu Paso:</label>
+                <select id="customMoveIcon" class="form-control">
+                  <option value="🔥">🔥 Fuego de Aura</option>
+                  <option value="⚡">⚡ Relámpago Sónico</option>
+                  <option value="🌀">🌀 Vórtice Sombra</option>
+                  <option value="✨">✨ Destello Cyber-Pop</option>
+                  <option value="🐉">🐉 Dragón Legendario</option>
+                  <option value="👑">👑 Corona Suprema</option>
+                  <option value="🎭">🎭 Estilo Teatral</option>
+                  <option value="💥">💥 Impacto Cósmico</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Descripción de Cómo Hacerlo (Video 15s):</label>
+                <textarea id="customMoveDesc" class="form-control" rows="3" placeholder="Describe los movimientos de tus manos o cuerpo en el video..." required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Dificultad de Ejecución & Bono AP:</label>
+                <select id="customMoveDiff" class="form-control">
+                  <option value="Medio Cyber">+2.3 Pts Jurado (+60 AP)</option>
+                  <option value="Dificultad Legendaria" selected>+2.8 Pts Jurado (+90 AP)</option>
+                  <option value="Paso Supremo Secreto">+3.0 Pts Jurado (+120 AP)</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn-cyber btn-cyber-gold" style="width: 100%; justify-content: center; margin-top: 10px;">💾 GUARDAR MI PASO ORIGINAL</button>
+              <button type="button" class="btn-cyber btn-cyber-home btn-go-home" style="width: 100%; justify-content: center; margin-top: 8px;">🏠 VOLVER AL HOME PRINCIPAL</button>
+            </form>
+          </div>
+
+          <!-- GALERÍA DE PASOS CREADOS POR EL USUARIO -->
+          <div>
+            <h3 style="font-family: var(--font-head); color: var(--gold-neon); font-size: 18px; margin-bottom: 15px;">📜 MIS PASOS Y MOVIMIENTOS INVENTADOS</h3>
+            <div class="moves-grid" id="customMovesContainer">
+              <!-- Carga dinámicamente desde JS LocalStorage -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: BILLETERA DIGITAL DE AURA -->
+    <section class="tab-content" id="walletTab">
+      <div class="module-header-nav" style="background: rgba(18, 22, 36, 0.85); padding: 12px 20px; border-radius: 12px; border: 1px solid var(--border-neon); margin-bottom: 20px;">
+        <button class="btn-cyber btn-cyber-home btn-go-home">🏠 VOLVER AL HOME PRINCIPAL</button>
+        <span class="module-badge-title" style="color: var(--gold-neon);">📍 MÓDULO BILLETERA DIGITAL</span>
+      </div>
+      <div class="wallet-hero-card">
+        <div class="wallet-balance-info">
+          <div class="wallet-label">SALDO TOTAL DE BILLETERA DIGITAL</div>
+          <div class="wallet-amount-big">
+            ⚡ <span id="walletTotalPoints">350</span> <small style="font-size: 18px; color: var(--text-muted);">AP (Aura Points)</small>
+          </div>
+          <p style="margin-top: 8px; font-size: 14px; color: var(--text-muted);">Ganarás +150 AP por cada victoria y perderás -50 AP por derrota. ¡Puedes regalar o recibir puntos en el chat con tu segmento!</p>
+        </div>
+
+        <div>
+          <div class="aura-tier-badge" id="walletTierName">NIVEL: AURA DE ORO</div>
+        </div>
+      </div>
+
+      <div class="transactions-card">
+        <h3 style="font-family: var(--font-head); color: var(--cyan-neon); font-size: 18px; margin-bottom: 15px;">📜 HISTORIAL DE TRANSACCIONES Y BATALLAS</h3>
+        <div class="tx-list" id="txHistoryList">
+          <!-- Carga dinámicamente mediante JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: RED SOCIAL & CHAT INTERACTIVO -->
+    <section class="tab-content" id="socialTab">
+      <div class="module-header-nav" style="background: rgba(18, 22, 36, 0.85); padding: 12px 20px; border-radius: 12px; border: 1px solid var(--border-neon); margin-bottom: 20px;">
+        <button class="btn-cyber btn-cyber-home btn-go-home">🏠 VOLVER AL HOME PRINCIPAL</button>
+        <span class="module-badge-title">📍 MÓDULO RED SOCIAL & CHAT</span>
+      </div>
+
+      <!-- MÓDULO DE CREWS & CLANES DE AURA 3v3 -->
+      <div class="legal-notice-box" style="margin-bottom: 20px; background: rgba(0, 243, 255, 0.05); border-color: var(--cyan-neon);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <strong style="color: var(--cyan-neon); font-size: 15px;">🛡️ CREWS & CLANES DE AURA (EQUIPOS 3v3)</strong>
+            <p style="margin-top: 4px; color: var(--text-main); font-size: 13px;">
+              Crea tu propio Clan de 3 integrantes, dale un nombre legendario y desafía a otras Crews de Chile a batallas en equipo.
+            </p>
+          </div>
+          <button class="btn-cyber btn-cyber-magenta" id="createCrewBtn" style="padding: 8px 16px; font-size: 12px;">
+            ⚡ CREAR MI CLAN (3v3)
+          </button>
+        </div>
+      </div>
+      <div class="social-layout">
+        <!-- SIDEBAR DE AMIGOS -->
+        <aside class="friends-sidebar">
+          <div class="sidebar-title">👥 PELEADORES DE TU SEGMENTO (<span id="socialAgeTag">12-15</span>)</div>
+          <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">🛡️ Solo interactúas con chicos de tu misma edad de forma segura.</div>
+          <div class="friends-list" id="friendsListContainer">
+            <!-- Carga dinámicamente -->
+          </div>
+        </aside>
+
+        <!-- CHAT BOX PRINCIPAL -->
+        <main class="chat-main-card">
+          <div class="chat-header">
+            <div>
+              <strong id="activeChatName" style="color: var(--cyan-neon); font-size: 16px;">CyberWarrior_Stgo</strong>
+              <div style="font-size: 12px; color: var(--green-safe);">● Conectado en Santiago, Chile</div>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <button class="btn-cyber btn-cyber-gold" style="padding: 6px 12px; font-size: 12px;" id="giftPointsBtn">🎁 REGALAR AURA AP</button>
+              <button class="btn-cyber btn-cyber-magenta" style="padding: 6px 12px; font-size: 12px;" id="reportAbuseBtn">🚨 REPORTAR</button>
+            </div>
+          </div>
+
+          <div class="chat-messages-area" id="chatMessagesArea">
+            <!-- Mensajes dinámicos con editar/eliminar -->
+          </div>
+
+          <form class="chat-input-bar" id="chatForm">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Escribe un mensaje de aura pacífico (con filtro de moderación)..." autocomplete="off">
+            <button type="submit" class="btn-cyber" style="padding: 10px 18px;">ENVIAR</button>
+          </form>
+        </main>
+      </div>
+    </section>
+
+    <!-- TAB 4: RANKING CHILE -->
+    <section class="tab-content" id="rankingTab">
+      <div class="transactions-card">
+        <div class="module-header-nav">
+          <button class="btn-cyber btn-cyber-home btn-go-home">🏠 VOLVER AL HOME PRINCIPAL</button>
+          <span class="module-badge-title" style="color: var(--gold-neon);">📍 MÓDULO RANKING CHILE</span>
+        </div>
+        <!-- BANNER DE PREMIACIÓN MENSUAL A DOMICILIO DÍA 27 EN RANKING -->
+        <div class="legal-notice-box" style="margin-bottom: 20px; background: rgba(255, 215, 0, 0.08); border-color: var(--gold-neon); border-width: 2px;">
+          <strong style="color: var(--gold-neon); font-size: 15px;">🎁 PREMIO FÍSICO A DOMICILIO LOS DÍAS 27 DE CADA MES:</strong>
+          <p style="margin-top: 5px; color: var(--text-main);">
+            El usuario que se ubique en el <strong>Puesto #1 de esta tabla el día 27 de cada mes</strong> ganará el Premio Oficial de Aura, el cual será <strong>enviado por correo certificado directamente a su domicilio</strong>. ¡Sigue compitiendo en batallas de aura para liderar tu ranking!
+          </p>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+          <h3 style="font-family: var(--font-head); color: var(--gold-neon); font-size: 20px;">🏆 TABLA DE LÍDERES DE AURA (CHILE)</h3>
+          <select id="rankingAgeFilter" class="form-control" style="width: auto;">
+            <option value="8-12">Rango: 8 a 12 años (Junior)</option>
+            <option value="12-15" selected>Rango: 12 a 15 años (Teens)</option>
+            <option value="15-18">Rango: 15 a 18 años (Youth)</option>
+            <option value="18+">Rango: 18+ años (Torneo Leyendas)</option>
+          </select>
+        </div>
+
+        <!-- FILTRO POR COMUNAS DE CHILE Y BRACKET DEL TORNEO DE SÁBADO -->
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 15px; margin-bottom: 20px; align-items: center;">
+          <label style="font-weight: 700; color: var(--cyan-neon); font-size: 13px;">📍 FILTRAR POR COMUNA DE CHILE:</label>
+          <select id="rankingCommuneFilter" class="form-control" style="width: auto; min-width: 200px;">
+            <option value="todas">Todas las Comunas de Chile</option>
+            <option value="Santiago">Santiago Centro</option>
+            <option value="Maipú">Maipú</option>
+            <option value="Puente Alto">Puente Alto</option>
+            <option value="La Florida">La Florida</option>
+            <option value="Viña del Mar">Viña del Mar / Valparaíso</option>
+            <option value="Concepción">Concepción</option>
+            <option value="Antofagasta">Antofagasta</option>
+            <option value="Temuco">Temuco</option>
+            <option value="Puerto Montt">Puerto Montt</option>
+          </select>
+        </div>
+
+        <!-- ÁRBOLES DE LLAVES COPA AURA CHILE (TORNEO SÁBADO DE BRACKETS) -->
+        <div style="background: rgba(14, 18, 30, 0.95); border: 2px solid var(--gold-neon); border-radius: 12px; padding: 18px; margin-bottom: 25px;">
+          <h4 style="font-family: var(--font-head); color: var(--gold-neon); font-size: 16px; margin-bottom: 12px; text-transform: uppercase;">
+            🏆 COPA AURA CHILE (LLAVES DE ELIMINACIÓN DIRECTA DEL SÁBADO)
+          </h4>
+          <div class="moves-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px;">
+            <div style="background: rgba(0, 243, 255, 0.08); border: 1px solid var(--cyan-neon); padding: 10px; border-radius: 8px; font-size: 12px;">
+              <strong style="color: var(--cyan-neon);">Cuartos A:</strong> AuraMaster_CL vs CyberWarrior_Stgo
+              <div style="color: var(--green-safe); font-weight: 700; margin-top: 4px;">✓ Ganador: AuraMaster_CL</div>
+            </div>
+            <div style="background: rgba(0, 243, 255, 0.08); border: 1px solid var(--cyan-neon); padding: 10px; border-radius: 8px; font-size: 12px;">
+              <strong style="color: var(--cyan-neon);">Cuartos B:</strong> Valkyria_Valpo vs NeoDragon_Conce
+              <div style="color: var(--green-safe); font-weight: 700; margin-top: 4px;">✓ Ganador: NeoDragon_Conce</div>
+            </div>
+            <div style="background: rgba(255, 215, 0, 0.12); border: 1.5px solid var(--gold-neon); padding: 10px; border-radius: 8px; font-size: 12px;">
+              <strong style="color: var(--gold-neon);">👑 GRAN FINAL DE CHILE:</strong> AuraMaster_CL vs NeoDragon_Conce
+              <div style="color: var(--gold-neon); font-weight: 800; margin-top: 4px;">⚡ En combate este Sábado 18:00 hrs</div>
+            </div>
+          </div>
+        </div>
+
+        <table class="leaderboard-table">
+          <thead>
+            <tr>
+              <th>POS</th>
+              <th>COMBATIENTE</th>
+              <th>RANGO ETARIO</th>
+              <th>NIVEL</th>
+              <th>PUNTOS (AP)</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboardTbody">
+            <!-- Carga mediante JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 5: COMPLIANCE LEGAL CHILE & CIBERSEGURIDAD EXPERTA -->
+    <section class="tab-content" id="legalTab">
+      <div class="transactions-card" style="line-height: 1.8;">
+        <div class="module-header-nav">
+          <button class="btn-cyber btn-cyber-home btn-go-home">🏠 VOLVER AL HOME PRINCIPAL</button>
+          <span class="module-badge-title">📍 MÓDULO PORTAL LEGAL & CIBERSEGURIDAD</span>
+        </div>
+        <div style="text-align: center; margin-bottom: 20px;">
+          <h2 style="font-family: var(--font-head); color: var(--cyan-neon); font-size: 24px;">⚖️ PORTAL LEGAL & CIBERSEGURIDAD AVANZADA (CHILE 100% LEGAL)</h2>
+          <p style="color: var(--text-muted); font-size: 14px;">Auditoría integral de cumplimiento normativo conforme a la legislación de la República de Chile y estándares de seguridad informática NNA.</p>
+        </div>
+
+        <!-- SECCIÓN 1: DERECHOS DE LA NIÑEZ -->
+        <div class="legal-notice-box">
+          <strong style="color: var(--gold-neon); font-size: 15px;">1. Ley N° 21.430: Protección Integral de la Niñez y Adolescencia en Entornos Digitales</strong>
+          <ul style="margin-top: 8px; padding-left: 20px;">
+            <li><strong>Tutor Legal Responsable:</strong> Registro supervisado que exige la verificación de un adulto responsable para cuentas menores de 18 años.</li>
+            <li><strong>Aislamiento Estricto por Segmentos:</strong> Los usuarios interactúan exclusivamente dentro de su franja etaria autorizada (8-12, 12-15, 15-18 y Torneo Leyendas 18+).</li>
+            <li><strong>Derecho al Olvido Digital:</strong> Cualquier tutor o usuario puede solicitar la eliminación inmediata e irrecuperable de su perfil y datos de la base de registro.</li>
+          </ul>
+        </div>
+
+        <!-- SECCIÓN 2: PRIVACIDAD Y DATOS PERSONALES -->
+        <div class="legal-notice-box" style="margin-top: 15px;">
+          <strong style="color: var(--cyan-neon); font-size: 15px;">2. Ley N° 19.628 y Ley N° 21.096: Protección de la Vida Privada y Datos Personales</strong>
+          <ul style="margin-top: 8px; padding-left: 20px;">
+            <li><strong>Almacenamiento Local descentralizado:</strong> La información reside 100% en tu dispositivo (`LocalStorage`), eliminando riesgos de filtración en servidores centralizados.</li>
+            <li><strong>Cero Comercialización de Datos:</strong> No se venden, ceden ni transfieren datos a terceros ni redes publicitarias.</li>
+            <li><strong>Foto Selfie / Tutor Privada:</strong> La imagen de verificación se resguarda exclusivamente en el registro de identidad interno y nunca se hace pública.</li>
+          </ul>
+        </div>
+
+        <!-- SECCIÓN 3: CIBERSEGURIDAD Y DELITOS INFORMÁTICOS -->
+        <div class="legal-notice-box" style="margin-top: 15px;">
+          <strong style="color: var(--magenta-neon); font-size: 15px;">3. Ley N° 21.459 y Ley N° 21.663 (Ley Marco de Ciberseguridad en Chile)</strong>
+          <ul style="margin-top: 8px; padding-left: 20px;">
+            <li><strong>Protección Anti-XSS y Sanitización de Entradas:</strong> Filtro activo contra inyección de código malicioso o manipulación de scripts.</li>
+            <li><strong>Cabeceras de Seguridad CSP y Anti-Framing:</strong> Protección contra ataques de Clickjacking (`X-Frame-Options: DENY`) y restricción de recursos cruzados (`Content-Security-Policy`).</li>
+            <li><strong>Integridad de Billetera Digital:</strong> Verificación de firmas de estado para prevenir alteración ilícita de puntos AP.</li>
+          </ul>
+        </div>
+
+        <!-- SECCIÓN 4: DERECHOS DEL CONSUMIDOR Y GRATUIDAD -->
+        <div class="legal-notice-box" style="margin-top: 15px;">
+          <strong style="color: var(--green-safe); font-size: 15px;">4. Ley N° 19.496 y Protocolo Cero Acoso (MINEDUC)</strong>
+          <ul style="margin-top: 8px; padding-left: 20px;">
+            <li><strong>100% Gratuito y Transparente:</strong> Sin cobros ocultos, cajas de botín (loot boxes) ni microtransacciones con dinero real.</li>
+            <li><strong>Filtro de Convivencia SafeKids:</strong> Moderación automatizada en tiempo real para la censura de garabatos y chilenismos ofensivos (`***`).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 6: PANEL DE CONTROL ADMINISTRATIVO & BASE DE DATOS -->
+    <section class="tab-content" id="adminTab">
+      <div class="transactions-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 25px;">
+          <div>
+            <h2 style="font-family: var(--font-head); color: var(--magenta-neon); font-size: 24px; text-transform: uppercase;">⚙️ PANEL DE CONTROL & BASE DE DATOS DE ADMINISTRACIÓN</h2>
+            <p style="color: var(--text-muted); font-size: 14px;">Supervisión en tiempo real de visitas, registros, combates e interacciones. Base de datos permanente sin borrado de registros.</p>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn-cyber btn-cyber-home btn-go-home">🏠 VOLVER AL HOME PRINCIPAL</button>
+            <button class="btn-cyber btn-cyber-gold" id="exportAdminDbBtn">📥 EXPORTAR BASE DE DATOS (JSON)</button>
+            <button class="btn-cyber btn-cyber-magenta" id="logoutAdminBtn">🔒 CERRAR SESIÓN ADMIN</button>
+          </div>
+        </div>
+
+        <!-- TARJETAS DE ESTADÍSTICAS EN TIEMPO REAL -->
+        <div class="moves-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 30px;">
+          <div class="move-card" style="border-color: var(--cyan-neon); text-align: center; padding: 16px;">
+            <div style="font-size: 32px;">👁️</div>
+            <div style="font-family: var(--font-head); font-size: 26px; color: var(--cyan-neon);" id="adminStatVisits">0</div>
+            <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Visitas Totales Sitio</div>
+          </div>
+
+          <div class="move-card" style="border-color: var(--gold-neon); text-align: center; padding: 16px;">
+            <div style="font-size: 32px;">👤</div>
+            <div style="font-family: var(--font-head); font-size: 26px; color: var(--gold-neon);" id="adminStatUsers">0</div>
+            <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Usuarios Registrados</div>
+          </div>
+
+          <div class="move-card" style="border-color: var(--magenta-neon); text-align: center; padding: 16px;">
+            <div style="font-size: 32px;">🥊</div>
+            <div style="font-family: var(--font-head); font-size: 26px; color: var(--magenta-neon);" id="adminStatBattles">0</div>
+            <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Batallas Disputadas</div>
+          </div>
+
+          <div class="move-card" style="border-color: var(--green-safe); text-align: center; padding: 16px;">
+            <div style="font-size: 32px;">💎</div>
+            <div style="font-family: var(--font-head); font-size: 26px; color: var(--green-safe);" id="adminStatAP">0 AP</div>
+            <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase;">Puntos AP en Circulación</div>
+          </div>
+        </div>
+
+        <!-- MÓDULO DE REGISTRO COMPLETO DE USUARIOS Y FOTOGRAFÍAS -->
+        <div class="admin-module-card" style="margin-bottom: 30px; background: rgba(14, 18, 30, 0.95); border: 2px solid var(--gold-neon); border-radius: 14px; padding: 20px; box-shadow: 0 0 25px rgba(255, 215, 0, 0.15);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px; border-bottom: 1px solid rgba(255, 215, 0, 0.2); padding-bottom: 12px;">
+            <div>
+              <h3 style="font-family: var(--font-head); color: var(--gold-neon); font-size: 18px; text-transform: uppercase;">📸 MÓDULO DE REGISTRO COMPLETO DE USUARIOS & FOTOGRAFÍAS DE IDENTIDAD</h3>
+              <p style="font-size: 13px; color: var(--text-muted);">Expediente de seguridad con datos personales, edad, segmento etario, foto de perfil y fotografía de registro interno (tutor/selfie).</p>
+            </div>
+            
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <input type="text" id="adminUserSearchInput" class="form-control" placeholder="🔍 Buscar usuario..." style="width: 220px; padding: 6px 12px; font-size: 13px;">
+              <button type="button" class="btn-cyber btn-cyber-gold" id="toggleUserViewBtn" style="padding: 6px 14px; font-size: 12px;">🖼️ CAMBIAR A VISTA DE CARDS</button>
+            </div>
+          </div>
+
+          <!-- VISTA 1: TABLA CON FOTOGRAFÍAS Y DATOS COMPLETOS -->
+          <div id="adminUsersTableView" class="table-responsive-wrapper">
+            <table class="leaderboard-table">
+              <thead>
+                <tr>
+                  <th>ID REGISTRO</th>
+                  <th>FOTO PERFIL</th>
+                  <th>USUARIO</th>
+                  <th>EDAD EXACTA</th>
+                  <th>SEGMENTO ASIGNADO</th>
+                  <th>ESTADO SEGURIDAD & FOTO ADULTO / TUTOR</th>
+                  <th>FECHA Y HORA REGISTRO</th>
+                  <th>ACCIONES</th>
+                </tr>
+              </thead>
+              <tbody id="adminUsersTbody">
+                <!-- Carga mediante JS desde BD permanente con fotos y datos -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- VISTA 2: GRID DE CARDS CON FOTOGRAFÍAS EN DETALLE -->
+          <div id="adminUsersGridView" class="moves-grid" style="display: none; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); margin-top: 15px;">
+            <!-- Carga dinámicamente mediante JS -->
+          </div>
+        </div>
+
+        <div>
+          <h3 style="font-family: var(--font-head); color: var(--cyan-neon); font-size: 16px; margin-bottom: 12px;">📈 LOG HISTÓRICO PERMANENTE DE VISITAS & INTERACCIONES</h3>
+          <div class="table-responsive-wrapper">
+            <table class="leaderboard-table">
+              <thead>
+                <tr>
+                  <th>ID LOG</th>
+                  <th>TIPO EVENTO</th>
+                  <th>DESCRIPCIÓN DE INTERACCIÓN</th>
+                  <th>USUARIO / SESIÓN</th>
+                  <th>FECHA REGISTRO</th>
+                </tr>
+              </thead>
+              <tbody id="adminLogsTbody">
+                <!-- Carga mediante JS desde BD permanente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== MODAL LOGIN ADMINISTRADOR ==================== -->
+  <div class="modal-overlay" id="adminLoginModal">
+    <div class="modal-box" style="max-width: 420px; border-color: var(--magenta-neon); box-shadow: 0 0 35px rgba(255, 0, 122, 0.4);">
+      <button class="modal-close-btn" id="closeAdminLoginModalBtn">✕</button>
+      <h2 class="modal-header-title" style="color: var(--magenta-neon);">⚙️ ACCESO DE ADMINISTRACIÓN</h2>
+      <p class="modal-subtitle">Ingresa tus credenciales maestras para acceder al panel de control de estadísticas y base de datos.</p>
+
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label class="form-label">Usuario Administrador:</label>
+          <input type="text" id="adminUser" class="form-control" placeholder="Usuario admin" required autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Contraseña:</label>
+          <input type="password" id="adminPass" class="form-control" placeholder="Contraseña admin" required>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
+          <button type="submit" class="btn-cyber btn-cyber-magenta" style="flex: 1; padding: 12px; justify-content: center;">🔑 INGRESAR AL PANEL</button>
+          <button type="button" class="btn-cyber btn-cyber-home btn-go-home" style="flex: 1; padding: 12px; justify-content: center;">🏠 VOLVER AL HOME</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL DE EXPULSIÓN Y BLOQUEO POR INFRACCIÓN GRAVE ==================== -->
+  <div class="modal-overlay" id="bannedUserModal">
+    <div class="modal-box" style="border-color: var(--red-alert); box-shadow: 0 0 50px rgba(255, 51, 102, 0.6); text-align: center;">
+      <div style="font-size: 54px; margin-bottom: 10px;">🚨</div>
+      <h2 class="modal-header-title" style="color: var(--red-alert);">CUENTA PERMANENTEMENTE INHABILITADA</h2>
+      <div class="strict-requirement-alert" style="margin-top: 15px; text-align: left; background: rgba(255, 51, 102, 0.15); border-color: var(--red-alert);">
+        <strong>🛑 EXPULSIÓN Y BAN PERMANENTE (LEY N° 21.430 & NNA):</strong><br>
+        El escáner de IA de la plataforma detectó una infracción grave por contenido inapropiado en el video grabado (partes íntimas, contenido explícito o sustancias/artículos prohibidos). Tu cuenta ha sido bloqueada y expulsada de forma permanente para resguardar la seguridad de los menores de edad.
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin-top: 10px;">
+        Esta infracción ha sido registrada de forma inalterable en la base de datos de auditoría de administración.
+      </p>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL DE REGISTRO CON EDAD EXACTA, IDENTIDAD Y PERFIL ==================== -->
+  <div class="modal-overlay" id="registerModal">
+    <div class="modal-box">
+      <h2 class="modal-header-title">🛡️ REGISTRO OBLIGATORIO DE INGRESO</h2>
+      <p class="modal-subtitle">Para garantizar la seguridad y cumplir con la normativa, debes completar todos tus datos y adjuntar tu foto de registro.</p>
+
+      <div class="strict-requirement-alert">
+        🛑 <strong>ACCESO RESTRINGIDO:</strong> No podrás ingresar al sitio ni navegar si no completas los campos obligatorios y adjuntas la foto de registro de identidad.
+      </div>
+
+      <form id="registerForm">
+        <div class="form-group">
+          <label class="form-label">1. Nombre de Usuario del Peleador (*Obligatorio):</label>
+          <input type="text" id="regUsername" class="form-control" placeholder="Ej: AuraMaster_CL" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">2. Ingresa tu Edad Exacta (años):</label>
+          <input type="number" id="regExactAge" class="form-control" min="8" max="99" value="13" required>
+          <div id="computedBracketBadge" class="computed-bracket-banner">
+            🎯 Segmento asignado automáticamente: <strong>12 a 15 años (Teens)</strong>
+          </div>
+        </div>
+
+        <!-- PASO 3: FOTO DE REGISTRO DE IDENTIDAD (INTERNO/PRIVADO) -->
+        <div class="form-group" id="registryPhotoGroup">
+          <label class="form-label" id="registryPhotoLabel">3. Fotografía de Adulto Responsable (Registro Interno de Identidad):</label>
+          <input type="file" id="registryPhotoInput" accept="image/*" class="form-control">
+          <img id="registryPhotoPreview" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" alt="Vista previa registro identidad" class="adult-preview-img">
+          <div class="photo-privacy-note">
+            🔒 <strong>Registro de Seguridad Privado:</strong> Esta fotografía se guarda únicamente en la base de registro de la plataforma y <strong>NO se mostrará</strong> a otros usuarios como tu foto de perfil.
+          </div>
+        </div>
+
+        <!-- PASO 4: FOTO DE PERFIL PÚBLICA (OPCIONAL O AVATAR GENÉRICO) -->
+        <div class="form-group">
+          <label class="form-label">4. Foto de Perfil Pública (Opcional):</label>
+          <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">
+            Puedes subir tu propia imagen para que te vean en las batallas y el chat, o usar una imagen genérica predeterminada.
+          </p>
+
+          <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+            <img id="publicAvatarPreview" src="https://api.dicebear.com/7.x/bottts/svg?seed=AuraFighter1" alt="Avatar público" class="avatar-mini" style="width: 55px; height: 55px; border-width: 3px;">
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
+              <input type="file" id="publicAvatarInput" accept="image/*" class="form-control" style="font-size: 13px;">
+              <button type="button" id="useGenericAvatarBtn" class="btn-cyber" style="padding: 6px 12px; font-size: 12px; background: rgba(0, 243, 255, 0.15); border: 1px solid var(--cyan-neon); color: var(--cyan-neon);">
+                🤖 Usar Imagen Genérica (Sin foto personal)
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label style="font-size: 13px; color: var(--text-muted);">
+            <input type="checkbox" required checked> Acepto participar en un espacio seguro desde casa, respetando las normas de convivencia sin acoso.
+          </label>
+        </div>
+
+        <button type="submit" class="btn-cyber" style="width: 100%; justify-content: center;">FINALIZAR REGISTRO E INGRESAR</button>
+        <button type="button" class="btn-cyber btn-cyber-home btn-go-home" style="width: 100%; justify-content: center; margin-top: 10px;">🏠 VOLVER AL HOME PRINCIPAL</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL DE REGALO DE PUNTOS ==================== -->
+  <div class="modal-overlay" id="giftModal">
+    <div class="modal-box" style="max-width: 420px;">
+      <h3 class="modal-header-title">🎁 REGALAR PUNTOS DE AURA AP</h3>
+      <p class="modal-subtitle">Envía parte de tus Aura Points acumulados a tu amigo en el chat.</p>
+
+      <div class="form-group">
+        <label class="form-label">Cantidad de Aura Points (AP) a regalar:</label>
+        <input type="number" id="giftAmountInput" class="form-control" min="10" max="500" value="50">
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
+        <button type="button" class="btn-cyber btn-cyber-gold" id="confirmGiftBtn" style="flex: 1; justify-content: center;">ENVIAR REGALO</button>
+        <button type="button" class="btn-cyber btn-cyber-home btn-go-home" style="flex: 1; justify-content: center;">🏠 VOLVER AL HOME</button>
+        <button type="button" class="btn-cyber btn-cyber-magenta" id="closeGiftBtn" style="padding: 10px 14px; justify-content: center;">CANCELAR</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL DE INSPECCIÓN DE FOTOGRAFÍA FULL-SIZE ==================== -->
+  <div class="modal-overlay" id="photoViewerModal">
+    <div class="modal-box" style="max-width: 520px; text-align: center; border-color: var(--cyan-neon); box-shadow: 0 0 40px rgba(0, 243, 255, 0.4);">
+      <button class="modal-close-btn" id="closePhotoViewerModalBtn">✕</button>
+      <h3 class="modal-header-title" id="photoViewerTitle" style="color: var(--cyan-neon); font-size: 18px;">📸 EXPEDIENTE DE FOTOGRAFÍA REGISTRADA</h3>
+      <p class="modal-subtitle" id="photoViewerSubtitle">Registro interno de identidad resguardado bajo Ley N° 21.430 & Ley N° 19.628.</p>
+
+      <div style="margin: 15px 0; background: rgba(0, 0, 0, 0.6); padding: 12px; border-radius: 12px; border: 1px solid var(--border-neon);">
+        <img id="photoViewerImg" src="" alt="Fotografía en tamaño completo" style="max-width: 100%; max-height: 380px; border-radius: 8px; object-fit: contain; box-shadow: var(--shadow-neon-cyan);">
+      </div>
+
+      <div style="font-size: 12px; color: var(--text-muted); text-align: left; background: rgba(0, 243, 255, 0.05); padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border-neon);">
+        <div><strong>👤 Usuario:</strong> <span id="photoViewerUser" style="color: var(--gold-neon);">--</span></div>
+        <div><strong>📌 Tipo de Foto:</strong> <span id="photoViewerType" style="color: var(--cyan-neon);">--</span></div>
+        <div><strong>🕒 Fecha de Registro:</strong> <span id="photoViewerDate">--</span></div>
+      </div>
+
+      <button type="button" class="btn-cyber btn-cyber-magenta" id="closePhotoViewerBtn" style="width: 100%; justify-content: center; margin-top: 15px;">CERRAR VISTA DE FOTO</button>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL PORTAL PARA PADRES Y APODERADOS ==================== -->
+  <div class="modal-overlay" id="parentsPortalModal">
+    <div class="modal-box" style="max-width: 580px; border-color: var(--green-safe); box-shadow: 0 0 40px rgba(0, 255, 136, 0.3);">
+      <button class="modal-close-btn" id="closeParentsPortalModalBtn">✕</button>
+      <h3 class="modal-header-title" style="color: var(--green-safe); font-size: 20px;">🛡️ PORTAL PARA PADRES, TUTORES Y APODERADOS</h3>
+      <p class="modal-subtitle">Garantías de Seguridad Integral conforme a la Ley N° 21.430 de la República de Chile.</p>
+
+      <div style="max-height: 60vh; overflow-y: auto; padding-right: 8px; line-height: 1.6; font-size: 13.5px; color: var(--text-main);">
+        <div style="background: rgba(0, 255, 136, 0.08); border: 1px solid var(--green-safe); padding: 12px 16px; border-radius: 10px; margin-bottom: 15px;">
+          <strong style="color: var(--green-safe); font-size: 15px;">✅ Entorno Digital 100% Protegido y Moderado</strong>
+          <p style="margin-top: 4px; margin-bottom: 0;">
+            BatallasDeAura.cl fue diseñado específicamente para brindar un espacio de expresión de talento seguro desde casa, eliminando los riesgos del pánico escénico y la exposición en las calles.
+          </p>
+        </div>
+
+        <h4 style="color: var(--gold-neon); font-size: 14px; margin-bottom: 6px;">1. Segmentación Estricta por Edad</h4>
+        <p style="margin-bottom: 12px;">
+          Los participantes interactúan única y exclusivamente con usuarios dentro de su mismo grupo etario (8-12, 12-15, 15-18 años). Ningún usuario adulto puede contactar ni batallar con menores de edad.
+        </p>
+
+        <h4 style="color: var(--cyan-neon); font-size: 14px; margin-bottom: 6px;">2. Moderación IA Visual & Filtro Anti-Bullying</h4>
+        <p style="margin-bottom: 12px;">
+          Cada video de 15 segundos y mensaje de chat es auditado por el escáner <strong>Aura-Guardian AI</strong> en tiempo real. Se censura automáticamente cualquier lenguaje ofensivo, partes íntimas o conductas no apropiadas.
+        </p>
+
+        <h4 style="color: var(--magenta-neon); font-size: 14px; margin-bottom: 6px;">3. Canal Directo de Apoderados & Derecho al Olvido</h4>
+        <p style="margin-bottom: 0;">
+          Cualquier padre o tutor legal puede solicitar la suspensión temporal o eliminación definitiva e irrecuperable de la cuenta de su representado enviando un reporte directo al equipo de administración.
+        </p>
+      </div>
+
+      <button type="button" class="btn-cyber" id="closeParentsPortalBtn" style="width: 100%; justify-content: center; margin-top: 20px; background: rgba(0, 255, 136, 0.15); border: 1.5px solid var(--green-safe); color: var(--green-safe);">
+        ENTENDIDO - CERRAR PORTAL DE APODERADOS
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== REPRODUCTOR AUDIO DE FONDO: OGRYZEK - AURA (1) ==================== -->
+  <audio id="bgMusicTrack" autoplay loop muted playsinline preload="auto">
+    <source src="Ogryzek%20-%20AURA%20(1).mp3" type="audio/mpeg">
+    <source src="https://assets.mixkit.co/music/preview/mixkit-game-level-music-689.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="app.js"></script>
+</body>
+</html>
